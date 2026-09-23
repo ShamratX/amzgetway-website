@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>CMS Admin</title>
+  <link rel="stylesheet" href="admin.css?v=11" />
+</head>
+
+<body>
+  <div class="overlay" id="sidebar-overlay" hidden></div>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar" aria-label="Admin navigation">
+      <div class="sidebar-brand">
+        <span>CMS Admin</span>
+      </div>
+      <nav>
+        <button type="button" class="nav-item active" data-nav="dashboard">Dashboard</button>
+        <button type="button" class="nav-item" data-nav="leads">Leads</button>
+        <button type="button" class="nav-item" data-nav="posts">Posts</button>
+        <button type="button" class="nav-item" data-nav="site-cms">Pages</button>
+        <button type="button" class="nav-item" data-nav="menus">Menus</button>
+        <button type="button" class="nav-item" data-nav="settings">Settings</button>
+        <button type="button" class="nav-item nav-item-muted" data-nav="pages" title="For developers">Advanced</button>
+      </nav>
+      <div class="sidebar-foot">Edit your website easily</div>
+    </aside>
+
+    <div class="main">
+      <header class="topbar">
+        <div style="display:flex;align-items:center;gap:0.6rem">
+          <button type="button" class="menu-btn" id="menu-btn" aria-label="Open menu">Menu</button>
+          <h1 id="page-title">Dashboard</h1>
+        </div>
+        <div class="topbar-actions">
+          <button type="button" class="btn btn-secondary btn-sm" id="btn-logout">Log out</button>
+        </div>
+      </header>
+
+      <div class="content">
+        <!-- Dashboard -->
+        <section id="panel-dashboard" class="panel active">
+          <div class="stats">
+            <div class="stat-card">
+              <p class="label">Total Leads</p>
+              <p class="value" id="stat-leads-total">0</p>
+            </div>
+            <div class="stat-card">
+              <p class="label">New Leads</p>
+              <p class="value" id="stat-leads-new">0</p>
+            </div>
+            <div class="stat-card">
+              <p class="label">Published Posts</p>
+              <p class="value" id="stat-posts-pub">0</p>
+            </div>
+            <div class="stat-card">
+              <p class="label">Draft Posts</p>
+              <p class="value" id="stat-posts-draft">0</p>
+            </div>
+          </div>
+          <div class="grid-2">
+            <div class="card">
+              <div class="card-header">
+                <h2>Recent Leads</h2><button type="button" class="btn btn-ghost btn-sm" data-nav="leads">View
+                  all</button>
+              </div>
+              <div id="dash-leads"></div>
+            </div>
+            <div class="card">
+              <div class="card-header">
+                <h2>Recent Posts</h2><button type="button" class="btn btn-ghost btn-sm" data-nav="posts">View
+                  all</button>
+              </div>
+              <div id="dash-posts"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Leads -->
+        <section id="panel-leads" class="panel">
+          <div class="card">
+            <div class="card-header">
+              <h2>Leads</h2>
+              <div>
+                <button type="button" class="btn btn-secondary btn-sm" id="export-leads">Export CSV</button>
+                <button type="button" class="btn btn-secondary btn-sm" id="refresh-leads">Refresh</button>
+              </div>
+            </div>
+            <div class="toolbar">
+              <input class="search" id="leads-search" type="search" placeholder="Search name, email, business…" />
+              <select id="leads-filter" style="max-width:160px">
+                <option value="">All statuses</option>
+                <option value="new">New</option>
+                <option value="contacted">Contacted</option>
+                <option value="closed">Closed</option>
+              </select>
+            </div>
+            <div class="table-wrap">
+              <table class="data">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Business</th>
+                    <th>Service</th>
+                    <th>Status</th>
+                    <th>Created</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="leads-body"></tbody>
+              </table>
+            </div>
+            <div id="leads-empty" class="empty" hidden><strong>No leads yet</strong>New form submissions will appear
+              here.</div>
+          </div>
+        </section>
+
+        <!-- Posts list -->
+        <section id="panel-posts" class="panel">
+          <div class="card">
+            <div class="card-header">
+              <h2>Posts</h2>
+              <div>
+                <button type="button" class="btn btn-secondary btn-sm" id="refresh-posts">Refresh</button>
+                <button type="button" class="btn btn-primary btn-sm" id="new-post">New Post</button>
+              </div>
+            </div>
+            <div class="table-wrap">
+              <table class="data">
+                <thead>
+                  <tr>
+                    <th>Title</th>
+                    <th>Slug</th>
+                    <th>Status</th>
+                    <th>Updated</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="posts-body"></tbody>
+              </table>
+            </div>
+            <div id="posts-empty" class="empty" hidden>
+              <strong>No posts yet</strong>
+              Create your first blog post to publish on /blog/.
+              <div style="margin-top:0.75rem"><button type="button" class="btn btn-primary btn-sm"
+                  id="new-post-empty">New Post</button></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Post editor -->
+        <section id="panel-post-editor" class="panel">
+          <div class="card">
+            <div class="card-header">
+              <h2 id="post-editor-heading">New Post</h2>
+              <button type="button" class="btn btn-ghost btn-sm" data-nav="posts">← Back to posts</button>
+            </div>
+            <input type="hidden" id="post-id" value="" />
+
+            <p class="section-title">Post information</p>
+            <label class="field-label" for="post-title">Title</label>
+            <input id="post-title" type="text" />
+            <div class="form-row">
+              <div>
+                <label class="field-label" for="post-slug">Slug</label>
+                <input id="post-slug" type="text" />
+              </div>
+              <div>
+                <label class="field-label" for="post-status">Status</label>
+                <select id="post-status">
+                  <option value="draft">Draft</option>
+                  <option value="published">Published</option>
+                </select>
+              </div>
+            </div>
+
+            <p class="section-title">Featured image</p>
+            <label class="field-label" for="post-featured">Featured image URL</label>
+            <input id="post-featured" type="text" placeholder="https://… or /assets/images/…" />
+            <div id="post-featured-upload" class="cms-upload-host"></div>
+            <div class="form-actions" style="margin-top:0.5rem">
+              <button type="button" class="btn btn-secondary btn-sm" id="update-featured-preview">Update
+                Preview</button>
+              <button type="button" class="btn btn-danger btn-sm" id="remove-featured">Remove Image</button>
+            </div>
+            <div class="image-preview" id="featured-preview">
+              <img id="featured-preview-img" alt="Featured preview" />
+            </div>
+
+            <p class="section-title">Content</p>
+            <label class="field-label" for="post-excerpt">Excerpt</label>
+            <textarea id="post-excerpt" style="min-height:4.5rem"></textarea>
+
+            <label class="field-label" for="post-body">Body (HTML)</label>
+            <div class="form-actions post-html-helpers" style="margin:0.35rem 0 0.5rem">
+              <button type="button" class="btn btn-secondary btn-sm" data-html-insert="h2">H2</button>
+              <button type="button" class="btn btn-secondary btn-sm" data-html-insert="p">Paragraph</button>
+              <button type="button" class="btn btn-secondary btn-sm" data-html-insert="strong">Bold</button>
+              <button type="button" class="btn btn-secondary btn-sm" data-html-insert="a">Link</button>
+              <button type="button" class="btn btn-secondary btn-sm" data-html-insert="ul">List</button>
+            </div>
+            <textarea id="post-body" class="body"></textarea>
+
+            <details class="seo-details">
+              <summary class="section-title"
+                style="cursor:pointer;list-style:none;display:flex;align-items:center;gap:0.5rem">
+                SEO <span class="hint" style="font-weight:400">(meta title, description, OG image)</span>
+              </summary>
+              <label class="field-label" for="post-meta-title">Meta title</label>
+              <input id="post-meta-title" type="text" />
+              <label class="field-label" for="post-meta-desc">Meta description</label>
+              <textarea id="post-meta-desc" style="min-height:4rem"></textarea>
+              <label class="field-label" for="post-og">OG image URL</label>
+              <input id="post-og" type="text" placeholder="https://… or /assets/images/…" />
+              <div id="post-og-upload" class="cms-upload-host"></div>
+              <div class="form-actions" style="margin-top:0.5rem">
+                <button type="button" class="btn btn-secondary btn-sm" id="update-og-preview">Update Preview</button>
+                <button type="button" class="btn btn-danger btn-sm" id="og-remove">Remove Image</button>
+              </div>
+              <div class="image-preview" id="og-preview" style="margin-top:0.5rem">
+                <img id="og-preview-img" alt="OG preview" />
+              </div>
+            </details>
+
+            <p class="section-title">Actions</p>
+            <div class="form-actions">
+              <button type="button" class="btn btn-primary" id="save-post">Save post</button>
+              <a class="btn btn-secondary" id="view-post-live" href="#" target="_blank" rel="noopener noreferrer" hidden>View on site</a>
+              <button type="button" class="btn btn-danger" id="delete-post">Delete</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Pages (Site CMS) -->
+        <section id="panel-site-cms" class="panel">
+          <div class="cms-shell">
+            <header class="cms-topbar">
+              <div class="cms-topbar-copy">
+                <h2 class="cms-title" id="cms-panel-heading">Pages</h2>
+                <p class="cms-lead" id="cms-lead">
+                  Edit a page, or click Add Page. To show it in the navbar/footer, nest it under a parent in Menus.
+                </p>
+              </div>
+              <div class="cms-topbar-actions">
+                <button type="button" class="btn btn-primary" id="cms-add-page-btn">Add Page</button>
+                <button type="button" class="btn btn-secondary" id="cms-back" hidden>← All pages</button>
+                <button type="button" class="btn btn-primary" id="cms-save" hidden>Save to site</button>
+              </div>
+            </header>
+
+            <!-- Hidden section state (driven by list Edit buttons) -->
+            <select id="cms-section" hidden aria-hidden="true">
+              <option value="branding">Branding</option>
+              <option value="layout:header">Header text</option>
+              <option value="layout:footer">Footer text</option>
+              <optgroup label="Website pages" id="cms-auto-pages"></optgroup>
+            </select>
+
+            <div id="cms-list-view">
+              <div class="cms-block cms-pages-dash">
+                <div class="wp-pages-filters" id="cms-page-filters" role="tablist" aria-label="Page filters">
+                  <button type="button" class="wp-pages-filter is-active" data-page-filter="all">All <span id="cms-filter-count-all">0</span></button>
+                  <button type="button" class="wp-pages-filter" data-page-filter="site">Site pages <span id="cms-filter-count-site">0</span></button>
+                  <button type="button" class="wp-pages-filter" data-page-filter="custom">Custom <span id="cms-filter-count-custom">0</span></button>
+                  <button type="button" class="btn btn-secondary btn-sm wp-pages-refresh" id="cms-reload">Refresh</button>
+                </div>
+
+                <div class="wp-pages-table-wrap">
+                  <div class="wp-pages-table-head">
+                    <span>Title</span>
+                  </div>
+                  <div id="cms-page-list" class="cms-page-list wp-pages-list"></div>
+                </div>
+                <p class="hint" style="margin:0.75rem 0 0">
+                  New pages open in the editor. Put them under any menu item in <strong>Menus</strong> to make a dropdown.
+                </p>
+              </div>
+            </div>
+
+            <div id="cms-edit-view" hidden>
+              <div class="cms-block cms-block-fields">
+                <div class="cms-block-head cms-block-head-row">
+                  <div>
+                    <h3 class="cms-block-title" id="cms-edit-title">Edit</h3>
+                    <p class="cms-block-hint" id="cms-status">Loading…</p>
+                  </div>
+                  <div class="cms-toolbar-side" id="cms-field-filter-wrap">
+                    <label class="cms-inline-label" for="cms-field-filter">Show</label>
+                    <select id="cms-field-filter" class="cms-select cms-select-sm">
+                      <option value="all" selected>Text + images</option>
+                      <option value="text">Text only</option>
+                      <option value="images">Images only</option>
+                    </select>
+                  </div>
+                </div>
+                <div id="cms-fields" class="cms-fields"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Menus (WordPress-style) -->
+        <section id="panel-menus" class="panel">
+          <div class="wp-menus">
+            <header class="cms-topbar">
+              <div class="cms-topbar-copy">
+                <h2 class="cms-title">Menus</h2>
+                <p class="cms-lead">
+                  Add pages or links on the left, arrange (drag) on the right, assign Primary or Footer, then Save Menu.
+                </p>
+              </div>
+              <button type="button" class="btn btn-primary" id="menus-save-btn">Save Menu</button>
+            </header>
+
+            <div class="wp-menus-select-bar card">
+              <div class="wp-menus-select-row">
+                <label class="field-label" for="menus-select" style="margin:0">Select a menu to edit:</label>
+                <select id="menus-select" class="cms-select"></select>
+                <button type="button" class="btn btn-secondary btn-sm" id="menus-create">Create a new menu</button>
+                <button type="button" class="btn btn-secondary btn-sm" id="menus-reload">Refresh</button>
+              </div>
+              <p id="menus-save-status" class="hint" style="margin:0.35rem 0 0"></p>
+            </div>
+
+            <div class="wp-menus-grid">
+              <aside class="wp-menus-add">
+                <h3 class="wp-menus-col-title">Add menu items</h3>
+
+                <details class="wp-acc" open>
+                  <summary>Pages</summary>
+                  <div class="wp-acc-body">
+                    <p class="hint" style="margin:0 0 0.55rem">Tick pages, then <strong>Add to Menu</strong>.</p>
+                    <div id="menus-pages-list" class="wp-check-list"></div>
+                    <button type="button" class="btn btn-secondary btn-sm" id="menus-add-pages">Add to Menu</button>
+                  </div>
+                </details>
+
+                <details class="wp-acc">
+                  <summary>Posts</summary>
+                  <div class="wp-acc-body">
+                    <p class="hint" style="margin:0 0 0.55rem">Published posts only.</p>
+                    <div id="menus-posts-list" class="wp-check-list"></div>
+                    <button type="button" class="btn btn-secondary btn-sm" id="menus-add-posts">Add to Menu</button>
+                  </div>
+                </details>
+
+                <details class="wp-acc" open>
+                  <summary>Custom Links</summary>
+                  <div class="wp-acc-body">
+                    <label class="field-label" for="menus-custom-href">URL</label>
+                    <input type="text" id="menus-custom-href" placeholder="https://… or /page.html" maxlength="500" />
+                    <label class="field-label" for="menus-custom-label">Link Text</label>
+                    <input type="text" id="menus-custom-label" placeholder="Menu label" maxlength="80" />
+                    <button type="button" class="btn btn-primary btn-sm" id="menus-add-custom" style="margin-top:0.65rem">Add to Menu</button>
+                  </div>
+                </details>
+              </aside>
+
+              <div class="wp-menus-structure">
+                <div class="wp-menus-name-row">
+                  <label class="field-label" for="menus-name">Menu Name</label>
+                  <input type="text" id="menus-name" class="wp-menus-name" maxlength="80" placeholder="Menu name" />
+                </div>
+
+                <h3 class="wp-menus-col-title">Menu structure</h3>
+                <p class="hint" style="margin:0 0 0.85rem" id="menus-location-hint">
+                  This menu shows where you assign it below. Drag to reorder; use Add sub-item or drop indented under a top item for a dropdown.
+                </p>
+                <div id="menus-structure" class="wp-structure"></div>
+                <p id="menus-structure-empty" class="cms-empty">No items yet. Add pages or custom links on the left, then Save Menu.</p>
+
+                <div class="wp-menu-locations">
+                  <p class="wp-menus-col-title" style="margin:0 0 0.5rem">Display location</p>
+                  <label class="wp-loc-check">
+                    <input type="checkbox" id="menus-loc-primary" />
+                    <span>Primary Menu (Navbar)</span>
+                  </label>
+                  <label class="wp-loc-check">
+                    <input type="checkbox" id="menus-loc-footer" />
+                    <span>Footer Menu</span>
+                  </label>
+                </div>
+
+                <div class="wp-menus-footer-actions">
+                  <button type="button" class="btn btn-ghost btn-sm wp-menus-delete" id="menus-delete">Delete Menu</button>
+                  <button type="button" class="btn btn-primary" id="menus-save-btn-2">Save Menu</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Advanced: raw HTML (not for normal CMS use) -->
+        <section id="panel-pages" class="panel">
+          <div class="card" style="margin-bottom:1rem">
+            <p class="hint" style="margin:0">
+              <strong>Developer only.</strong> Raw HTML edit and “Publish to GitHub” can overwrite live pages.
+              Day-to-day content: use <em>Site CMS</em> and <em>Menus</em>. Do not publish unless you know what you are changing.
+            </p>
+          </div>
+          <div class="grid-2">
+            <div class="card">
+              <div class="card-header">
+                <h2>Pages</h2>
+                <button type="button" class="btn btn-secondary btn-sm" id="refresh-pages">Refresh</button>
+              </div>
+              <div class="table-wrap">
+                <table class="data">
+                  <thead>
+                    <tr>
+                      <th>Path</th>
+                      <th>Saved</th>
+                      <th>Updated</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody id="pages-body"></tbody>
+                </table>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header">
+                <h2>Edit page</h2>
+                <span class="hint" id="page-path-label">Select a page</span>
+              </div>
+              <input type="hidden" id="page-path" value="" />
+              <label class="field-label" for="page-html">HTML</label>
+              <textarea id="page-html" class="code"></textarea>
+              <div class="warn-box">
+                Publishing overwrites the file in your GitHub repo. Review carefully before you publish.
+              </div>
+              <div class="form-actions">
+                <button type="button" class="btn btn-secondary" id="load-from-site">Load from site file</button>
+                <button type="button" class="btn btn-primary" id="save-page">Save to D1</button>
+                <button type="button" class="btn btn-danger" id="publish-page">Publish to GitHub</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Settings -->
+        <section id="panel-settings" class="panel">
+          <div class="card">
+            <h2 style="margin-top:0">Settings</h2>
+
+            <p class="section-title">Admin session</p>
+            <p class="hint" style="margin:0">Status: <span class="badge badge-published">Logged in</span></p>
+            <p class="hint" style="margin:0.35rem 0 0">The session token stays in this browser only. Secrets are never
+              shown here.</p>
+            <p class="hint" style="margin:0.35rem 0 0">To change the admin password, update the Worker secret
+              <code>ADMIN_PASSWORD</code> (Wrangler), then redeploy.</p>
+            <div class="form-actions">
+              <button type="button" class="btn btn-danger" id="settings-logout">Log out</button>
+            </div>
+
+            <hr class="divider" />
+
+            <p class="section-title">API connection</p>
+            <p class="hint">API base URL</p>
+            <p style="margin:0.35rem 0 0"><code id="settings-api"></code></p>
+            <p id="settings-api-status" class="hint" style="margin:0.5rem 0 0">Checking…</p>
+
+            <hr class="divider" />
+
+            <p class="section-title">GitHub Publishing</p>
+            <div id="github-status-box" class="future-box" style="text-align:left">
+              <p style="margin:0" class="hint">Checking status…</p>
+            </div>
+            <p class="hint" style="margin-top:0.75rem">
+              Tokens are never shown here. Configure <code>GITHUB_REPO</code> and <code>GITHUB_TOKEN</code> on the
+              Worker to enable publish.
+            </p>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <div class="modal-backdrop" id="add-page-modal" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="add-page-title">
+      <h3 id="add-page-title">Add Page</h3>
+      <p class="hint" style="margin:0 0 0.75rem">
+        Creates a new page you can edit with sections. To show it in the header/footer, nest it under a parent in Menus.
+      </p>
+      <label class="field-label" for="cms-new-title">Page name</label>
+      <input type="text" id="cms-new-title" placeholder="e.g. Citation Building" maxlength="120" />
+      <label class="field-label" for="cms-new-desc">Short description (optional)</label>
+      <textarea id="cms-new-desc" rows="2" placeholder="One or two sentences" maxlength="500"></textarea>
+      <input type="hidden" id="cms-new-image" value="" />
+      <p id="cms-create-status" class="hint" style="margin:0.5rem 0 0"></p>
+      <div class="form-actions" style="margin-top:1rem">
+        <button type="button" class="btn btn-secondary" id="cms-add-page-cancel">Cancel</button>
+        <button type="button" class="btn btn-primary" id="cms-create-page">Create page</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="confirm-modal" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="confirm-title">
+      <h3 id="confirm-title">Confirm</h3>
+      <p id="confirm-message" class="hint confirm-message"></p>
+      <div class="form-actions">
+        <button type="button" class="btn btn-secondary" id="confirm-cancel">Cancel</button>
+        <button type="button" class="btn btn-danger" id="confirm-ok">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="lead-modal" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="lead-modal-title">
+      <h3 id="lead-modal-title">Lead details</h3>
+      <dl id="lead-modal-body"></dl>
+      <div class="form-actions">
+        <label class="field-label" for="lead-modal-status" style="margin:0">Status</label>
+        <select id="lead-modal-status">
+          <option value="new">new</option>
+          <option value="contacted">contacted</option>
+          <option value="closed">closed</option>
+        </select>
+        <button type="button" class="btn btn-primary" id="lead-modal-save">Update status</button>
+        <button type="button" class="btn btn-secondary" id="lead-modal-close">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="admin.js"></script>
+  <script src="admin-app.js?v=16"></script>
+</body>
+
+</html>

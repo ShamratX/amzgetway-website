@@ -1,53 +1,48 @@
 # ============================================================
-# CMS Worker — TEMPLATE (fill these in for EACH new project)
+# AmzGetway CMS Worker — connected to export/site
 # ============================================================
-# 1. Change "name" to your project name (lowercase, no spaces)
-# 2. Create a D1 database and paste database_id below
-# 3. Set your website folder as [assets] directory
-# 4. Set routes / custom domain for your site
-# 5. Set emails + ALLOWED_ORIGINS
-# 6. Put secrets with: npx wrangler secret put ...
-# Full steps: see ../docs/ in this package
+# Remaining (your Cloudflare account):
+#   1. cd backend/worker && npm install && npx wrangler login
+#   2. npx wrangler d1 create amzgetway-cms-db
+#   3. Paste database_id below, then:
+#      npx wrangler d1 migrations apply amzgetway-cms-db --remote
+#   4. npx wrangler secret put ADMIN_PASSWORD
+#      npx wrangler secret put ADMIN_SECRET
+#      npx wrangler secret put RESEND_API_KEY   (optional)
+#   5. npm run deploy
+# Full checklist: ../docs/00-setup-checklist.md
 # ============================================================
 
-name = "YOUR_PROJECT_NAME"
+name = "amzgetway-cms"
 main = "src/index.js"
 compatibility_date = "2024-11-01"
 workers_dev = true
 
-# Your live domain(s). Example:
+# After domain is on Cloudflare, uncomment:
 # routes = [
-#   { pattern = "example.com", custom_domain = true },
-#   { pattern = "www.example.com", custom_domain = true },
+#   { pattern = "amzgetway.com", custom_domain = true },
+#   { pattern = "www.amzgetway.com", custom_domain = true },
 # ]
 routes = []
 
 [assets]
-# Path to the WEBSITE root (HTML, /admin, /assets, …).
-# From this worker folder, "../.." means: two folders up = site root.
-# Change this if your folder layout is different.
-directory = "../.."
+# Website root (HTML + /admin + /assets + /cms) relative to this worker folder
+directory = "../../export/site"
 binding = "ASSETS"
 run_worker_first = true
 not_found_handling = "404-page"
 
 [vars]
-# Browser origins allowed to call the API (comma-separated).
-# Always include your real https:// domain after you go live.
-ALLOWED_ORIGINS = "http://127.0.0.1:5500,http://localhost:5500,http://127.0.0.1:8787,http://localhost:8787"
+ALLOWED_ORIGINS = "http://127.0.0.1:8090,http://localhost:8090,http://127.0.0.1:8787,http://localhost:8787,https://amzgetway.com,https://www.amzgetway.com"
+PUBLIC_SITE_URL = "https://amzgetway.com"
+RECIPIENT_EMAIL = "amzexperts@amzgetway.com"
+SENDER_EMAIL = "AMZgetway <amzexperts@amzgetway.com>"
 
-# Public site URL (no trailing slash). Used for emails / canonical helpers.
-PUBLIC_SITE_URL = "https://example.com"
+# Optional — Publish to GitHub / media features (needs GITHUB_TOKEN secret)
+GITHUB_REPO = "ShamratX/amzgetway-website"
+GITHUB_BRANCH = "main"
 
-# Contact form inbox + From: line (Resend must verify your domain)
-RECIPIENT_EMAIL = "contact@example.com"
-SENDER_EMAIL = "My Site <contact@example.com>"
-
-# Optional — only if you use “Publish to GitHub” / image upload to repo
-# GITHUB_REPO = "your-org/your-repo"
-# GITHUB_BRANCH = "main"
-
-# SECRETS (do NOT put real values in this file — use wrangler secret put):
+# SECRETS (do NOT put real values here — use wrangler secret put):
 #   ADMIN_PASSWORD
 #   ADMIN_SECRET
 #   RESEND_API_KEY
@@ -55,7 +50,7 @@ SENDER_EMAIL = "My Site <contact@example.com>"
 
 [[d1_databases]]
 binding = "DB"
-database_name = "YOUR_D1_DATABASE_NAME"
-# Paste the id from: npx wrangler d1 create YOUR_D1_DATABASE_NAME
-database_id = "REPLACE_WITH_YOUR_D1_DATABASE_ID"
+database_name = "amzgetway-cms-db"
+# Paste id from: npx wrangler d1 create amzgetway-cms-db
+database_id = "336184a8-ff69-4a70-bd90-917d643a5c77"
 migrations_dir = "migrations"

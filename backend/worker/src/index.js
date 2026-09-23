@@ -1,5 +1,5 @@
 /**
- * Townloc — Contact API + Admin CMS
+ * AMZgetway — Contact API + Admin CMS
  * POST /api/contact
  * Public posts + admin leads/posts/pages
  * Site CMS: GET /api/cms , GET|PUT /api/admin/cms
@@ -56,21 +56,69 @@ const ALLOWED_SERVICES = new Set([
   "Local SEO",
   "Remove Negative Reviews",
   "Not sure",
+  "Amazon / Walmart Services",
+  "Amazon Services",
+  "Walmart Services",
+  "Newsletter Subscribe",
+  "General Inquiry",
+  "Get A Quote",
+  "Full Store Management",
+  "Listing Optimization",
+  "PPC Campaign Management",
 ]);
 
 const PAGE_ALLOWLIST = [
-  "index.html",
-  "privacy.html",
-  "terms.html",
-  "industries/index.html",
+  "about-us/index.html",
+  "amazon-account-suspension-appeal-reinstatement-service/index.html",
+  "amazon-brand-registry-service/index.html",
+  "amazon-enhanced-brand-content-a-plus-service/index.html",
+  "amazon-fda-restricted-products-approval-service/index.html",
+  "amazon-full-store-management-service/index.html",
+  "amazon-listing-hijacker-removal-service/index.html",
+  "amazon-listing-image-design-service/index.html",
+  "amazon-listing-optimization-service/index.html",
+  "amazon-listing-reinstated-service/index.html",
+  "amazon-listing-services/index.html",
+  "amazon-ppc-campaign-management-service/index.html",
+  "amazon-product-description-writing-service/index.html",
+  "amazon-product-launching-service/index.html",
+  "amazon-product-research-service/index.html",
+  "amazon-restricted-category-ungated-service/index.html",
+  "amazon-search-trams-optimization-service/index.html",
+  "amazon-seller-feedback-service/index.html",
+  "amazon-services/index.html",
+  "amazon-shipment-creation-service/index.html",
+  "amazon-storefront-design-service/index.html",
+  "apply-for-sell-on-amazon/index.html",
+  "apply-for-sell-on-walmart/index.html",
+  "apply-selling-for-ecommerce-services/index.html",
   "blog/index.html",
-  "services/index.html",
-  "services/google-business-profile-setup.html",
-  "services/google-maps-review-management.html",
-  "services/google-ads-campaigns.html",
-  "services/web-development.html",
-  "services/local-seo.html",
-  "services/remove-negative-reviews.html",
+  "contact-us/index.html",
+  "full-service-management-form/index.html",
+  "index.html",
+  "llc-company-formation-service/index.html",
+  "service/brand-strategy/index.html",
+  "service/content-marketing/index.html",
+  "service/index.html",
+  "service/link-building/index.html",
+  "service/pay-per-click/index.html",
+  "service/search-engine-optimization/index.html",
+  "service/social-media-marketing/index.html",
+  "walmart-dropshipping-automation-services/index.html",
+  "walmart-full-store-management-services/index.html",
+  "walmart-listing-image-design-service/index.html",
+  "walmart-listing-optimization-service/index.html",
+  "walmart-listing-services/index.html",
+  "walmart-ppc-campaign-management-service/index.html",
+  "walmart-product-description-writing-service/index.html",
+  "walmart-product-launching-service/index.html",
+  "walmart-product-research-service/index.html",
+  "walmart-seller-feedback-service/index.html",
+  "walmart-services/index.html",
+  "walmart-shipment-creation-service/index.html",
+  "walmart-suspension-account-reinstated-service/index.html",
+  "walmart-wfs-listing-creation-services/index.html",
+  "what-makes-us-unique/index.html",
 ];
 
 const PAGE_ALLOWLIST_SET = new Set(PAGE_ALLOWLIST);
@@ -78,11 +126,13 @@ const PAGE_ALLOWLIST_SET = new Set(PAGE_ALLOWLIST);
 /** Structural pages whose public URL must stay fixed. */
 const FIXED_PAGE_PATHS = new Set([
   "index.html",
-  "privacy.html",
-  "terms.html",
-  "industries/index.html",
   "blog/index.html",
-  "services/index.html",
+  "service/index.html",
+  "amazon-services/index.html",
+  "walmart-services/index.html",
+  "about-us/index.html",
+  "contact-us/index.html",
+  "what-makes-us-unique/index.html",
 ]);
 
 /** Slugs that must not become root CMS pages (collide with site routes/files). */
@@ -92,6 +142,7 @@ const RESERVED_ROOT_SLUGS = new Set([
   "assets",
   "blog",
   "services",
+  "service",
   "industries",
   "privacy",
   "terms",
@@ -101,11 +152,18 @@ const RESERVED_ROOT_SLUGS = new Set([
   "sitemap",
   "favicon",
   "contact",
+  "contact-us",
+  "about-us",
   "css",
   "js",
   "images",
   "static",
   "www",
+  "cms",
+  "wp-content",
+  "wp-includes",
+  "amazon-services",
+  "walmart-services",
 ]);
 
 function customPagesFromDoc(doc) {
@@ -246,10 +304,10 @@ async function renamePagePath(env, doc, oldPath, nextSlugRaw) {
   html = html
     .replace(
       new RegExp(
-        `https://townloc\\.com${oldHref.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}(?:\\.html)?`,
+        `https://amzgetway\\.com${oldHref.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}(?:\\.html)?`,
         "gi"
       ),
-      `https://townloc.com${newHref}`
+      `https://amzgetway.com${newHref}`
     )
     .replace(
       new RegExp(
@@ -345,7 +403,7 @@ async function renamePagePath(env, doc, oldPath, nextSlugRaw) {
       entry.builtinSource &&
       entry.builtinSource === builtinSource
     ) {
-      // orphan clone from a prior rename — drop from CMS list only
+      // orphan clone from a prior rename ΓÇö drop from CMS list only
       continue;
     }
     customPages.push(entry);
@@ -458,7 +516,7 @@ function rewriteMenuHrefsForMovedPage(menusDoc, oldPath, newPath) {
   return menus;
 }
 
-/** Move legacy custom pages services/{slug}.html → {slug}.html (public URL /{slug}). */
+/** Move legacy custom pages services/{slug}.html ΓåÆ {slug}.html (public URL /{slug}). */
 async function migrateCustomPagesToRoot(env, doc) {
   const customs = customPagesFromDoc(doc);
   if (!customs.length) return doc;
@@ -508,8 +566,8 @@ async function migrateCustomPagesToRoot(env, doc) {
         let html = row.html;
         html = html
           .replace(
-            new RegExp(`https://townloc\\.com/services/${slug}(?:\\.html)?`, "gi"),
-            `https://townloc.com/${slug}`
+            new RegExp(`https://amzgetway\\.com/services/${slug}(?:\\.html)?`, "gi"),
+            `https://amzgetway.com/${slug}`
           )
           .replace(
             new RegExp(`data-cms-page="services/${slug}"`, "gi"),
@@ -589,7 +647,7 @@ async function loadMenusWithSeed(env) {
     changed = seeded.changed || true;
   }
 
-  // Industries nav → homepage #industries (same pattern as Work / Trust / FAQ)
+  // Industries nav ΓåÆ homepage #industries (same pattern as Work / Trust / FAQ)
   const menus = Array.isArray(raw.menus) ? raw.menus : [];
   menus.forEach(function (menu) {
     (menu.items || []).forEach(function (it) {
@@ -671,7 +729,7 @@ function isEditablePage(path, doc) {
   if (customPagesFromDoc(doc).some((x) => x && x.path === p)) return true;
   const redirects = pageRedirectsFromDoc(doc);
   if (Object.values(redirects).some((v) => String(v) === p)) return true;
-  // Old path still "editable" only via redirect resolve for CMS open — prefer new path
+  // Old path still "editable" only via redirect resolve for CMS open ΓÇö prefer new path
   return false;
 }
 
@@ -810,7 +868,7 @@ async function repairBuiltinPageDuplicates(env, doc) {
       delete pageSections[dead];
       changed = true;
     }
-    // Remove only D1 clones of built-in renames — never touch user pages
+    // Remove only D1 clones of built-in renames ΓÇö never touch user pages
     try {
       await env.DB.prepare(`DELETE FROM pages WHERE path = ?`).bind(dead).run();
     } catch (err) {
@@ -865,7 +923,7 @@ async function readPageHtml(env, path) {
   return assetRes.text();
 }
 
-/* ── Rate-limit store (in-memory, per-isolate) ── */
+/* ΓöÇΓöÇ Rate-limit store (in-memory, per-isolate) ΓöÇΓöÇ */
 const ipSubmissions = new Map();
 const RATE_WINDOW_MS = 60 * 1000;
 const RATE_MAX = 3;
@@ -885,7 +943,7 @@ function isRateLimited(ip) {
   return false;
 }
 
-/* ── Helpers ── */
+/* ΓöÇΓöÇ Helpers ΓöÇΓöÇ */
 
 function json(data, status, origin) {
   const headers = {
@@ -959,7 +1017,7 @@ function isValidUrl(value) {
   }
 }
 
-/** http(s) URL or site-relative /assets/… path */
+/** http(s) URL or site-relative /assets/ΓÇª path */
 function isMediaUrl(value) {
   const v = String(value || "").trim();
   if (!v) return false;
@@ -1117,7 +1175,7 @@ function applyFooter(html, footer) {
   if (copyrightText) {
     out = out.replace(
       /(<div\b[^>]*\bfooter-bottom\b[^>]*>[\s\S]*?<p\b[^>]*>)([\s\S]*?)(<\/p>)/i,
-      `$1© <span id="year"></span> ${escapeHtml(copyrightText)}$3`
+      `$1┬⌐ <span id="year"></span> ${escapeHtml(copyrightText)}$3`
     );
   }
 
@@ -1198,7 +1256,7 @@ function timingSafeEqual(a, b) {
   return out === 0;
 }
 
-/* ── Validation (contact) ── */
+/* ΓöÇΓöÇ Validation (contact) ΓöÇΓöÇ */
 
 function validatePayload(body) {
   if (!body || typeof body !== "object" || Array.isArray(body)) {
@@ -1254,7 +1312,7 @@ function validatePayload(body) {
   return { ok: true, data };
 }
 
-/* ── D1 contact ── */
+/* ΓöÇΓöÇ D1 contact ΓöÇΓöÇ */
 
 async function saveLead(env, data) {
   if (!env.DB) {
@@ -1278,7 +1336,7 @@ async function saveLead(env, data) {
     .run();
 }
 
-/* ── Email notification via Resend ── */
+/* ΓöÇΓöÇ Email notification via Resend ΓöÇΓöÇ */
 
 function buildEmailHtml(data, submittedAt) {
   const rows = [
@@ -1304,13 +1362,13 @@ function buildEmailHtml(data, submittedAt) {
 <body style="margin:0;padding:24px;background:#f9fafb;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif">
   <div style="max-width:560px;margin:0 auto;background:#fff;border-radius:12px;border:1px solid #e5e7eb;overflow:hidden">
     <div style="background:#111827;padding:20px 24px">
-      <h1 style="margin:0;font-size:18px;color:#fff">New Townloc Lead</h1>
+      <h1 style="margin:0;font-size:18px;color:#fff">New AMZgetway Lead</h1>
     </div>
     <table style="width:100%;border-collapse:collapse;font-size:14px">
       ${rowsHtml}
     </table>
     <div style="padding:16px 24px;font-size:12px;color:#9ca3af;border-top:1px solid #e5e7eb">
-      Townloc Contact API &middot; Automated notification
+      AMZgetway Contact API &middot; Automated notification
     </div>
   </div>
 </body></html>`;
@@ -1318,8 +1376,8 @@ function buildEmailHtml(data, submittedAt) {
 
 function buildEmailText(data, submittedAt) {
   return [
-    "New Townloc Lead",
-    "═══════════════════",
+    "New AMZgetway Lead",
+    "ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ",
     "",
     `Name:         ${data.clientName}`,
     `Email:        ${data.email}`,
@@ -1330,25 +1388,25 @@ function buildEmailText(data, submittedAt) {
     `Website/GBP:  ${data.mapsLink || "Not provided"}`,
     `Submitted:    ${submittedAt}`,
     "",
-    "— Townloc Contact API",
+    "ΓÇö AMZgetway Contact API",
   ].join("\n");
 }
 
 async function sendNotification(env, data) {
   const apiKey = env.RESEND_API_KEY;
-  const recipient = env.RECIPIENT_EMAIL || "contact@townloc.com";
+  const recipient = env.RECIPIENT_EMAIL || "contact@amzgetway.com";
 
   if (!apiKey) {
-    console.error("RESEND_API_KEY not configured — skipping email notification.");
+    console.error("RESEND_API_KEY not configured ΓÇö skipping email notification.");
     return;
   }
 
   const submittedAt = new Date().toISOString().replace("T", " ").slice(0, 19) + " UTC";
 
   const payload = {
-    from: env.SENDER_EMAIL || "Townloc <contact@townloc.com>",
+    from: env.SENDER_EMAIL || "AMZgetway <amzexperts@amzgetway.com>",
     to: [recipient],
-    subject: `New Lead: ${data.clientName} — ${data.service}`,
+    subject: `New Lead: ${data.clientName} ΓÇö ${data.service}`,
     html: buildEmailHtml(data, submittedAt),
     text: buildEmailText(data, submittedAt),
     reply_to: data.email,
@@ -1373,7 +1431,7 @@ async function sendNotification(env, data) {
   }
 }
 
-/* ── Contact handler ── */
+/* ΓöÇΓöÇ Contact handler ΓöÇΓöÇ */
 
 async function handleContact(request, env, origin) {
   if (!origin && request.headers.get("Origin")) {
@@ -1442,7 +1500,7 @@ async function handleContact(request, env, origin) {
   );
 }
 
-/* ── Admin auth ── */
+/* ΓöÇΓöÇ Admin auth ΓöÇΓöÇ */
 
 async function hmacSign(secret, message) {
   const key = await crypto.subtle.importKey(
@@ -1540,7 +1598,7 @@ async function handleAdminLogin(request, env, origin) {
   return json({ success: true, token }, 200, origin);
 }
 
-/* ── Public posts ── */
+/* ΓöÇΓöÇ Public posts ΓöÇΓöÇ */
 
 async function handlePublicPostsList(env, origin) {
   const { results } = await env.DB.prepare(
@@ -1564,7 +1622,7 @@ async function handlePublicPostGet(env, origin, slug) {
   return json({ success: true, post: row }, 200, origin);
 }
 
-/* ── Admin leads ── */
+/* ΓöÇΓöÇ Admin leads ΓöÇΓöÇ */
 
 function csvEscape(value) {
   const s = value == null ? "" : String(value);
@@ -1625,7 +1683,7 @@ async function handleAdminLeadsExport(env, origin) {
 
   const csv = leadsToCsv(results || []);
   const day = new Date().toISOString().slice(0, 10);
-  const filename = `townloc-leads-${day}.csv`;
+  const filename = `amzgetway-leads-${day}.csv`;
   const headers = {
     "content-type": "text/csv; charset=utf-8",
     "content-disposition": `attachment; filename="${filename}"`,
@@ -1670,7 +1728,7 @@ async function handleAdminLeadPatch(request, env, origin, id) {
   return json({ success: true }, 200, origin);
 }
 
-/* ── Admin posts ── */
+/* ΓöÇΓöÇ Admin posts ΓöÇΓöÇ */
 
 function parsePostFields(body) {
   const title = clean(body.title, 200);
@@ -1689,13 +1747,13 @@ function parsePostFields(body) {
   if (featured_image && !isMediaUrl(featured_image)) {
     return {
       ok: false,
-      message: "Featured image must be an http(s) URL or /assets/… path.",
+      message: "Featured image must be an http(s) URL or /assets/ΓÇª path.",
     };
   }
   if (og_image && !isMediaUrl(og_image)) {
     return {
       ok: false,
-      message: "OG image must be an http(s) URL or /assets/… path.",
+      message: "OG image must be an http(s) URL or /assets/ΓÇª path.",
     };
   }
 
@@ -1848,7 +1906,7 @@ async function handleAdminPostDelete(env, origin, id) {
   return json({ success: true }, 200, origin);
 }
 
-/* ── Admin pages + GitHub publish ── */
+/* ΓöÇΓöÇ Admin pages + GitHub publish ΓöÇΓöÇ */
 
 async function handleAdminPagesList(env, origin) {
   const doc = await readCmsDocument(env);
@@ -2000,7 +2058,7 @@ async function handleAdminPageCreate(request, env, origin) {
     return json({ success: false, message: "ASSETS binding missing." }, 500, origin);
   }
   const tplRes = await env.ASSETS.fetch(
-    new Request("https://scan.local/services/local-seo.html")
+    new Request("https://scan.local/cms/page-shell.html")
   );
   if (!tplRes.ok) {
     return json(
@@ -2169,7 +2227,7 @@ async function handleAdminPageDelete(request, env, origin) {
 async function loadServiceTemplateHtml(env) {
   if (!env.ASSETS) return null;
   const tplRes = await env.ASSETS.fetch(
-    new Request("https://scan.local/services/local-seo.html")
+    new Request("https://scan.local/cms/page-shell.html")
   );
   if (!tplRes.ok) return null;
   return tplRes.text();
@@ -2396,7 +2454,7 @@ async function handleAdminMediaUpload(request, env, origin) {
   if (!dataBase64 || dataBase64.length < 32) {
     return json({ success: false, message: "Missing image data." }, 400, origin);
   }
-  // ~5.5MB base64 ≈ 4MB binary; allow up to ~7MB base64 for quality-first uploads
+  // ~5.5MB base64 Γëê 4MB binary; allow up to ~7MB base64 for quality-first uploads
   if (dataBase64.length > 7_500_000) {
     return json({ success: false, message: "Image is too large." }, 400, origin);
   }
@@ -2490,7 +2548,7 @@ async function githubPutFileRaw(env, path, contentBase64, sha, message) {
       Authorization: `Bearer ${token}`,
       Accept: "application/vnd.github+json",
       "Content-Type": "application/json",
-      "User-Agent": "townloc-cms",
+      "User-Agent": "amzgetway-cms",
     },
     body: JSON.stringify(payload),
   });
@@ -2558,7 +2616,7 @@ function applyPageSeo(html, seo) {
 
   if (ogImage && isMediaUrl(ogImage)) {
     const abs = ogImage.startsWith("/")
-      ? `https://townloc.com${ogImage}`
+      ? `https://amzgetway.com${ogImage}`
       : ogImage;
     const safe = escapeHtml(abs);
     if (/property=["']og:image["']/i.test(out)) {
@@ -2591,7 +2649,7 @@ async function githubGetFileSha(env, path) {
     headers: {
       Authorization: `Bearer ${token}`,
       Accept: "application/vnd.github+json",
-      "User-Agent": "townloc-cms",
+      "User-Agent": "amzgetway-cms",
     },
   });
 
@@ -2625,7 +2683,7 @@ async function githubPutFile(env, path, html, sha) {
       Authorization: `Bearer ${token}`,
       Accept: "application/vnd.github+json",
       "Content-Type": "application/json",
-      "User-Agent": "townloc-cms",
+      "User-Agent": "amzgetway-cms",
     },
     body: JSON.stringify(payload),
   });
@@ -2706,7 +2764,7 @@ async function handleAdminPagePublish(request, env, origin) {
   );
 }
 
-/* ── Site CMS (branding / header / footer / page text + image URLs) ── */
+/* ΓöÇΓöÇ Site CMS (branding / header / footer / page text + image URLs) ΓöÇΓöÇ */
 
 let cmsSchemaReady = false;
 let cmsDocCache = { at: 0, doc: null };
@@ -2762,7 +2820,7 @@ function fixIndustriesNavToHomeSection(doc) {
       if (
         /^\/?industries\/?$/i.test(href) ||
         /^\/?industries\/index(?:\.html)?$/i.test(href) ||
-        /^https?:\/\/townloc\.com\/industries\/?$/i.test(href)
+        /^https?:\/\/amzgetway\.com\/industries\/?$/i.test(href)
       ) {
         it.href = "/#industries";
         it.type = "custom";
@@ -2993,7 +3051,7 @@ async function handleAdminCmsPut(request, env, origin) {
       const og = clean(body.seo.ogImage || body.seo.og_image || "", 500);
       if (og && !isMediaUrl(og)) {
         return json(
-          { success: false, message: "OG image must be http(s) or /assets/…" },
+          { success: false, message: "OG image must be http(s) or /assets/ΓÇª" },
           400,
           origin
         );
@@ -3215,7 +3273,7 @@ function menuAssignedToPrimary(doc, menuId) {
   return doc.locations && doc.locations.primary === menuId;
 }
 
-/** PUT — save menu tree, or save location assignments */
+/** PUT ΓÇö save menu tree, or save location assignments */
 async function handleAdminMenuSave(request, env, origin) {
   let body;
   try {
@@ -3318,7 +3376,7 @@ async function handleAdminMenuSave(request, env, origin) {
   );
 }
 
-/** POST — create a new named menu (WordPress “create a new menu”) */
+/** POST ΓÇö create a new named menu (WordPress ΓÇ£create a new menuΓÇ¥) */
 async function handleAdminMenuCreate(request, env, origin) {
   let body;
   try {
@@ -3386,7 +3444,7 @@ async function handleAdminMenuCreate(request, env, origin) {
   return json({ success: true, menu: entry, menus: doc, cms: merged }, 201, origin);
 }
 
-/** DELETE — delete a named menu, or delete one item (legacy: region+id) */
+/** DELETE ΓÇö delete a named menu, or delete one item (legacy: region+id) */
 async function handleAdminMenuDelete(request, env, origin) {
   let body;
   try {
@@ -3501,10 +3559,12 @@ async function serveAssetWithCms(request, env) {
   let status = 200;
   let baseHeaders = new Headers({
     "content-type": "text/html; charset=utf-8",
+    // Block Chrome "Access other apps and services on this device" (loopback / LNA)
+    "permissions-policy": "local-network-access=(), window-management=()",
   });
 
   if (looksHtml && env.DB) {
-    // CMS-renamed page URLs: old path → new path
+    // CMS-renamed page URLs: old path ΓåÆ new path
     try {
       const doc = await readCmsDocument(env);
       const redirected = resolveRedirectPath(doc, pagePath);
@@ -3516,7 +3576,7 @@ async function serveAssetWithCms(request, env) {
       console.error("page redirect check failed", err);
     }
 
-    // Old custom URLs under /services/{slug} → /{slug}
+    // Old custom URLs under /services/{slug} ΓåÆ /{slug}
     const legacySvc =
       url.pathname.match(/^\/services\/([a-z0-9]+(?:-[a-z0-9]+)*)\.html$/i) ||
       url.pathname.match(/^\/services\/([a-z0-9]+(?:-[a-z0-9]+)*)$/i);
@@ -3554,7 +3614,7 @@ async function serveAssetWithCms(request, env) {
     }
   }
 
-  // Canonical clean URLs: /path.html → /path (same as static HTML assets).
+  // Canonical clean URLs: /path.html ΓåÆ /path (same as static HTML assets).
   if (
     html != null &&
     /\.html$/i.test(url.pathname) &&
@@ -3585,10 +3645,10 @@ async function serveAssetWithCms(request, env) {
       doc.pageSections &&
       Array.isArray(doc.pageSections[pagePath]) &&
       doc.pageSections[pagePath].length > 0;
-    // Section-builder pages are compiled HTML — don't re-apply field overrides
+    // Section-builder pages are compiled HTML ΓÇö don't re-apply field overrides
     if (overrides && !hasSections) html = applyEditables(html, overrides);
     // Sitewide header/footer menus (auto). New pages only appear in Services
-    // when nested under that parent in Menus — no auto-inject into nav/cards.
+    // when nested under that parent in Menus ΓÇö no auto-inject into nav/cards.
     html = applyAllLayout(html, doc.layout);
     html = injectCustomMenus(html, customMenusFromDoc(doc));
 
@@ -3609,7 +3669,7 @@ async function serveAssetWithCms(request, env) {
 
   // Keep public meta URLs extensionless (stored HTML may still say *.html).
   html = String(html).replace(
-    /(https:\/\/townloc\.com\/[^"'>\s]+?)\.html(?=["'\s>])/gi,
+    /(https:\/\/amzgetway\.com\/[^"'>\s]+?)\.html(?=["'\s>])/gi,
     "$1"
   );
 
@@ -3622,7 +3682,7 @@ async function serveAssetWithCms(request, env) {
   return new Response(html, { status, headers: baseHeaders });
 }
 
-/* ── Admin router ── */
+/* ΓöÇΓöÇ Admin router ΓöÇΓöÇ */
 
 async function handleAdmin(request, env, origin, url) {
   const path = url.pathname.replace(/\/+$/, "") || "/";
@@ -3765,15 +3825,15 @@ async function handleAdmin(request, env, origin, url) {
   return json({ success: false, message: "Not found." }, 404, origin);
 }
 
-/* ── Router ── */
+/* ΓöÇΓöÇ Router ΓöÇΓöÇ */
 
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
 
-    // Apex canonical: www → non-www
-    if (url.hostname === "www.townloc.com") {
-      url.hostname = "townloc.com";
+    // Apex canonical: www ΓåÆ non-www
+    if (url.hostname === "www.amzgetway.com") {
+      url.hostname = "amzgetway.com";
       return Response.redirect(url.toString(), 301);
     }
 
@@ -3832,7 +3892,7 @@ export default {
         return json(
           {
             success: true,
-            message: "Townloc contact API is online.",
+            message: "AMZgetway contact API is online.",
             endpoints: [
               "POST /api/contact",
               "GET /api/posts",

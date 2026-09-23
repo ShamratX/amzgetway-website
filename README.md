@@ -40,8 +40,10 @@ amzgetway/
 
 ## Backend
 
-Reusable package from [master-backend-for-every-frontend](https://github.com/ShamratX/master-backend-for-every-frontend).  
-Setup steps: `backend/docs/00-setup-checklist.md` (D1, secrets, deploy — not done yet).
+Reusable package from [master-backend-for-every-frontend](https://github.com/ShamratX/master-backend-for-every-frontend).
+
+**Connected to this site** (admin, CMS shell, form bridge, wrangler assets).  
+Features kept; Cloudflare D1 + secrets + deploy still needed — see **`docs/BACKEND-CONNECT.md`**.
 
 ## Deploy
 
