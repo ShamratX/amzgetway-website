@@ -1,0 +1,69 @@
+/* ------------------------------------------
+  # Estatik
+--------------------------------------------- */ 
+.es-search__wrapper .es-search__field .es-field__wrap input {
+  padding: 15px;
+}
+.es-listing .properties {
+  padding-bottom: 30px;
+}
+.es-category-items {
+    display: flow-root;
+}
+/*.es-single .es-price-note {
+  text-align: left !important;
+}*/
+.es-cat-price {
+    display: inline-block;
+    position: absolute;
+    right: 15px;
+    top: -33px;
+}
+.es-single .es-price {
+  font-weight: 600;
+  font-size: 22px;
+  padding: 4px 10px !important;
+}
+.es-request-widget-wrap {
+  padding: 30px 20px;
+}
+.es-request-widget-wrap label {
+  width: 100%;
+  font-size: 12px;
+}
+.es-request-widget-wrap input[type=email] {
+  height: 40px;
+}
+.es-search__wrapper .es-search__field .es-field__wrap .select2 * {
+  height: 35px;
+}
+.es-request-widget-wrap h3 {
+  text-transform: none;
+  font-weight: 600;
+  text-align: left;
+}
+.es-request-widget-wrap input[type=submit] {
+  padding: 5px 0 !important;
+}
+.es-single .es-category-items a {
+    border-radius: 3px;
+    background-color: #bdbdbd;
+    color: #fff !important;
+    margin: 0 0 10px 5px !important;
+    padding: 3px 9px;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 10px !important;
+    font-weight: 400 !important;
+    line-height: 15px !important
+}
+.es-search__wrapper.es-search__wrapper--vertical .es-search__buttons {
+  margin-top: 25px;
+}
+.es-search__wrapper {
+  padding: 20px;
+}
+.es-top-arrow,
+.es-powered {
+  display: none;
+}

@@ -1,0 +1,17 @@
+{
+  "name": "backend-cms-worker",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Cloudflare Worker: site CMS admin API + contact/leads + static assets",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "cms:sync-from-html": "python ../scripts/sync-cms-from-html.py",
+    "db:create": "echo Run: npx wrangler d1 create YOUR_D1_DATABASE_NAME",
+    "db:migrate:local": "wrangler d1 migrations apply YOUR_D1_DATABASE_NAME --local",
+    "db:migrate:remote": "wrangler d1 migrations apply YOUR_D1_DATABASE_NAME --remote"
+  },
+  "devDependencies": {
+    "wrangler": "^4.128.0"
+  }
+}

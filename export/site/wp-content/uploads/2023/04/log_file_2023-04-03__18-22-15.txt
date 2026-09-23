@@ -1,0 +1,78 @@
+
+---Downloaded files---
+The import files for: SEO were successfully downloaded!
+Initial max execution time = 1500
+Files info:
+Site URL = https://amzgetway.com
+Data file = /home/jnixpvqx/amzgetway.com/wp-content/uploads/2023/04/demo-content-import-file_2023-04-03__18-22-15.xml
+Widget file = /home/jnixpvqx/amzgetway.com/wp-content/uploads/2023/04/demo-widgets-import-file_2023-04-03__18-22-15.json
+Customizer file = not defined!
+Redux files:
+tx -> /home/jnixpvqx/amzgetway.com/wp-content/uploads/2023/04/demo-redux-import-file_0-2023-04-03__18-22-15.json 
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+---Importing widgets---
+Post Sidebar : 
+
+Search - No Title - Imported
+Avas Recent Posts - Recent posts - Imported
+Avas Posts Gallery - Our Services - Imported
+Categories - No Title - Imported
+Meta - No Title - Imported
+
+Post Single Sidebar : 
+
+Search - No Title - Imported
+Avas Recent Posts - Recent posts - Imported
+Avas Categories - Categories - Imported
+Avas Posts Gallery - Our Services - Imported
+Meta - No Title - Imported
+
+Services Single Post Sidebar : 
+
+Avas Posts Gallery - More Services - Imported
+
+Hamburger / Side Menu : 
+
+Navigation Menu - Our Services - Imported
+Text - GET FREE SEO REPORT - Imported
+
+Footer | 1 : 
+
+Text - No Title - Imported
+
+Footer | 2 : 
+
+Navigation Menu - Service Provided - Imported
+
+Footer | 3 : 
+
+Avas Recent Posts - Recent posts - Imported
+
+Footer | 4 : 
+
+Text - CONTACT DETAILS - Imported
+
+
+
+---Importing Redux settings---
+Redux settings import for: tx finished successfully!
+
+---ocdi/after_import---
+

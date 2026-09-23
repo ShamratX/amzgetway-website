@@ -1,0 +1,1 @@
+.darkmode-layer--button{border-radius:0!important;right:-50px!important;bottom:-50px!important;}.darkmode-toggle,.darkmode-layer{z-index:500}.darkmode--activated i,.darkmode--activated svg,.darkmode--activated img,.ignore-element{isolation:isolate;z-index:999!important;filter:invert(1);}

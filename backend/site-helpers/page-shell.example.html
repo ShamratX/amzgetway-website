@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>New page</title>
+  <meta name="description" content="" />
+  <link rel="canonical" href="/" />
+  <meta property="og:title" content="" />
+  <meta property="og:description" content="" />
+  <meta property="og:url" content="" />
+  <meta property="og:image" content="" />
+  <meta name="twitter:title" content="" />
+  <meta name="twitter:description" content="" />
+  <meta name="twitter:image" content="" />
+  <link rel="icon" href="/assets/images/favicon.png" />
+</head>
+<body data-cms-page="shell">
+  <!--
+    PAGE SHELL for the CMS section builder.
+    Copy this file into your website as: cms/page-shell.html
+    Replace header/footer with YOUR site chrome (same as other pages).
+    The Worker replaces the contents of <main> when building new pages.
+
+    FOOTER AUTO-CAPTURE (master CMS):
+    Keep these class names so Admin → Footer fills itself from HTML
+    the first time you open Site CMS on a new site:
+      .site-logo / .site-logo-footer
+      .footer-tagline
+      .footer-col-title  (Services, Contact, Company — in that order)
+      .footer-contact    (ul with 4 li: email, email, phone, WhatsApp)
+      .footer-guarantee-label / .footer-guarantee-text
+      .footer-bottom / .footer-cta
+  -->
+  <header id="site-header">
+    <!-- Put your real site header / nav here -->
+    <a href="/" class="site-logo-link" aria-label="Home">
+      <img class="site-logo site-logo-header" src="/assets/images/logo.png" alt="Site" width="160" height="48" />
+    </a>
+  </header>
+
+  <main>
+    <p>Shell placeholder — replaced by CMS sections.</p>
+  </main>
+
+  <footer class="site-footer" id="site-footer">
+    <div class="footer-top">
+      <div class="footer-col">
+        <a href="/" class="footer-logo-link site-logo-link" aria-label="Home">
+          <img class="site-logo site-logo-footer" src="/assets/images/logo.png" alt="Site" width="160" height="48" />
+        </a>
+        <p class="footer-tagline">Short footer tagline about your business.</p>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title">Services</p>
+        <ul>
+          <li><a href="/services/">Services</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title">Contact</p>
+        <ul class="footer-contact">
+          <li><a class="footer-contact-link" href="mailto:hello@example.com"><span>hello@example.com</span></a></li>
+          <li><a class="footer-contact-link" href="mailto:contact@example.com"><span>contact@example.com</span></a></li>
+          <li><a class="footer-contact-link" href="tel:1234567890"><span>1234567890</span></a></li>
+          <li><a class="footer-contact-link" href="https://wa.me/1234567890"><span>1234567890</span></a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title">Company</p>
+        <ul>
+          <li><a href="/about">About</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-guarantee">
+      <p class="footer-guarantee-label">Client Guarantee</p>
+      <p class="footer-guarantee-text">Point one <span>|</span> Point two <span>|</span> Point three</p>
+    </div>
+    <div class="footer-bottom">
+      <p>© <span id="year"></span> Your Brand. All rights reserved.</p>
+      <a href="/#contact" class="footer-cta">Get a Free Assessment</a>
+    </div>
+  </footer>
+</body>
+</html>

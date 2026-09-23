@@ -1,0 +1,61 @@
+# ============================================================
+# CMS Worker — TEMPLATE (fill these in for EACH new project)
+# ============================================================
+# 1. Change "name" to your project name (lowercase, no spaces)
+# 2. Create a D1 database and paste database_id below
+# 3. Set your website folder as [assets] directory
+# 4. Set routes / custom domain for your site
+# 5. Set emails + ALLOWED_ORIGINS
+# 6. Put secrets with: npx wrangler secret put ...
+# Full steps: see ../docs/ in this package
+# ============================================================
+
+name = "YOUR_PROJECT_NAME"
+main = "src/index.js"
+compatibility_date = "2024-11-01"
+workers_dev = true
+
+# Your live domain(s). Example:
+# routes = [
+#   { pattern = "example.com", custom_domain = true },
+#   { pattern = "www.example.com", custom_domain = true },
+# ]
+routes = []
+
+[assets]
+# Path to the WEBSITE root (HTML, /admin, /assets, …).
+# From this worker folder, "../.." means: two folders up = site root.
+# Change this if your folder layout is different.
+directory = "../.."
+binding = "ASSETS"
+run_worker_first = true
+not_found_handling = "404-page"
+
+[vars]
+# Browser origins allowed to call the API (comma-separated).
+# Always include your real https:// domain after you go live.
+ALLOWED_ORIGINS = "http://127.0.0.1:5500,http://localhost:5500,http://127.0.0.1:8787,http://localhost:8787"
+
+# Public site URL (no trailing slash). Used for emails / canonical helpers.
+PUBLIC_SITE_URL = "https://example.com"
+
+# Contact form inbox + From: line (Resend must verify your domain)
+RECIPIENT_EMAIL = "contact@example.com"
+SENDER_EMAIL = "My Site <contact@example.com>"
+
+# Optional — only if you use “Publish to GitHub” / image upload to repo
+# GITHUB_REPO = "your-org/your-repo"
+# GITHUB_BRANCH = "main"
+
+# SECRETS (do NOT put real values in this file — use wrangler secret put):
+#   ADMIN_PASSWORD
+#   ADMIN_SECRET
+#   RESEND_API_KEY
+#   GITHUB_TOKEN   (optional)
+
+[[d1_databases]]
+binding = "DB"
+database_name = "YOUR_D1_DATABASE_NAME"
+# Paste the id from: npx wrangler d1 create YOUR_D1_DATABASE_NAME
+database_id = "REPLACE_WITH_YOUR_D1_DATABASE_ID"
+migrations_dir = "migrations"

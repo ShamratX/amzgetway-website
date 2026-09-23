@@ -1,0 +1,4112 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+    <head>
+        <meta charset="UTF-8">
+  <link rel="preload" href="/wp-content/uploads/fonts/rajdhani-600.woff2" as="font" type="font/woff2" crossorigin
+    id="amz-menu-font-preload">
+  <link rel="preload" href="/wp-content/uploads/banner.png?v=12" as="image" type="image/png" fetchpriority="high"
+    id="amz-banner-preload">
+  <style id="amz-banner-lock-early">
+    /* Early paint lock — reserve banner box before late CSS/JS */
+    #amz-new-banner.amz-new-banner {
+      display: block !important;
+      width: 100% !important;
+      height: 630px !important;
+      min-height: 630px !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      overflow: hidden !important;
+      background: #fff url("/wp-content/uploads/banner.png?v=12") center top / cover no-repeat !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+    }
+
+    #amz-new-banner .amz-banner-img {
+      display: block !important;
+      width: 100% !important;
+      height: 630px !important;
+      object-fit: cover !important;
+      object-position: center top !important;
+    }
+
+    @media (min-width: 992px) and (max-width: 1599px) {
+
+      #amz-new-banner.amz-new-banner,
+      #amz-new-banner .amz-banner-img {
+        height: 610px !important;
+        min-height: 610px !important;
+      }
+    }
+
+    @media (max-width: 991px) and (min-width: 768px) {
+
+      #amz-new-banner.amz-new-banner,
+      #amz-new-banner .amz-banner-img {
+        height: 420px !important;
+        min-height: 420px !important;
+      }
+    }
+
+    @media (max-width: 767px) {
+
+      #amz-new-banner.amz-new-banner,
+      #amz-new-banner .amz-banner-img {
+        height: 380px !important;
+        min-height: 380px !important;
+      }
+    }
+
+    /* Remove orange boarder line under banner (features section top border) */
+    .elementor-291 .elementor-element-1f6ce22 {
+      border: 0 !important;
+      border-top: 0 !important;
+      box-shadow: none !important;
+    }
+  </style>
+<style id="amz-menu-font-face">
+/* Metric-matched Arial stand-in so swap to Rajdhani does not flash/jump */
+@font-face {
+  font-family: "RajdhaniMenu";
+  font-style: normal;
+  font-weight: 600;
+  src: local("Arial");
+  size-adjust: 98%;
+  ascent-override: 90%;
+  descent-override: 22%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "RajdhaniMenu";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("/wp-content/uploads/fonts/rajdhani-600.woff2") format("woff2");
+}
+</style>
+<style id="amz-menu-stable">
+/* Lock nav geometry — fix menuLeft flash from scrollbar/logo shrink (hyp D) */
+    html {
+      overflow-y: scroll;
+      scrollbar-gutter: stable;
+    }
+
+@media (min-width: 992px) {
+
+  #header #h-style-3.main-header,
+  #header #h-style-3.main-header.sticky-header {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    height: 81px !important;
+    min-height: 81px !important;
+    max-height: 81px !important;
+    z-index: 10000 !important;
+    background-color: #ffffff !important;
+    box-shadow: 0 0 10px 0 rgb(0 0 0 / 15%) !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    animation: none !important;
+  }
+
+      body #page {
+        padding-top: 81px !important;
+      }
+
+      #header #h-style-3.main-header>.container-fluid {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+    height: 81px !important;
+    box-sizing: border-box !important;
+    padding-left: 40px !important;
+    padding-right: 40px !important;
+  }
+
+      #header #h-style-3.main-header>.container-fluid>.tx_logo:not(.tx_sticky_logo) {
+    display: none !important;
+  }
+
+      #header #h-style-3.main-header>.container-fluid>.tx_logo.tx_sticky_logo {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    width: 105px !important;
+    flex: 0 0 105px !important;
+  }
+
+      #header #h-style-3.main-header>.container-fluid>.tx_logo.tx_sticky_logo img {
+    height: 52px !important;
+    width: 105px !important;
+    display: block !important;
+  }
+
+      #header #h-style-3.main-header>.container-fluid>.navbar {
+    margin-left: auto !important;
+    margin-right: 0 !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    flex: 0 0 auto !important;
+  }
+
+  #header #h-style-3 ul.main-menu {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    list-style: none !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    float: none !important;
+  }
+
+      #header #h-style-3 ul.main-menu>li {
+    display: inline-flex !important;
+    border-right: 1px solid #dbdbdb !important;
+    margin: 0 !important;
+    float: none !important;
+    flex: 0 0 auto !important;
+  }
+
+      #header #h-style-3 ul.main-menu>li:last-child {
+        border-right: 0 !important;
+      }
+
+      #header #h-style-3 ul.main-menu>li>a {
+    display: inline-flex !important;
+    align-items: center !important;
+    padding: 27px 20px !important;
+    font-family: "RajdhaniMenu", Arial, Helvetica, sans-serif !important;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    line-height: 27px !important;
+    text-transform: uppercase !important;
+    white-space: nowrap !important;
+    box-sizing: border-box !important;
+    transition: none !important;
+    animation: none !important;
+    position: relative !important;
+    letter-spacing: 0 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    color: #000000 !important;
+  }
+
+      #header #h-style-3 ul.main-menu>li.menu-item-has-children>a:after {
+    content: none !important;
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+}
+</style>
+<script id="amz-menu-stable-js">
+(function () {
+  var h = document.getElementById("h-style-3");
+  if (h) h.classList.add("sticky-header");
+  else document.addEventListener("DOMContentLoaded", function () {
+    var el = document.getElementById("h-style-3");
+    if (el) el.classList.add("sticky-header");
+  });
+})();
+</script>
+<link rel="profile" href="http://gmpg.org/xfn/11">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+
+	<!-- This site is optimized with the Yoast SEO plugin v26.7 - https://yoast.com/wordpress/plugins/seo/ -->
+	<title>Home - Seller Central Agency | Grow Your Amazon &amp; Walmart Sales</title>
+  <meta name="description"
+    content="AMZgetway is a one-stop digital marketing agency, assisting clients in promoting their brands on leading ecommerce marketplaces, such as Amazon and Walmart." />
+	<link rel="canonical" href="/" />
+	<meta property="og:locale" content="en_US" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="Home - Seller Central Agency | Grow Your Amazon &amp; Walmart Sales" />
+  <meta property="og:description"
+    content="AMZgetway is a one-stop digital marketing agency, assisting clients in promoting their brands on leading ecommerce marketplaces, such as Amazon and Walmart." />
+	<meta property="og:url" content="/" />
+	<meta property="og:site_name" content="Seller Central Agency | Grow Your Amazon &amp; Walmart Sales" />
+	<meta property="article:publisher" content="https://www.facebook.com/AmzGetway/" />
+	<meta property="article:modified_time" content="2023-06-13T06:36:39+00:00" />
+	<meta property="og:image" content="https://avas.live/seo/wp-content/uploads/sites/33/2019/11/highly-optimized.png" />
+	<meta name="twitter:card" content="summary_large_image" />
+  <script type="application/ld+json"
+    class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"/","url":"/","name":"Home - Seller Central Agency | Grow Your Amazon &amp; Walmart Sales","isPartOf":{"@id":"/#website"},"about":{"@id":"/#organization"},"primaryImageOfPage":{"@id":"/#primaryimage"},"image":{"@id":"/#primaryimage"},"thumbnailUrl":"https://avas.live/seo/wp-content/uploads/sites/33/2019/11/highly-optimized.png","datePublished":"2019-11-12T17:01:56+00:00","dateModified":"2023-06-13T06:36:39+00:00","description":"AMZgetway is a one-stop digital marketing agency, assisting clients in promoting their brands on leading ecommerce marketplaces, such as Amazon and Walmart.","breadcrumb":{"@id":"/#breadcrumb"},"inLanguage":"en-US","potentialAction":[{"@type":"ReadAction","target":["/"]}]},{"@type":"ImageObject","inLanguage":"en-US","@id":"/#primaryimage","url":"https://avas.live/seo/wp-content/uploads/sites/33/2019/11/highly-optimized.png","contentUrl":"https://avas.live/seo/wp-content/uploads/sites/33/2019/11/highly-optimized.png"},{"@type":"BreadcrumbList","@id":"/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home"}]},{"@type":"WebSite","@id":"/#website","url":"/","name":"Seller Central Agency | Grow Your Amazon & Walmart Sales","description":"Seller Central Agency | Grow Your Amazon &amp; Walmart Sales","publisher":{"@id":"/#organization"},"alternateName":"Amzgetway.com","potentialAction":[{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"/?s={search_term_string}"},"query-input":{"@type":"PropertyValueSpecification","valueRequired":true,"valueName":"search_term_string"}}],"inLanguage":"en-US"},{"@type":"Organization","@id":"/#organization","name":"Seller Central Agency | Grow Your Amazon & Walmart Sales","alternateName":"Amzgetway.com","url":"/","logo":{"@type":"ImageObject","inLanguage":"en-US","@id":"/#/schema/logo/image/","url":"/wp-content/uploads/2023/04/AMZgetway-Logo.png","contentUrl":"/wp-content/uploads/2023/04/AMZgetway-Logo.png","width":8090,"height":3995,"caption":"Seller Central Agency | Grow Your Amazon & Walmart Sales"},"image":{"@id":"/#/schema/logo/image/"},"sameAs":["https://www.facebook.com/AmzGetway/"]}]}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//www.googletagmanager.com' />
+<link rel='preconnect' href='https://fonts.gstatic.com' crossorigin />
+  <link rel="alternate" type="application/rss+xml"
+    title="Seller Central Agency | Grow Your Amazon &amp; Walmart Sales &raquo; Feed" href="/feed/" />
+  <link rel="alternate" type="application/rss+xml"
+    title="Seller Central Agency | Grow Your Amazon &amp; Walmart Sales &raquo; Comments Feed" href="/comments/feed/" />
+  <link rel="alternate" title="oEmbed (JSON)" type="application/json+oembed"
+    href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2F127.0.0.1%3A8080%2F" />
+  <link rel="alternate" title="oEmbed (XML)" type="text/xml+oembed"
+    href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2F127.0.0.1%3A8080%2F&#038;format=xml" />
+<style id='wp-img-auto-sizes-contain-inline-css' type='text/css'>
+    img:is([sizes=auto i], [sizes^="auto," i]) {
+      contain-intrinsic-size: 3000px 1500px
+    }
+
+/*# sourceURL=wp-img-auto-sizes-contain-inline-css */
+</style>
+  <link rel='stylesheet' id='tx-owl-carousel-css'
+    href='/wp-content/themes/avas/assets/css/owl.carousel.min.css?ver=6.9.8' type='text/css' media='all' />
+<style id='wp-emoji-styles-inline-css' type='text/css'>
+    img.wp-smiley,
+    img.emoji {
+		display: inline !important;
+		border: none !important;
+		box-shadow: none !important;
+		height: 1em !important;
+		width: 1em !important;
+		margin: 0 0.07em !important;
+		vertical-align: -0.1em !important;
+		background: none !important;
+		padding: 0 !important;
+	}
+
+/*# sourceURL=wp-emoji-styles-inline-css */
+</style>
+<style id='classic-theme-styles-inline-css' type='text/css'>
+/*! This file is auto-generated */
+    .wp-block-button__link {
+      color: #fff;
+      background-color: #ffffff;
+      border-radius: 9999px;
+      box-shadow: none;
+      text-decoration: none;
+      padding: calc(.667em + 2px) calc(1.333em + 2px);
+      font-size: 1.125em
+    }
+
+    .wp-block-file__button {
+      background: #ffffff;
+      color: #fff;
+      text-decoration: none
+    }
+
+/*# sourceURL=/wp-includes/css/classic-themes.min.css */
+</style>
+<style id='global-styles-inline-css' type='text/css'>
+    :root {
+      --wp--preset--aspect-ratio--square: 1;
+      --wp--preset--aspect-ratio--4-3: 4/3;
+      --wp--preset--aspect-ratio--3-4: 3/4;
+      --wp--preset--aspect-ratio--3-2: 3/2;
+      --wp--preset--aspect-ratio--2-3: 2/3;
+      --wp--preset--aspect-ratio--16-9: 16/9;
+      --wp--preset--aspect-ratio--9-16: 9/16;
+      --wp--preset--color--black: #000000;
+      --wp--preset--color--cyan-bluish-gray: #abb8c3;
+      --wp--preset--color--white: #ffffff;
+      --wp--preset--color--pale-pink: #f78da7;
+      --wp--preset--color--vivid-red: #cf2e2e;
+      --wp--preset--color--luminous-vivid-orange: #ff6900;
+      --wp--preset--color--luminous-vivid-amber: #fcb900;
+      --wp--preset--color--light-green-cyan: #7bdcb5;
+      --wp--preset--color--vivid-green-cyan: #00d084;
+      --wp--preset--color--pale-cyan-blue: #8ed1fc;
+      --wp--preset--color--vivid-cyan-blue: #0693e3;
+      --wp--preset--color--vivid-purple: #9b51e0;
+      --wp--preset--color--deep-cerise: #e51681;
+      --wp--preset--color--strong-magenta: #a156b4;
+      --wp--preset--color--light-grayish-magenta: #d0a5db;
+      --wp--preset--color--very-light-gray: #eee;
+      --wp--preset--color--very-dark-gray: #444;
+      --wp--preset--color--strong-blue: #0073aa;
+      --wp--preset--color--lighter-blue: #229fd8;
+      --wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg, rgb(6, 147, 227) 0%, rgb(155, 81, 224) 100%);
+      --wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg, rgb(122, 220, 180) 0%, rgb(0, 208, 130) 100%);
+      --wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg, rgb(252, 185, 0) 0%, rgb(255, 105, 0) 100%);
+      --wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg, rgb(255, 105, 0) 0%, rgb(207, 46, 46) 100%);
+      --wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg, rgb(238, 238, 238) 0%, rgb(169, 184, 195) 100%);
+      --wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg, rgb(74, 234, 220) 0%, rgb(151, 120, 209) 20%, rgb(207, 42, 186) 40%, rgb(238, 44, 130) 60%, rgb(251, 105, 98) 80%, rgb(254, 248, 76) 100%);
+      --wp--preset--gradient--blush-light-purple: linear-gradient(135deg, rgb(255, 206, 236) 0%, rgb(152, 150, 240) 100%);
+      --wp--preset--gradient--blush-bordeaux: linear-gradient(135deg, rgb(254, 205, 165) 0%, rgb(254, 45, 45) 50%, rgb(107, 0, 62) 100%);
+      --wp--preset--gradient--luminous-dusk: linear-gradient(135deg, rgb(255, 203, 112) 0%, rgb(199, 81, 192) 50%, rgb(65, 88, 208) 100%);
+      --wp--preset--gradient--pale-ocean: linear-gradient(135deg, rgb(255, 245, 203) 0%, rgb(182, 227, 212) 50%, rgb(51, 167, 181) 100%);
+      --wp--preset--gradient--electric-grass: linear-gradient(135deg, rgb(202, 248, 128) 0%, rgb(113, 206, 126) 100%);
+      --wp--preset--gradient--midnight: linear-gradient(135deg, rgb(2, 3, 129) 0%, rgb(40, 116, 252) 100%);
+      --wp--preset--font-size--small: 12px;
+      --wp--preset--font-size--medium: 20px;
+      --wp--preset--font-size--large: 36px;
+      --wp--preset--font-size--x-large: 42px;
+      --wp--preset--font-size--regular: 16px;
+      --wp--preset--font-size--larger: 50px;
+      --wp--preset--spacing--20: 0.44rem;
+      --wp--preset--spacing--30: 0.67rem;
+      --wp--preset--spacing--40: 1rem;
+      --wp--preset--spacing--50: 1.5rem;
+      --wp--preset--spacing--60: 2.25rem;
+      --wp--preset--spacing--70: 3.38rem;
+      --wp--preset--spacing--80: 5.06rem;
+      --wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);
+      --wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);
+      --wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);
+      --wp--preset--shadow--outlined: 6px 6px 0px -3px rgb(255, 255, 255), 6px 6px rgb(0, 0, 0);
+      --wp--preset--shadow--crisp: 6px 6px 0px rgb(0, 0, 0);
+    }
+
+    :where(.is-layout-flex) {
+      gap: 0.5em;
+    }
+
+    :where(.is-layout-grid) {
+      gap: 0.5em;
+    }
+
+    body .is-layout-flex {
+      display: flex;
+    }
+
+    .is-layout-flex {
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .is-layout-flex> :is(*, div) {
+      margin: 0;
+    }
+
+    body .is-layout-grid {
+      display: grid;
+    }
+
+    .is-layout-grid> :is(*, div) {
+      margin: 0;
+    }
+
+    :where(.wp-block-columns.is-layout-flex) {
+      gap: 2em;
+    }
+
+    :where(.wp-block-columns.is-layout-grid) {
+      gap: 2em;
+    }
+
+    :where(.wp-block-post-template.is-layout-flex) {
+      gap: 1.25em;
+    }
+
+    :where(.wp-block-post-template.is-layout-grid) {
+      gap: 1.25em;
+    }
+
+    .has-black-color {
+      color: var(--wp--preset--color--black) !important;
+    }
+
+    .has-cyan-bluish-gray-color {
+      color: var(--wp--preset--color--cyan-bluish-gray) !important;
+    }
+
+    .has-white-color {
+      color: var(--wp--preset--color--white) !important;
+    }
+
+    .has-pale-pink-color {
+      color: var(--wp--preset--color--pale-pink) !important;
+    }
+
+    .has-vivid-red-color {
+      color: var(--wp--preset--color--vivid-red) !important;
+    }
+
+    .has-luminous-vivid-orange-color {
+      color: var(--wp--preset--color--luminous-vivid-orange) !important;
+    }
+
+    .has-luminous-vivid-amber-color {
+      color: var(--wp--preset--color--luminous-vivid-amber) !important;
+    }
+
+    .has-light-green-cyan-color {
+      color: var(--wp--preset--color--light-green-cyan) !important;
+    }
+
+    .has-vivid-green-cyan-color {
+      color: var(--wp--preset--color--vivid-green-cyan) !important;
+    }
+
+    .has-pale-cyan-blue-color {
+      color: var(--wp--preset--color--pale-cyan-blue) !important;
+    }
+
+    .has-vivid-cyan-blue-color {
+      color: var(--wp--preset--color--vivid-cyan-blue) !important;
+    }
+
+    .has-vivid-purple-color {
+      color: var(--wp--preset--color--vivid-purple) !important;
+    }
+
+    .has-black-background-color {
+      background-color: var(--wp--preset--color--black) !important;
+    }
+
+    .has-cyan-bluish-gray-background-color {
+      background-color: var(--wp--preset--color--cyan-bluish-gray) !important;
+    }
+
+    .has-white-background-color {
+      background-color: var(--wp--preset--color--white) !important;
+    }
+
+    .has-pale-pink-background-color {
+      background-color: var(--wp--preset--color--pale-pink) !important;
+    }
+
+    .has-vivid-red-background-color {
+      background-color: var(--wp--preset--color--vivid-red) !important;
+    }
+
+    .has-luminous-vivid-orange-background-color {
+      background-color: var(--wp--preset--color--luminous-vivid-orange) !important;
+    }
+
+    .has-luminous-vivid-amber-background-color {
+      background-color: var(--wp--preset--color--luminous-vivid-amber) !important;
+    }
+
+    .has-light-green-cyan-background-color {
+      background-color: var(--wp--preset--color--light-green-cyan) !important;
+    }
+
+    .has-vivid-green-cyan-background-color {
+      background-color: var(--wp--preset--color--vivid-green-cyan) !important;
+    }
+
+    .has-pale-cyan-blue-background-color {
+      background-color: var(--wp--preset--color--pale-cyan-blue) !important;
+    }
+
+    .has-vivid-cyan-blue-background-color {
+      background-color: var(--wp--preset--color--vivid-cyan-blue) !important;
+    }
+
+    .has-vivid-purple-background-color {
+      background-color: var(--wp--preset--color--vivid-purple) !important;
+    }
+
+    .has-black-border-color {
+      border-color: var(--wp--preset--color--black) !important;
+    }
+
+    .has-cyan-bluish-gray-border-color {
+      border-color: var(--wp--preset--color--cyan-bluish-gray) !important;
+    }
+
+    .has-white-border-color {
+      border-color: var(--wp--preset--color--white) !important;
+    }
+
+    .has-pale-pink-border-color {
+      border-color: var(--wp--preset--color--pale-pink) !important;
+    }
+
+    .has-vivid-red-border-color {
+      border-color: var(--wp--preset--color--vivid-red) !important;
+    }
+
+    .has-luminous-vivid-orange-border-color {
+      border-color: var(--wp--preset--color--luminous-vivid-orange) !important;
+    }
+
+    .has-luminous-vivid-amber-border-color {
+      border-color: var(--wp--preset--color--luminous-vivid-amber) !important;
+    }
+
+    .has-light-green-cyan-border-color {
+      border-color: var(--wp--preset--color--light-green-cyan) !important;
+    }
+
+    .has-vivid-green-cyan-border-color {
+      border-color: var(--wp--preset--color--vivid-green-cyan) !important;
+    }
+
+    .has-pale-cyan-blue-border-color {
+      border-color: var(--wp--preset--color--pale-cyan-blue) !important;
+    }
+
+    .has-vivid-cyan-blue-border-color {
+      border-color: var(--wp--preset--color--vivid-cyan-blue) !important;
+    }
+
+    .has-vivid-purple-border-color {
+      border-color: var(--wp--preset--color--vivid-purple) !important;
+    }
+
+    .has-vivid-cyan-blue-to-vivid-purple-gradient-background {
+      background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;
+    }
+
+    .has-light-green-cyan-to-vivid-green-cyan-gradient-background {
+      background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;
+    }
+
+    .has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background {
+      background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;
+    }
+
+    .has-luminous-vivid-orange-to-vivid-red-gradient-background {
+      background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;
+    }
+
+    .has-very-light-gray-to-cyan-bluish-gray-gradient-background {
+      background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;
+    }
+
+    .has-cool-to-warm-spectrum-gradient-background {
+      background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;
+    }
+
+    .has-blush-light-purple-gradient-background {
+      background: var(--wp--preset--gradient--blush-light-purple) !important;
+    }
+
+    .has-blush-bordeaux-gradient-background {
+      background: var(--wp--preset--gradient--blush-bordeaux) !important;
+    }
+
+    .has-luminous-dusk-gradient-background {
+      background: var(--wp--preset--gradient--luminous-dusk) !important;
+    }
+
+    .has-pale-ocean-gradient-background {
+      background: var(--wp--preset--gradient--pale-ocean) !important;
+    }
+
+    .has-electric-grass-gradient-background {
+      background: var(--wp--preset--gradient--electric-grass) !important;
+    }
+
+    .has-midnight-gradient-background {
+      background: var(--wp--preset--gradient--midnight) !important;
+    }
+
+    .has-small-font-size {
+      font-size: var(--wp--preset--font-size--small) !important;
+    }
+
+    .has-medium-font-size {
+      font-size: var(--wp--preset--font-size--medium) !important;
+    }
+
+    .has-large-font-size {
+      font-size: var(--wp--preset--font-size--large) !important;
+    }
+
+    .has-x-large-font-size {
+      font-size: var(--wp--preset--font-size--x-large) !important;
+    }
+
+    :where(.wp-block-post-template.is-layout-flex) {
+      gap: 1.25em;
+    }
+
+    :where(.wp-block-post-template.is-layout-grid) {
+      gap: 1.25em;
+    }
+
+    :where(.wp-block-term-template.is-layout-flex) {
+      gap: 1.25em;
+    }
+
+    :where(.wp-block-term-template.is-layout-grid) {
+      gap: 1.25em;
+    }
+
+    :where(.wp-block-columns.is-layout-flex) {
+      gap: 2em;
+    }
+
+    :where(.wp-block-columns.is-layout-grid) {
+      gap: 2em;
+    }
+
+    :root :where(.wp-block-pullquote) {
+      font-size: 1.5em;
+      line-height: 1.6;
+    }
+
+/*# sourceURL=global-styles-inline-css */
+</style>
+  <link rel='stylesheet' id='tx-style-css' href='/wp-content/plugins/avas-core/assets/css/style.min.css?ver=6.9.8'
+    type='text/css' media='all' />
+  <link rel='stylesheet' id='tx-fa6-css' href='/wp-content/plugins/avas-core/assets/css/all.min.css?ver=6.9.8'
+    type='text/css' media='all' />
+  <link rel='stylesheet' id='tx-fa4-css' href='/wp-content/plugins/avas-core/assets/css/fa4.min.css?ver=6.9.8'
+    type='text/css' media='all' />
+  <link rel='stylesheet' id='tx-arrow-font-css'
+    href='/wp-content/plugins/avas-core/assets/css/tx-arrow-font.min.css?ver=6.9.8' type='text/css' media='all' />
+  <link rel='stylesheet' id='elementor-icons-css'
+    href='/wp-content/plugins/elementor/assets/lib/eicons/css/elementor-icons.min.css?ver=5.45.0' type='text/css'
+    media='all' />
+  <link rel='stylesheet' id='elementor-frontend-css'
+    href='/wp-content/plugins/elementor/assets/css/frontend.min.css?ver=3.34.1' type='text/css' media='all' />
+  <link rel='stylesheet' id='elementor-post-7-css' href='/wp-content/uploads/elementor/css/post-7.css?ver=1790090710'
+    type='text/css' media='all' />
+  <link rel='stylesheet' id='e-animation-headShake-css'
+    href='/wp-content/plugins/elementor/assets/lib/animations/styles/headShake.min.css?ver=3.34.1' type='text/css'
+    media='all' />
+  <link rel='stylesheet' id='e-animation-zoomIn-css'
+    href='/wp-content/plugins/elementor/assets/lib/animations/styles/zoomIn.min.css?ver=3.34.1' type='text/css'
+    media='all' />
+  <link rel='stylesheet' id='e-animation-fadeInLeft-css'
+    href='/wp-content/plugins/elementor/assets/lib/animations/styles/fadeInLeft.min.css?ver=3.34.1' type='text/css'
+    media='all' />
+  <link rel='stylesheet' id='widget-image-css'
+    href='/wp-content/plugins/elementor/assets/css/widget-image.min.css?ver=3.34.1' type='text/css' media='all' />
+  <link rel='stylesheet' id='e-animation-fadeInRight-css'
+    href='/wp-content/plugins/elementor/assets/lib/animations/styles/fadeInRight.min.css?ver=3.34.1' type='text/css'
+    media='all' />
+  <link rel='stylesheet' id='e-animation-fadeInUp-css'
+    href='/wp-content/plugins/elementor/assets/lib/animations/styles/fadeInUp.min.css?ver=3.34.1' type='text/css'
+    media='all' />
+  <link rel='stylesheet' id='e-animation-pulse-css'
+    href='/wp-content/plugins/elementor/assets/lib/animations/styles/e-animation-pulse.min.css?ver=3.34.1'
+    type='text/css' media='all' />
+  <link rel='stylesheet' id='swiper-css'
+    href='/wp-content/plugins/elementor/assets/lib/swiper/v8/css/swiper.min.css?ver=8.4.5' type='text/css'
+    media='all' />
+  <link rel='stylesheet' id='e-swiper-css'
+    href='/wp-content/plugins/elementor/assets/css/conditionals/e-swiper.min.css?ver=3.34.1' type='text/css'
+    media='all' />
+  <link rel='stylesheet' id='e-animation-bounceIn-css'
+    href='/wp-content/plugins/elementor/assets/lib/animations/styles/bounceIn.min.css?ver=3.34.1' type='text/css'
+    media='all' />
+  <link rel='stylesheet' id='elementor-post-291-css'
+    href='/wp-content/uploads/elementor/css/post-291.css?ver=1790090712' type='text/css' media='all' />
+  <link rel='stylesheet' id='contact-form-7-css'
+    href='/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=6.1.4' type='text/css' media='all' />
+  <link rel='stylesheet' id='bootstrap-css' href='/wp-content/themes/avas/assets/css/bootstrap.min.css?ver=6.9.8'
+    type='text/css' media='all' />
+  <link rel='stylesheet' id='tx-main-css' href='/wp-content/themes/avas/assets/css/main.min.css?ver=6.9.8'
+    type='text/css' media='all' />
+  <link rel='stylesheet' id='bootstrap-icons-css'
+    href='/wp-content/themes/avas/assets/css/bootstrap-icons.min.css?ver=6.9.8' type='text/css' media='all' />
+  <link rel='stylesheet' id='font-awesome-4-css'
+    href='/wp-content/themes/avas/assets/css/font-awesome.min.css?ver=6.9.8' type='text/css' media='all' />
+  <link rel='stylesheet' id='tx-cf7-css' href='/wp-content/themes/avas/assets/css/cf7.min.css?ver=6.9.8' type='text/css'
+    media='all' />
+  <link rel='stylesheet' id='tx-services-css' href='/wp-content/themes/avas/assets/css/services.min.css?ver=6.9.8'
+    type='text/css' media='all' />
+  <link rel='stylesheet' id='tx-magnific-popup-css'
+    href='/wp-content/themes/avas/assets/css/magnific-popup.min.css?ver=6.9.8' type='text/css' media='all' />
+  <link rel="preload" as="style"
+    href="https://fonts.googleapis.com/css?family=Josefin%20Sans:100,200,300,400,500,600,700,100italic,200italic,300italic,400italic,500italic,600italic,700italic%7CRajdhani:300,400,500,600,700&#038;display=swap&#038;ver=1790091838" />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Josefin%20Sans:100,200,300,400,500,600,700,100italic,200italic,300italic,400italic,500italic,600italic,700italic%7CRajdhani:300,400,500,600,700&#038;display=swap&#038;ver=1790091838"
+    media="print" onload="this.media='all'"><noscript>
+    <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Josefin%20Sans:100,200,300,400,500,600,700,100italic,200italic,300italic,400italic,500italic,600italic,700italic%7CRajdhani:300,400,500,600,700&#038;display=swap&#038;ver=1790091838" />
+  </noscript>
+  <link rel='stylesheet' id='elementor-gf-roboto-css'
+    href='https://fonts.googleapis.com/css?family=Roboto:100,100italic,200,200italic,300,300italic,400,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic&#038;display=swap'
+    type='text/css' media='all' />
+  <link rel='stylesheet' id='elementor-gf-robotoslab-css'
+    href='https://fonts.googleapis.com/css?family=Roboto+Slab:100,100italic,200,200italic,300,300italic,400,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic&#038;display=swap'
+    type='text/css' media='all' />
+  <link rel='stylesheet' id='elementor-gf-opensans-css'
+    href='https://fonts.googleapis.com/css?family=Open+Sans:100,100italic,200,200italic,300,300italic,400,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic&#038;display=swap'
+    type='text/css' media='all' />
+<script type="text/javascript" src="/wp-includes/js/jquery/jquery.min.js?ver=3.7.1" id="jquery-core-js"></script>
+  <script type="text/javascript" src="/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1"
+    id="jquery-migrate-js"></script>
+  <script type="text/javascript" src="/wp-content/plugins/avas-core/assets/js/carousel-widgets.min.js?ver=6.9.8"
+    id="carousel-widgets-js"></script>
+  <link rel="https://api.w.org/" href="/wp-json/" />
+  <link rel="alternate" title="JSON" type="application/json" href="/wp-json/wp/v2/pages/291" />
+  <link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 6.9.8" />
+<link rel='shortlink' href='/' />
+  <meta name="generator" content="Redux 4.4.18" />
+  <meta name="generator" content="Site Kit by Google 1.170.0" />
+  <style type="text/css">
+    @media (min-width: 991px) {
+                                    .main-header {
+                        height: 82px;
+                    }
+
+                                                    .main-header.sticky-header {
+                        height: 75px;
+                    }
+                            }
+        </style>
+        <style type="text/css">
+        .main-header.sticky-header {
+            box-shadow: 0 0 10px 0 rgb(0 0 0 / 15%);
+        }
+    </style>
+            <style type="text/css">
+            .top-header {
+                height: 30px;
+            }
+        </style>
+            <style type="text/css">
+            @media (max-device-width: 768px) {
+                .top-header {
+                    height: 30px;
+                }
+            }
+        </style>
+            <style type="text/css">
+            @media (max-width: 768px) {
+                .news-ticker-wrap {
+                    width: 222px;
+                }
+            }
+        </style>
+        <style type="text/css">
+        .sub-header {
+            height: 180px;
+        }
+    </style>
+        <style type="text/css">
+        @media (max-width: 768px) {
+            .sub-header {
+                height: 180px;
+            }
+        }
+    </style>
+    
+    <!-- header style 10 width, top header social icon font size, border-radius, body padding -->
+    <style type="text/css">
+        #h-style-10 {
+            width: 225px;
+        }
+
+        #header .top-header-right-area .social li a i {
+            font-size: 13px;
+        }
+
+        #header .top-header-right-area .social li {
+            border-radius: 0px;
+        }
+
+        @media(min-width: 992px) {
+            .tx_header_style_10 {
+                padding-left: 225px;
+            }
+        }
+    </style>
+
+    <!-- footer social media icon size -->
+    
+    <!-- Preloader -->
+    <style type="text/css">
+    .tx-main-preloader .tx-preloader-bar-outer {
+        height: 7px;
+    }
+    </style>
+    <!-- LearnPress Course min height -->
+      <style type="text/css">
+    .tx-scroll-progress-bar {
+      height: 8px;
+    }
+    </style>
+    <style type="text/css">
+        @media (min-width: 992px) {
+
+            #h-style-1 .menu-bar .container,
+            #h-style-2 .menu-bar .container,
+            #h-style-4 .menu-bar .container,
+            #h-style-6 .menu-bar .container,
+            #h-style-7 .menu-bar .container,
+            #h-style-8 .menu-bar .container {
+                justify-content: end !important;
+            }
+        }
+    </style>
+      <style type="text/css">
+        @media(min-width: 992px) {
+      .navbar {
+        margin-right: unset;
+      }
+        }
+    </style>
+        <style type="text/css">
+        @media(min-width: 992px) {
+      #h-style-11 .container {
+        justify-content: right !important;
+      }
+
+      #h-style-11 .navbar {
+        margin-right: unset;
+      }
+        }
+    </style>
+        <style type="text/css">
+    .main-menu>li:hover>a:hover:before {
+      opacity: 1;
+    }
+    </style>
+        <style type="text/css">
+    .main-menu>li a:before {
+      bottom: 0;
+      border-bottom: 2px solid;
+    }
+    </style>
+        <style type="text/css">
+    .main-menu>li.menu-item-has-children>a:after {
+      display: none;
+    }
+    </style>
+        <style type="text/css">
+    .tx-mega-menu .mega-menu-item .depth0 {
+      left: -45%;
+    }
+    </style>
+    <style type="text/css">
+        @media (max-width: 1024px) {
+            #tx-res-menu {
+                background-color: ;
+            }
+        }
+    </style>
+
+    <!-- Main Menu Item border-radius -->
+    
+    <!-- Responsive Main Menu Icon Text Top -->
+            <style type="text/css">
+            .tx-res-menu-txt {
+                position: relative;
+                top: 0px;
+            }
+        </style>
+            <style type="text/css">
+    @media (max-width: 1024px) {
+
+      .navbar-collapse>ul>li>a,
+      .navbar-collapse>ul>li>ul>li>a,
+      .navbar-collapse>ul>li>ul>li>ul>li>a,
+      .navbar-collapse>ul>li>ul>li>ul>li>ul>li>a,
+      .navbar-collapse>ul>li>ul>li>ul>li>ul>li>ul>li>a,
+                .mb-dropdown-icon:before {
+        color: #333 !important;
+                }
+            }
+        </style>
+            <style type="text/css">
+            .tx-menu-btn {
+                border-radius: 0px;
+            }
+        </style>
+            <style>
+    .tx_logo img {
+      height: 52px;
+    }
+        </style>
+    
+            <style>
+    @media(max-width: 1024px) {
+      .tx_logo img {
+        height: 45px;
+      }
+            }
+        </style>
+            <script>
+        jQuery(document).ready(function ($) {
+            "use strict";
+            /* amz: scroll sticky toggle disabled */
+        });
+    </script>
+        <style type="text/css">
+        .sticky-header #h-style-2,
+        .sticky-header #h-style-4,
+        .sticky-header #h-style-6,
+        .sticky-header #h-style-7,
+        .sticky-header #h-style-8 {
+            display: none !important;
+        }
+
+        .main-header.sticky-header {
+            height: auto;
+        }
+
+        @media(min-width: 992px) {
+
+            #h-style-1.sticky-header .tx-main-head-contain,
+            #h-style-2.sticky-header .tx-main-head-contain,
+            #h-style-4.sticky-header .tx-main-head-contain,
+            #h-style-6.sticky-header .tx-main-head-contain,
+            #h-style-7.sticky-header .tx-main-head-contain,
+            #h-style-8.sticky-header .tx-main-head-contain {
+                display: none !important;
+            }
+        }
+    </style>
+      <style type="text/css">
+    .post-type-archive-portfolio .tx-portfolio-item,
+    .tax-portfolio-category .tx-portfolio-item {
+      padding: 10px
+    }
+      </style>
+        <style type="text/css">
+        #secondary .tribe-compatibility-container,
+        #secondary .widget,
+        #secondary_2 .widget {
+      box-shadow: 0 0 8px 0 rgba(110, 123, 140, .2);
+        }
+    </style>
+    
+    <!-- Custom CSS -->
+      <style type="text/css">
+        @media (max-width: 768px) {
+    .navbar-nav {
+        box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+    background-color: #fff !important;
+    }
+
+      #top_head,
+      .main-header {
+        padding: 0 !important
+      }
+
+      .social_media {
+        float: none;
+        padding-left: 0
+      }
+    }
+  </style>
+        <style type="text/css">
+    #footer-top aside {
+      display: table;
+    }
+    </style>
+
+    <!-- scroll to top broder radius / back to top border radius -->
+    <style type="text/css">
+    #back_top {
+      border-radius: 10px
+    }
+    </style>
+
+  <meta name="generator"
+    content="Elementor 3.34.1; features: additional_custom_breakpoints; settings: css_print_method-external, google_font-enabled, font_display-swap">
+			<style>
+				.e-con.e-parent:nth-of-type(n+4):not(.e-lazyloaded):not(.e-no-lazyload),
+				.e-con.e-parent:nth-of-type(n+4):not(.e-lazyloaded):not(.e-no-lazyload) * {
+					background-image: none !important;
+				}
+
+				@media screen and (max-height: 1024px) {
+
+					.e-con.e-parent:nth-of-type(n+3):not(.e-lazyloaded):not(.e-no-lazyload),
+					.e-con.e-parent:nth-of-type(n+3):not(.e-lazyloaded):not(.e-no-lazyload) * {
+						background-image: none !important;
+					}
+				}
+
+				@media screen and (max-height: 640px) {
+
+					.e-con.e-parent:nth-of-type(n+2):not(.e-lazyloaded):not(.e-no-lazyload),
+					.e-con.e-parent:nth-of-type(n+2):not(.e-lazyloaded):not(.e-no-lazyload) * {
+						background-image: none !important;
+					}
+				}
+			</style>
+  <meta name="generator"
+    content="Powered by Slider Revolution 6.6.12 - responsive, Mobile-Friendly Slider Plugin for WordPress with comfortable drag and drop interface." />
+<link rel="icon" href="/wp-content/uploads/2023/04/cropped-Icon-for-AMZ-modified-32x32.png" sizes="32x32" />
+<link rel="icon" href="/wp-content/uploads/2023/04/cropped-Icon-for-AMZ-modified-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon" href="/wp-content/uploads/2023/04/cropped-Icon-for-AMZ-modified-180x180.png" />
+  <meta name="msapplication-TileImage"
+    content="/wp-content/uploads/2023/04/cropped-Icon-for-AMZ-modified-270x270.png" />
+<style id="amz-container-fix">
+/* Kill the Blank-template boxed container that breaks the banner */
+    body.elementor-page .container.space-blank {
+      max-width: 100% !important;
+      width: 100% !important;
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+    }
+
+    /* Also without body.elementor-page — blank template safety */
+    .container.space-blank {
+      max-width: 100% !important;
+      width: 100% !important;
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+    }
+
+    body.elementor-page #page.tx-wrapper.container-fluid,
+    #page.tx-wrapper.container-fluid {
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+      max-width: 100% !important;
+      width: 100% !important;
+    }
+
+    body.elementor-page #page>.row,
+    #page > .row {
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+      max-width: 100% !important;
+    }
+
+    /* Mobile/tablet: banner edge-to-edge, no side gap */
+    @media (max-width: 991px) {
+      html, body {
+        overflow-x: hidden !important;
+      }
+
+      #main.site-main,
+      #post-291,
+      .entry-content,
+      .elementor.elementor-291 {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+      }
+
+      #amz-new-banner.amz-new-banner {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        left: auto !important;
+        right: auto !important;
+        position: relative !important;
+        box-sizing: border-box !important;
+        overflow: hidden !important;
+      }
+
+      #amz-new-banner .amz-banner-img {
+        width: 100% !important;
+        max-width: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        object-fit: cover !important;
+        object-position: center top !important;
+      }
+    }
+
+/* Header keeps normal side padding so nav doesn't touch edges */
+    body.elementor-page #header .main-header>.container-fluid {
+      padding-left: 40px !important;
+      padding-right: 40px !important;
+    }
+
+/* Let Elementor/RevSlider own the width â€” don't fight stretch with left:0 hacks */
+body.elementor-page .elementor-section.elementor-section-full_width,
+    body.elementor-page .elementor-top-section.elementor-section-full_width {
+      width: 100% !important;
+      max-width: 100% !important;
+    }
+
+body.elementor-page .elementor-widget-slider_revolution,
+body.elementor-page .elementor-widget-slider_revolution .elementor-widget-container,
+body.elementor-page .wp-block-themepunch-revslider,
+    .tx-main-preloader,
+    .preloader {
+      display: none !important
+    }
+  </style>
+  <style type="text/css" id="wp-custom-css">
+    .admin-bar .tx-nav-right-side-items-mobile {
+      display: none !important;
+    }
+
+    .tx-res-menu {
+      z-index: 1000 !important;
+      Height: 600px !important
+    }
+
+    .mobile-nav-toggle {
+      font-size: 32px;
+      margin-right: 0;
+      margin-top: 0px;
+    }
+
+    .main-menu li:hover>ul,
+    .main-menu li>ul.tx_focused,
+    .top_menu li:hover>ul,
+    .top_menu li>ul.tx_focused {
+      width: max-content;
+    }
+</style>
+  <style id="tx-dynamic-css" title="dynamic-css" class="redux-options-output">
+    ::selection {
+      background-color: #607DFD;
+    }
+
+    a:hover {
+      color: #F28B15;
+    }
+
+    h1 {
+      font-family: "Josefin Sans";
+      font-weight: 700;
+      font-style: normal;
+    }
+
+    h2 {
+      font-family: "Josefin Sans";
+      font-weight: 700;
+      font-style: normal;
+    }
+
+    h3 {
+      font-family: "Josefin Sans";
+      font-weight: 700;
+      font-style: normal;
+    }
+
+    h4 {
+      font-family: "Josefin Sans";
+      font-weight: 700;
+      font-style: normal;
+    }
+
+    h5 {
+      font-family: "Josefin Sans";
+      font-weight: 600;
+      font-style: normal;
+    }
+
+    h6 {
+      font-family: "Josefin Sans";
+      font-weight: 600;
+      font-style: normal;
+    }
+
+    .main-header .container,
+    .main-header .container-fluid {
+      padding-right: 40px;
+      padding-left: 40px;
+    }
+
+    .home #h-style-1.sticky-header,
+    .home #h-style-2.sticky-header,
+    .home #h-style-3.sticky-header,
+    .home #h-style-4.sticky-header,
+    .home #h-style-5.sticky-header,
+    .home #h-style-6.sticky-header,
+    .home #h-style-7.sticky-header,
+    .home #h-style-8.sticky-header,
+    .home #h-style-9.sticky-header,
+    .home #h-style-10.sticky-header,
+    .home #h-style-11.sticky-header {
+      background-color: #ffffff;
+    }
+
+    #h-style-1.sticky-header,
+    #h-style-2.sticky-header,
+    #h-style-3.sticky-header,
+    #h-style-4.sticky-header,
+    #h-style-5.sticky-header,
+    #h-style-6.sticky-header,
+    #h-style-7.sticky-header,
+    #h-style-8.sticky-header,
+    #h-style-9.sticky-header,
+    #h-style-10.sticky-header,
+    #h-style-11.sticky-header {
+      background-color: #ffffff;
+    }
+
+    .main-header {
+      border-bottom: 1px solid;
+    }
+
+    .main-header {
+      border-color: #dbdbdb;
+    }
+
+    #header .social li:hover a i {
+      color: #F28B15;
+    }
+
+    .breadcrumbs span a:hover,
+    .bbp-breadcrumb a:hover {
+      color: #f28b15;
+    }
+
+    .breadcrumbs .breadcrumbs__separator,
+    .bbp-breadcrumb-sep {
+      color: #d6d6d6;
+    }
+
+    .breadcrumbs .breadcrumbs__current,
+    .bbp-breadcrumb-current {
+      color: #d6d6d6;
+    }
+
+    .sub-header {
+      background-color: #343a40;
+    }
+
+    .main-menu>li>a,
+    .header-style-eight .main-menu>li>a,
+    .header-style-four .main-menu>li>a,
+    .header-style-one .main-menu>li>a,
+    .header-style-seven .main-menu>li>a,
+    .header-style-six .main-menu>li>a,
+    .header-style-two .main-menu>li>a,
+    #h-style-10 .main-menu>li>a,
+    #h-style-1 .main-menu>li>a {
+      padding-top: 27px;
+      padding-right: 20px;
+      padding-bottom: 27px;
+      padding-left: 20px;
+    }
+
+    ul.main-menu>li>a,
+    .navbar-collapse>ul>li>a,
+    .navbar-collapse>ul>li>ul>li>a,
+    .navbar-collapse>ul>li>ul>li>ul>li>a,
+    .navbar-collapse>ul>li>span>i,
+    .navbar-collapse>ul>li>ul>li>span>i,
+    .mb-dropdown-icon:before,
+    .tx-res-menu li a {
+      color: #000000;
+    }
+
+    .home ul.main-menu>li>a,
+    .home .navbar-collapse>ul>li>a,
+    .home .navbar-collapse>ul>li>ul>li>a,
+    .home .navbar-collapse>ul>li>ul>li>ul>li>a,
+    .home .navbar-collapse>ul>li>span>i,
+    .home .navbar-collapse>ul>li>ul>li>span>i,
+    .home .mb-dropdown-icon:before,
+    .tx-res-menu li a {
+      color: #000000;
+    }
+
+    ul.main-menu>li>a:hover,
+    ul.main-menu>li>a:focus,
+    ul.main-menu>li.menu-item-has-children a:hover,
+    ul.main-menu>li.menu-item-has-children a:focus,
+    .tx-mega-menu .mega-menu-item .depth0 li .depth1.standard.sub-menu li a:hover {
+      color: #F28B15;
+    }
+
+    .home ul.main-menu>li>a:hover,
+    .home ul.main-menu>li>a:focus,
+    .home ul.main-menu>li.menu-item-has-children a:focus {
+      color: #F28B15;
+    }
+
+    .main-menu>li:hover a:before {
+      color: #F28B15;
+    }
+
+    .main-menu>li {
+      border-right: 1px solid #dbdbdb;
+    }
+
+    .main-menu>li>a,
+    .navbar-collapse>ul>li>a {
+      font-family: Rajdhani;
+      line-height: 27px;
+      font-weight: 600;
+      font-style: normal;
+      font-size: 16px;
+    }
+
+    .main-menu>li>ul>li>a,
+    .main-menu>li>ul>li>ul>li>a,
+    .main-menu>li>ul>li>ul>li>ul>li>a,
+    .main-menu>li>ul>li>ul>li>ul>li>ul>li>a,
+    .tx-mega-menu .mega-menu-item .depth0 li .depth1.standard.sub-menu li a,
+    .tx-mega-menu .mega-menu-item .depth0 li .depth1 li a,
+    .navbar-collapse>ul>li>ul>li>a,
+    .navbar-collapse>ul>li>ul>li>ul>li>a,
+    .navbar-collapse>ul>li>ul>li>ul>li>ul>li>a,
+    .navbar-collapse>ul>li>ul>li>ul>li>ul>li>ul>li>a {
+      font-family: Rajdhani;
+      line-height: 20px;
+      font-weight: 500;
+      font-style: normal;
+      font-size: 15px;
+    }
+
+    .tx-res-menu li {
+      border-color: #D9D8D8;
+    }
+
+    h1.entry-title a:hover,
+    .details-box .post-title a:hover,
+    .tx-cat-style3-right .post-title a:hover {
+      color: #F28B15;
+    }
+
+    .entry-meta i,
+    .entry-footer i {
+      color: #607DFD;
+    }
+
+    .post .post-category a:hover,
+    .post .comments-link a:hover,
+    .post .post-tag a:hover,
+    .nickname a:hover {
+      color: #F28B15;
+    }
+
+    .details-box .post-time {
+      background-color: #607DFD;
+    }
+
+    .blog-cols:hover .details-box .post-time {
+      background-color: #4768FD;
+    }
+
+    .blog-cols:hover .details-box {
+      border-color: #4768FD;
+    }
+
+    .tx-read-more,
+    .tx-read-more a,
+    .tx-read-more:after {
+      color: #FFFFFF;
+    }
+
+    .tx-read-more {
+      background-color: #607DFD;
+    }
+
+    .single .page-link:hover,
+    .single .page-link:hover a,
+    .single .page-link a:hover {
+      color: #607DFD;
+    }
+
+    .single .page-link:hover,
+    .single .page-link:hover a,
+    .single .page-link a:hover {
+      background-color: #FFFFFF;
+    }
+
+    .form-submit input[type="submit"] {
+      background-color: #F28B15;
+    }
+
+    .form-submit input[type="submit"]:hover {
+      background-color: #F4A345;
+    }
+
+    .form-control:focus {
+      border-color: #607DFD;
+    }
+
+    .related-posts-title {
+      background-color: #000000;
+    }
+
+    .related-posts-item .overlay {
+      background-color: #607DFD;
+    }
+
+    .tx-services-title:hover,
+    .tx-services-overlay-item .tx-services-title:hover,
+    .tx-services-title a:hover {
+      color: #F28B15;
+    }
+
+    .elementor h2.widgettitle:after,
+    .elementor h3.widget-title:after,
+    #secondary h2.widgettitle:after,
+    #secondary h3.widget-title:after,
+    #secondary_2 h3.widget-title:after,
+    .lp-archive-courses .course-summary .course-summary-content .lp-entry-content.lp-content-area .course-summary-sidebar .course-summary-sidebar__inner>div .widgettitle:after,
+    #secondary .tribe-events-widget-events-list__header:after,
+    #secondary_2 .tribe-events-widget-events-list__header:after {
+      background-color: #000000;
+    }
+
+    .search-form i:hover {
+      color: #F28B15;
+    }
+
+    #secondary li.cat-item a:hover {
+      color: #F28B15;
+    }
+
+    input.wpcf7-form-control.wpcf7-submit {
+      background-color: #F28B15;
+    }
+
+    input.wpcf7-form-control.wpcf7-submit:hover {
+      background-color: #F4A345;
+    }
+
+    .footer input.wpcf7-form-control.wpcf7-text,
+    .footer textarea.wpcf7-form-control.wpcf7-textarea {
+      border-color: #F28B15;
+    }
+
+    #footer-top {
+      background-color: #0f1b60;
+    }
+
+    #footer-top {
+      color: #E7E9EE;
+    }
+
+    #footer-top a {
+      color: #E7E9EE;
+    }
+
+    #footer-top a:hover {
+      color: #FFFFFF;
+    }
+
+    #footer-top {
+      padding-right: 40px;
+      padding-bottom: 50px;
+      padding-left: 40px;
+    }
+
+    #footer-top aside {
+      margin-bottom: 50px;
+    }
+
+    #footer {
+      background-color: #2A3B99;
+    }
+
+    #footer {
+      border-color: #FFFFFF;
+    }
+
+    .footer-menu li a {
+      color: #E5E5E5;
+    }
+
+    .footer-menu li a:hover {
+      color: #FFFFFF;
+    }
+
+    .footer-menu li:after {
+      color: #E5E5E5;
+    }
+
+    .copyright {
+      color: #E5E5E5;
+    }
+
+    .copyright a {
+      color: #FFFFFF;
+    }
+
+    .copyright a:hover {
+      color: #F28B15;
+    }
+  </style>
+  <style id="amz-static-fidelity">
+/* Layout only â€” do NOT override RevSlider slide backgrounds */
+.container.space-blank,
+#page.tx-wrapper.container-fluid {
+  max-width: 100% !important;
+  width: 100% !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+    #page>.row {
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+    }
+
+    #header .main-header>.container-fluid {
+  padding-left: 40px !important;
+  padding-right: 40px !important;
+}
+
+.elementor-section.elementor-section-full_width {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+    #wpadminbar {
+      display: none !important;
+    }
+
+.amz-anim-fallback .elementor-invisible {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+</style>
+<script id="amz-static-fidelity-js">
+(function () {
+  function pinFullBleed() {
+    try {
+      document.querySelectorAll(".elementor-section-stretched, .elementor-section-full_width").forEach(function (el) {
+        el.style.setProperty("left", "0px", "important");
+        el.style.setProperty("width", "100%", "important");
+        el.style.setProperty("max-width", "100%", "important");
+        el.style.setProperty("margin-left", "0px", "important");
+        el.style.setProperty("transform", "none", "important");
+        el.style.setProperty("transition", "none", "important");
+      });
+        } catch (e) { }
+  }
+  function stripHeadShake() {
+    try {
+      document.querySelectorAll('[data-settings*="headShake"]').forEach(function (el) {
+        var s = el.getAttribute("data-settings") || "";
+        el.setAttribute("data-settings", s.replace(/headShake/g, "none"));
+        el.classList.remove("headShake", "animated");
+      });
+        } catch (e) { }
+  }
+  function boot() {
+    stripHeadShake();
+    pinFullBleed(); // once only — repeated pins cause body/footer shake
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
+  else boot();
+  window.addEventListener("load", function () {
+    stripHeadShake();
+  });
+})();
+</script>
+
+
+<style id="amz-navbar-lock">
+/* Always-locked navbar */
+    #header.tx-header {
+      position: relative;
+      z-index: 10000;
+    }
+
+#header .main-header,
+#h-style-3.main-header,
+.main-header.sticky-header {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  z-index: 10000 !important;
+  transform: none !important;
+  transition: none !important;
+  animation: none !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  background-color: #ffffff !important;
+  box-shadow: 0 0 10px 0 rgb(0 0 0 / 15%) !important;
+}
+
+    #header .main-header .tx_logo {
+      display: none !important;
+    }
+
+    #header .main-header .tx_logo.tx_sticky_logo {
+      display: block !important;
+    }
+
+body #page,
+#page.tx-wrapper,
+.tx-wrapper#page {
+  padding-top: 81px !important;
+}
+
+    #back_top {
+      cursor: pointer;
+      z-index: 99999;
+    }
+</style>
+<style id="amz-tablet-nav">
+    /* Tablet/phone only — never touch desktop (≥992px) */
+    @media (max-width: 991px) {
+      #h-style-3 .navbar>.d-md-block {
+        display: none !important;
+      }
+
+      #h-style-3.main-header>.container-fluid {
+        position: relative !important;
+      }
+
+      /* NO transform here — traps fixed #tx-res-menu inside the toggle box */
+  #h-style-3 #responsive-menu,
+  #h-style-3 #responsive-menu.d-md-none,
+  #h-style-3 #responsive-menu.d-lg-none {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+        position: absolute !important;
+        right: 12px !important;
+        top: 50% !important;
+        bottom: auto !important;
+        margin-top: -22px !important;
+        height: 44px !important;
+        min-width: 44px !important;
+        transform: none !important;
+        z-index: 10050 !important;
+        overflow: visible !important;
+      }
+
+      #h-style-3.main-header,
+      #h-style-3.main-header > .container-fluid,
+      #h-style-3 .navbar {
+        overflow: visible !important;
+      }
+
+      #h-style-3 .mobile-nav-toggle,
+      #h-style-3 .mobile-nav-toggle.tx-mob-sticky {
+    display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    color: #111 !important;
+        font-size: 32px !important;
+        line-height: 1 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        min-width: 44px !important;
+        min-height: 44px !important;
+        width: 44px !important;
+        height: 44px !important;
+        position: fixed !important;
+        top: 10px !important;
+        right: 12px !important;
+        left: auto !important;
+        bottom: auto !important;
+        z-index: 10060 !important;
+        background: transparent !important;
+        border: 0 !important;
+      }
+
+      #h-style-3 .mobile-nav-toggle .x,
+      #h-style-3 .mobile-nav-toggle .bi {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 100% !important;
+        height: 100% !important;
+        line-height: 1 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+
+      #h-style-3 #tx-res-menu {
+        display: block !important;
+        position: fixed !important;
+        left: 0 !important;
+        right: 0 !important;
+        top: 64px !important;
+        width: 100% !important;
+        z-index: 10040 !important;
+        background-color: #fff !important;
+        visibility: hidden !important;
+        pointer-events: none !important;
+        transform: translateX(100%) !important;
+        transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+                    visibility 0.35s step-end !important;
+      }
+      #h-style-3 #tx-res-menu.tx-res-menu-toggle {
+        visibility: visible !important;
+        pointer-events: auto !important;
+        transform: translateX(0) !important;
+        transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+                    visibility 0s step-start !important;
+      }
+
+      /* Submenu accordion — collapsed until + is tapped */
+      #h-style-3 .tx-res-menu li.menu-item-has-children {
+        position: relative !important;
+      }
+      #h-style-3 .tx-res-menu li.menu-item-has-children > ul.sub-menu {
+        display: none;
+        padding-left: 15px;
+        list-style: none;
+        overflow: hidden;
+      }
+      #h-style-3 .tx-res-menu li.menu-item-has-children > .mb-dropdown-icon {
+        display: block !important;
+        position: absolute !important;
+        top: 0 !important;
+        right: 0 !important;
+        width: 44px !important;
+        height: 44px !important;
+        z-index: 2 !important;
+      }
+      #h-style-3 .mb-dropdown-icon:before {
+        content: "+" !important;
+        color: #333 !important;
+        font-size: 22px !important;
+        font-weight: 600 !important;
+      }
+      #h-style-3 .mb-dropdown-icon.open:before {
+        content: "\2212" !important;
+      }
+    }
+
+    @media (min-width: 992px) {
+      #h-style-3 #responsive-menu {
+        display: none !important;
+      }
+
+      #h-style-3 .navbar>.d-md-block {
+        display: block !important;
+  }
+}
+</style>
+<script>
+/* Apply lock class ASAP before paint where possible */
+document.documentElement.classList.add("amz-nav-locked");
+  </script>
+  <style id="amz-new-banner-slot">
+    /* Banner lock — no flash on reload (same idea as fixed navbar) */
+    #amz-new-banner.amz-new-banner {
+      display: block !important;
+      position: relative !important;
+      width: 100% !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      overflow: hidden !important;
+      min-height: 630px !important;
+      height: 630px !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+      background-color: #ffffff !important;
+      background-image: url("/wp-content/uploads/banner.png?v=12") !important;
+      background-repeat: no-repeat !important;
+      background-position: center top !important;
+      background-size: cover !important;
+    }
+
+    #amz-new-banner .amz-banner-img {
+      display: block !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      height: 630px !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      border: 0 !important;
+      vertical-align: top !important;
+      object-fit: cover !important;
+      object-position: center top !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+    }
+
+    /* Text + CTA overlay — left aligned, vertically centered (equal top/bottom gap) */
+    #amz-new-banner .amz-banner-content {
+      position: absolute !important;
+      z-index: 2 !important;
+      left: 0 !important;
+      right: 0 !important;
+      top: 0 !important;
+      bottom: 0 !important;
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: center !important;
+      align-items: flex-start !important;
+      text-align: left !important;
+      box-sizing: border-box !important;
+      padding: 40px 8% !important;
+      max-width: 780px !important;
+      width: auto !important;
+      margin: 0 !important;
+      line-height: normal !important;
+  pointer-events: none !important;
+}
+
+    #amz-new-banner .amz-banner-title,
+    #amz-new-banner .amz-banner-text {
+      pointer-events: auto !important;
+      animation: amzBannerFadeUp 0.7s ease both;
+    }
+
+    #amz-new-banner .amz-banner-btn {
+      pointer-events: auto !important;
+    }
+
+    #amz-new-banner .amz-banner-title {
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: flex-start !important;
+      text-align: left !important;
+      margin: 0 0 16px !important;
+      padding: 0 !important;
+      font-family: "Josefin Sans", "Rajdhani", sans-serif !important;
+      font-weight: 700 !important;
+      font-size: 52px !important;
+      line-height: 1.15 !important;
+      color: #1a1a1a !important;
+      letter-spacing: -0.02em !important;
+      animation-delay: 0.05s;
+    }
+
+    #amz-new-banner .amz-banner-title-line {
+      display: block !important;
+      white-space: nowrap !important;
+      text-align: left !important;
+    }
+
+    #amz-new-banner .amz-banner-text {
+      margin: 0 0 28px !important;
+      padding: 0 !important;
+      max-width: 540px !important;
+      font-family: "Josefin Sans", sans-serif !important;
+      font-weight: 400 !important;
+      font-size: 18px !important;
+      line-height: 1.55 !important;
+      color: #333333 !important;
+      text-align: left !important;
+      animation-delay: 0.18s;
+    }
+
+    #amz-new-banner .amz-banner-btn {
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: 0 !important;
+      position: relative !important;
+      margin: 0 !important;
+      padding: 14px 32px !important;
+      font-family: "Josefin Sans", "Rajdhani", sans-serif !important;
+      font-weight: 700 !important;
+      font-size: 16px !important;
+      line-height: 1.2 !important;
+      letter-spacing: 0.06em !important;
+      text-decoration: none !important;
+      text-transform: uppercase !important;
+      color: #ffffff !important;
+      background: #F28B15 !important;
+      border: 0 !important;
+      border-radius: 6px !important;
+      box-shadow: 0 4px 14px rgba(242, 139, 21, 0.35) !important;
+      transform: none !important;
+      transition: background 0.25s ease, color 0.25s ease, box-shadow 0.25s ease !important;
+      animation: amzBannerFadeUp 0.7s ease both;
+      animation-delay: 0.3s;
+      pointer-events: auto !important;
+      overflow: hidden !important;
+    }
+
+    #amz-new-banner .amz-banner-btn::after {
+      content: "" !important;
+      display: block !important;
+      position: absolute !important;
+      left: 0 !important;
+      bottom: 0 !important;
+      width: 100% !important;
+      height: 3px !important;
+      background: #ffffff !important;
+      transform: scaleX(0) !important;
+      transform-origin: left center !important;
+      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1) !important;
+    }
+
+    #amz-new-banner .amz-banner-btn:hover,
+    #amz-new-banner .amz-banner-btn:focus {
+      background: #d9780f !important;
+      color: #ffffff !important;
+      transform: none !important;
+      box-shadow: 0 6px 18px rgba(242, 139, 21, 0.45) !important;
+    }
+
+    #amz-new-banner .amz-banner-btn:hover::after,
+    #amz-new-banner .amz-banner-btn:focus::after {
+      transform: scaleX(1) !important;
+    }
+
+    #amz-new-banner .amz-banner-btn:active {
+      background: #c66c0c !important;
+      color: #ffffff !important;
+      transform: none !important;
+      box-shadow: 0 3px 10px rgba(242, 139, 21, 0.3) !important;
+    }
+
+    @keyframes amzBannerFadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* MacBook / laptop */
+    @media (min-width: 992px) and (max-width: 1599px) {
+      #amz-new-banner.amz-new-banner {
+        min-height: 610px !important;
+        height: 610px !important;
+      }
+
+      #amz-new-banner .amz-banner-img {
+        height: 610px !important;
+      }
+
+      #amz-new-banner .amz-banner-title {
+        font-size: 46px !important;
+      }
+
+      #amz-new-banner .amz-banner-text {
+        font-size: 17px !important;
+      }
+    }
+
+    /* Tablet */
+    @media (max-width: 991px) and (min-width: 768px) {
+      #amz-new-banner.amz-new-banner {
+        min-height: 420px !important;
+        height: 420px !important;
+      }
+
+      #amz-new-banner .amz-banner-img {
+        height: 420px !important;
+      }
+
+      #amz-new-banner .amz-banner-content {
+        padding: 28px 6% !important;
+        align-items: flex-start !important;
+        text-align: left !important;
+        max-width: 560px !important;
+        width: auto !important;
+        justify-content: center !important;
+      }
+
+      #amz-new-banner .amz-banner-title {
+        font-size: 34px !important;
+        margin-bottom: 12px !important;
+        align-items: flex-start !important;
+      }
+
+      #amz-new-banner .amz-banner-title-line {
+        white-space: nowrap !important;
+      }
+
+      #amz-new-banner .amz-banner-text {
+        font-size: 15px !important;
+        margin-bottom: 20px !important;
+        max-width: 420px !important;
+        text-align: left !important;
+      }
+
+      #amz-new-banner .amz-banner-btn {
+        padding: 12px 26px !important;
+        font-size: 15px !important;
+      }
+    }
+
+    /* Mobile */
+    @media (max-width: 767px) {
+      #amz-new-banner.amz-new-banner {
+        min-height: 380px !important;
+        height: 380px !important;
+      }
+
+      #amz-new-banner .amz-banner-img {
+        height: 380px !important;
+        object-position: center top !important;
+      }
+
+      #amz-new-banner .amz-banner-content {
+        padding: 24px 5% !important;
+        max-width: 100% !important;
+        width: auto !important;
+        justify-content: center !important;
+        align-items: flex-start !important;
+        text-align: left !important;
+      }
+
+      #amz-new-banner .amz-banner-title {
+        font-size: 24px !important;
+        margin-bottom: 10px !important;
+        align-items: flex-start !important;
+      }
+
+      #amz-new-banner .amz-banner-title-line {
+        white-space: nowrap !important;
+      }
+
+      #amz-new-banner .amz-banner-text {
+        font-size: 13px !important;
+        line-height: 1.45 !important;
+        margin-bottom: 16px !important;
+        max-width: 100% !important;
+        text-align: left !important;
+      }
+
+      #amz-new-banner .amz-banner-btn {
+        padding: 11px 22px !important;
+        font-size: 13px !important;
+      }
+    }
+  </style>
+<link rel="stylesheet" href="/wp-content/uploads/amz-responsive.css" id="amz-responsive" />
+</head>
+    
+<body
+  class="home wp-singular page-template page-template-templates page-template-blank page-template-templatesblank-php page page-id-291 wp-embed-responsive wp-theme-avas sidebar-right elementor-default elementor-kit-7 elementor-page elementor-page-291">
+    
+    <div id="page" class="tx-wrapper container-fluid">
+        <div class="row">
+            <header id="header" itemscope="itemscope" itemtype="http://schema.org/WPHeader" class="tx-header">
+
+                <!-- search -->
+                    <div id="search" class="tx-search-form-wrap">
+      <form role="search" id="search-form" class="search-box" action="/" method="get">
+            <input type="search" required="" aria-required="true" name="s" placeholder="Type here &amp; press Enter"
+              value="">
+          <span class="search-close"><i class="bi bi-x-lg"></i></span>
+      </form>
+    </div>
+
+                <!-- top header -->
+                
+                <!-- main header -->
+                
+<div id="h-style-3" class="main-header sticky-header d-flex align-items-center">
+	<div class="tx-header-overlay"></div><!-- overlay color -->
+	<div class="container-fluid d-flex align-items-center justify-content-lg-between">
+	    	<!-- logo -->
+            <a class="navbar-brand tx_logo" href=""
+              title="Seller Central Agency | Grow Your Amazon &amp; Walmart Sales"><img
+                src="/wp-content/uploads/2023/04/AMZgetway-Logo-1.png"
+                alt="Seller Central Agency | Grow Your Amazon &amp; Walmart Sales"></a><a
+              class="navbar-brand tx_logo tx_sticky_logo" href=""
+              title="Seller Central Agency | Grow Your Amazon &amp; Walmart Sales"><img
+                src="/wp-content/uploads/2023/04/AMZgetway-Logo-1.png"
+                alt="Seller Central Agency | Grow Your Amazon &amp; Walmart Sales"></a> <!-- Main Menu -->
+            
+<nav class="navbar order-last order-lg-0">
+        <div class="d-none d-sm-none d-md-block">
+        <div class="menubar site-nav-inner">
+            <!-- Menu goes here -->
+                  <div class="navbar-responsive-collapse">
+                    <ul id="main-menu" class="nav navbar-nav main-menu tx-mega-menu" role="menu">
+                      <li id="menu-item-289"
+                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-291 current_page_item nomega-menu-item menu-item-289">
+                        <a href="/" class="mega-menu-title">Home</a>
+                      </li>
+                      <li id="menu-item-984"
+                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children nomega-menu-item menu-item-984">
+                        <a href="/amazon-services/" class="mega-menu-title">Amazon Services</a>
+<ul class='depth0 standard sub-menu' style="">
+                          <li id="menu-item-405"
+                            class="menu-item menu-item-type-post_type menu-item-object-page nomega-menu-item menu-item-405">
+                            <a href="/amazon-full-store-management-service/" class="mega-menu-title">Full Store
+                              Management</a>
+                          </li>
+                          <li id="menu-item-409"
+                            class="menu-item menu-item-type-post_type menu-item-object-page nomega-menu-item menu-item-409">
+                            <a href="/amazon-ppc-campaign-management-service/" class="mega-menu-title">PPC Campaign
+                              Management</a>
+                          </li>
+                          <li id="menu-item-455"
+                            class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children nomega-menu-item menu-item-455">
+                            <a href="/amazon-listing-services/" class="mega-menu-title">Product Listing</a>
+	<ul class='depth1 standard sub-menu' style="">
+                              <li id="menu-item-412"
+                                class="menu-item menu-item-type-post_type menu-item-object-page nomega-menu-item menu-item-412">
+                                <a href="/amazon-product-research-service/" class="mega-menu-title">Product Research</a>
+                              </li>
+                              <li id="menu-item-410"
+                                class="menu-item menu-item-type-post_type menu-item-object-page nomega-menu-item menu-item-410">
+                                <a href="/amazon-product-description-writing-service/" class="mega-menu-title">Product
+                                  Description Writing</a>
+                              </li>
+                              <li id="menu-item-407"
+                                class="menu-item menu-item-type-post_type menu-item-object-page nomega-menu-item menu-item-407">
+                                <a href="/amazon-listing-image-design-service/" class="mega-menu-title">Listing Image
+                                  Design</a>
+                              </li>
+                              <li id="menu-item-411"
+                                class="menu-item menu-item-type-post_type menu-item-object-page nomega-menu-item menu-item-411">
+                                <a href="/amazon-product-launching-service/" class="mega-menu-title">Product
+                                  Launching</a>
+                              </li>
+                              <li id="menu-item-408"
+                                class="menu-item menu-item-type-post_type menu-item-object-page nomega-menu-item menu-item-408">
+                                <a href="/amazon-listing-optimization-service/" class="mega-menu-title">Listing
+                                  Optimization</a>
+                              </li>
+                              <li id="menu-item-414"
+                                class="menu-item menu-item-type-post_type menu-item-object-page nomega-menu-item menu-item-414">
+                                <a href="/amazon-search-trams-optimization-service/" class="mega-menu-title">Search
+                                  Trams Optimization</a>
+                              </li>
+	</ul>
+</li>
+                          <li id="menu-item-403"
+                            class="menu-item menu-item-type-post_type menu-item-object-page nomega-menu-item menu-item-403">
+                            <a href="/amazon-enhanced-brand-content-a-plus-service/" class="mega-menu-title">Enhanced
+                              Brand Content EBC/A+</a>
+                          </li>
+                          <li id="menu-item-453"
+                            class="menu-item menu-item-type-post_type menu-item-object-page nomega-menu-item menu-item-453">
+                            <a href="/amazon-shipment-creation-service/" class="mega-menu-title">Shipment Creation</a>
+                          </li>
+                          <li id="menu-item-402"
+                            class="menu-item menu-item-type-post_type menu-item-object-page nomega-menu-item menu-item-402">
+                            <a href="/amazon-brand-registry-service/" class="mega-menu-title">Brand Registry</a>
+                          </li>
+                          <li id="menu-item-416"
+                            class="menu-item menu-item-type-post_type menu-item-object-page nomega-menu-item menu-item-416">
+                            <a href="/amazon-storefront-design-service/" class="mega-menu-title">Storefront Design</a>
+                          </li>
+                          <li id="menu-item-406"
+                            class="menu-item menu-item-type-post_type menu-item-object-page nomega-menu-item menu-item-406">
+                            <a href="/amazon-listing-hijacker-removal-service/" class="mega-menu-title">Listing Hijacker
+                              Removal</a>
+                          </li>
+                          <li id="menu-item-452"
+                            class="menu-item menu-item-type-post_type menu-item-object-page nomega-menu-item menu-item-452">
+                            <a href="/amazon-listing-reinstated-service/" class="mega-menu-title">Listing Reinstated</a>
+                          </li>
+                          <li id="menu-item-404"
+                            class="menu-item menu-item-type-post_type menu-item-object-page nomega-menu-item menu-item-404">
+                            <a href="/amazon-fda-restricted-products-approval-service/" class="mega-menu-title">FDA
+                              Restricted Products Approval</a>
+                          </li>
+                          <li id="menu-item-413"
+                            class="menu-item menu-item-type-post_type menu-item-object-page nomega-menu-item menu-item-413">
+                            <a href="/amazon-restricted-category-ungated-service/" class="mega-menu-title">Restricted
+                              Category Ungated</a>
+                          </li>
+                          <li id="menu-item-415"
+                            class="menu-item menu-item-type-post_type menu-item-object-page nomega-menu-item menu-item-415">
+                            <a href="/amazon-seller-feedback-service/" class="mega-menu-title">Seller Feedback</a>
+                          </li>
+                          <li id="menu-item-401"
+                            class="menu-item menu-item-type-post_type menu-item-object-page nomega-menu-item menu-item-401">
+                            <a href="/amazon-account-suspension-appeal-reinstatement-service/"
+                              class="mega-menu-title">Suspension Account Reinstatement</a>
+                          </li>
+</ul>
+</li>
+                      <li id="menu-item-417"
+                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children nomega-menu-item menu-item-417">
+                        <a href="/walmart-services/" class="mega-menu-title">Walmart Services</a>
+<ul class='depth0 standard sub-menu' style="">
+                          <li id="menu-item-457"
+                            class="menu-item menu-item-type-post_type menu-item-object-page nomega-menu-item menu-item-457">
+                            <a href="/walmart-full-store-management-services/" class="mega-menu-title">Full Store
+                              Management</a>
+                          </li>
+                          <li id="menu-item-460"
+                            class="menu-item menu-item-type-post_type menu-item-object-page nomega-menu-item menu-item-460">
+                            <a href="/walmart-ppc-campaign-management-service/" class="mega-menu-title">PPC Campaign
+                              Management</a>
+                          </li>
+                          <li id="menu-item-456"
+                            class="menu-item menu-item-type-post_type menu-item-object-page nomega-menu-item menu-item-456">
+                            <a href="/walmart-dropshipping-automation-services/" class="mega-menu-title">Dropshipping
+                              Automation</a>
+                          </li>
+                          <li id="menu-item-467"
+                            class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children nomega-menu-item menu-item-467">
+                            <a href="/walmart-listing-services/" class="mega-menu-title">Product Listing</a>
+	<ul class='depth1 standard sub-menu' style="">
+                              <li id="menu-item-463"
+                                class="menu-item menu-item-type-post_type menu-item-object-page nomega-menu-item menu-item-463">
+                                <a href="/walmart-product-research-service/" class="mega-menu-title">Product
+                                  Research</a>
+                              </li>
+                              <li id="menu-item-461"
+                                class="menu-item menu-item-type-post_type menu-item-object-page nomega-menu-item menu-item-461">
+                                <a href="/walmart-product-description-writing-service/" class="mega-menu-title">Product
+                                  Description Writing</a>
+                              </li>
+                              <li id="menu-item-458"
+                                class="menu-item menu-item-type-post_type menu-item-object-page nomega-menu-item menu-item-458">
+                                <a href="/walmart-listing-image-design-service/" class="mega-menu-title">Listing Image
+                                  Design</a>
+                              </li>
+                              <li id="menu-item-462"
+                                class="menu-item menu-item-type-post_type menu-item-object-page nomega-menu-item menu-item-462">
+                                <a href="/walmart-product-launching-service/" class="mega-menu-title">Product
+                                  Launching</a>
+                              </li>
+                              <li id="menu-item-459"
+                                class="menu-item menu-item-type-post_type menu-item-object-page nomega-menu-item menu-item-459">
+                                <a href="/walmart-listing-optimization-service/" class="mega-menu-title">Listing
+                                  Optimization</a>
+                              </li>
+	</ul>
+</li>
+                          <li id="menu-item-466"
+                            class="menu-item menu-item-type-post_type menu-item-object-page nomega-menu-item menu-item-466">
+                            <a href="/walmart-wfs-listing-creation-services/" class="mega-menu-title">WFS Listing
+                              Creation</a>
+                          </li>
+                          <li id="menu-item-454"
+                            class="menu-item menu-item-type-post_type menu-item-object-page nomega-menu-item menu-item-454">
+                            <a href="/walmart-shipment-creation-service/" class="mega-menu-title">Shipment Creation</a>
+                          </li>
+                          <li id="menu-item-464"
+                            class="menu-item menu-item-type-post_type menu-item-object-page nomega-menu-item menu-item-464">
+                            <a href="/walmart-seller-feedback-service/" class="mega-menu-title">Seller Feedback</a>
+                          </li>
+                          <li id="menu-item-465"
+                            class="menu-item menu-item-type-post_type menu-item-object-page nomega-menu-item menu-item-465">
+                            <a href="/walmart-suspension-account-reinstated-service/" class="mega-menu-title">Suspension
+                              Account Reinstated</a>
+                          </li>
+</ul>
+</li>
+                      <li id="menu-item-421"
+                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children nomega-menu-item menu-item-421">
+                        <a href="/apply-selling-for-ecommerce-services/" class="mega-menu-title">Apply Selling</a>
+<ul class='depth0 standard sub-menu' style="">
+                          <li id="menu-item-418"
+                            class="menu-item menu-item-type-post_type menu-item-object-page nomega-menu-item menu-item-418">
+                            <a href="/llc-company-formation-service/" class="mega-menu-title">LLC Company Formation</a>
+                          </li>
+                          <li id="menu-item-420"
+                            class="menu-item menu-item-type-post_type menu-item-object-page nomega-menu-item menu-item-420">
+                            <a href="/apply-for-sell-on-amazon/" class="mega-menu-title">Apply For Sell On Amazon</a>
+                          </li>
+                          <li id="menu-item-419"
+                            class="menu-item menu-item-type-post_type menu-item-object-page nomega-menu-item menu-item-419">
+                            <a href="/apply-for-sell-on-walmart/" class="mega-menu-title">Apply For Sell On Walmart</a>
+                          </li>
+</ul>
+</li>
+                      <li id="menu-item-383"
+                        class="menu-item menu-item-type-post_type menu-item-object-page nomega-menu-item menu-item-383">
+                        <a href="/about-us/" class="mega-menu-title">About Us</a>
+                      </li>
+                      <li id="menu-item-385"
+                        class="menu-item menu-item-type-post_type menu-item-object-page nomega-menu-item menu-item-385">
+                        <a href="/contact-us/" class="mega-menu-title">Contact Us</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div> <!-- menubar -->
+    </div> <!-- desktop menu -->
+    
+        <div id="responsive-menu" class="d-md-none d-lg-none">
+            <!-- .navbar-toggle is used as the toggle for collapsed navbar content -->
+            <button type="button" class="mobile-nav-toggle">
+              <span class="x"><i class="bi bi-list"></i></span> <span class="tx-res-menu-txt"></span>
+            </button>
+        <div class="tx-mobile-menu" id="tx-res-menu">
+                  <ul id="menu-main-menu" class="tx-res-menu">
+                    <li
+                      class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-291 current_page_item nomega-menu-item menu-item-289">
+                      <a href="/" class="mega-menu-title">Home</a>
+                    </li>
+                    <li
+                      class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children nomega-menu-item menu-item-984">
+                      <a href="/amazon-services/" class="mega-menu-title">Amazon Services</a>
+<ul class='depth0 standard sub-menu' style="">
+                        <li
+                          class="menu-item menu-item-type-post_type menu-item-object-page nomega-menu-item menu-item-405">
+                          <a href="/amazon-full-store-management-service/" class="mega-menu-title">Full Store
+                            Management</a>
+                        </li>
+                        <li
+                          class="menu-item menu-item-type-post_type menu-item-object-page nomega-menu-item menu-item-409">
+                          <a href="/amazon-ppc-campaign-management-service/" class="mega-menu-title">PPC Campaign
+                            Management</a>
+                        </li>
+                        <li
+                          class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children nomega-menu-item menu-item-455">
+                          <a href="/amazon-listing-services/" class="mega-menu-title">Product Listing</a>
+	<ul class='depth1 standard sub-menu' style="">
+                            <li
+                              class="menu-item menu-item-type-post_type menu-item-object-page nomega-menu-item menu-item-412">
+                              <a href="/amazon-product-research-service/" class="mega-menu-title">Product Research</a>
+                            </li>
+                            <li
+                              class="menu-item menu-item-type-post_type menu-item-object-page nomega-menu-item menu-item-410">
+                              <a href="/amazon-product-description-writing-service/" class="mega-menu-title">Product
+                                Description Writing</a>
+                            </li>
+                            <li
+                              class="menu-item menu-item-type-post_type menu-item-object-page nomega-menu-item menu-item-407">
+                              <a href="/amazon-listing-image-design-service/" class="mega-menu-title">Listing Image
+                                Design</a>
+                            </li>
+                            <li
+                              class="menu-item menu-item-type-post_type menu-item-object-page nomega-menu-item menu-item-411">
+                              <a href="/amazon-product-launching-service/" class="mega-menu-title">Product Launching</a>
+                            </li>
+                            <li
+                              class="menu-item menu-item-type-post_type menu-item-object-page nomega-menu-item menu-item-408">
+                              <a href="/amazon-listing-optimization-service/" class="mega-menu-title">Listing
+                                Optimization</a>
+                            </li>
+                            <li
+                              class="menu-item menu-item-type-post_type menu-item-object-page nomega-menu-item menu-item-414">
+                              <a href="/amazon-search-trams-optimization-service/" class="mega-menu-title">Search Trams
+                                Optimization</a>
+                            </li>
+	</ul>
+</li>
+                        <li
+                          class="menu-item menu-item-type-post_type menu-item-object-page nomega-menu-item menu-item-403">
+                          <a href="/amazon-enhanced-brand-content-a-plus-service/" class="mega-menu-title">Enhanced
+                            Brand Content EBC/A+</a>
+                        </li>
+                        <li
+                          class="menu-item menu-item-type-post_type menu-item-object-page nomega-menu-item menu-item-453">
+                          <a href="/amazon-shipment-creation-service/" class="mega-menu-title">Shipment Creation</a>
+                        </li>
+                        <li
+                          class="menu-item menu-item-type-post_type menu-item-object-page nomega-menu-item menu-item-402">
+                          <a href="/amazon-brand-registry-service/" class="mega-menu-title">Brand Registry</a>
+                        </li>
+                        <li
+                          class="menu-item menu-item-type-post_type menu-item-object-page nomega-menu-item menu-item-416">
+                          <a href="/amazon-storefront-design-service/" class="mega-menu-title">Storefront Design</a>
+                        </li>
+                        <li
+                          class="menu-item menu-item-type-post_type menu-item-object-page nomega-menu-item menu-item-406">
+                          <a href="/amazon-listing-hijacker-removal-service/" class="mega-menu-title">Listing Hijacker
+                            Removal</a>
+                        </li>
+                        <li
+                          class="menu-item menu-item-type-post_type menu-item-object-page nomega-menu-item menu-item-452">
+                          <a href="/amazon-listing-reinstated-service/" class="mega-menu-title">Listing Reinstated</a>
+                        </li>
+                        <li
+                          class="menu-item menu-item-type-post_type menu-item-object-page nomega-menu-item menu-item-404">
+                          <a href="/amazon-fda-restricted-products-approval-service/" class="mega-menu-title">FDA
+                            Restricted Products Approval</a>
+                        </li>
+                        <li
+                          class="menu-item menu-item-type-post_type menu-item-object-page nomega-menu-item menu-item-413">
+                          <a href="/amazon-restricted-category-ungated-service/" class="mega-menu-title">Restricted
+                            Category Ungated</a>
+                        </li>
+                        <li
+                          class="menu-item menu-item-type-post_type menu-item-object-page nomega-menu-item menu-item-415">
+                          <a href="/amazon-seller-feedback-service/" class="mega-menu-title">Seller Feedback</a>
+                        </li>
+                        <li
+                          class="menu-item menu-item-type-post_type menu-item-object-page nomega-menu-item menu-item-401">
+                          <a href="/amazon-account-suspension-appeal-reinstatement-service/"
+                            class="mega-menu-title">Suspension Account Reinstatement</a>
+                        </li>
+</ul>
+</li>
+                    <li
+                      class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children nomega-menu-item menu-item-417">
+                      <a href="/walmart-services/" class="mega-menu-title">Walmart Services</a>
+<ul class='depth0 standard sub-menu' style="">
+                        <li
+                          class="menu-item menu-item-type-post_type menu-item-object-page nomega-menu-item menu-item-457">
+                          <a href="/walmart-full-store-management-services/" class="mega-menu-title">Full Store
+                            Management</a>
+                        </li>
+                        <li
+                          class="menu-item menu-item-type-post_type menu-item-object-page nomega-menu-item menu-item-460">
+                          <a href="/walmart-ppc-campaign-management-service/" class="mega-menu-title">PPC Campaign
+                            Management</a>
+                        </li>
+                        <li
+                          class="menu-item menu-item-type-post_type menu-item-object-page nomega-menu-item menu-item-456">
+                          <a href="/walmart-dropshipping-automation-services/" class="mega-menu-title">Dropshipping
+                            Automation</a>
+                        </li>
+                        <li
+                          class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children nomega-menu-item menu-item-467">
+                          <a href="/walmart-listing-services/" class="mega-menu-title">Product Listing</a>
+	<ul class='depth1 standard sub-menu' style="">
+                            <li
+                              class="menu-item menu-item-type-post_type menu-item-object-page nomega-menu-item menu-item-463">
+                              <a href="/walmart-product-research-service/" class="mega-menu-title">Product Research</a>
+                            </li>
+                            <li
+                              class="menu-item menu-item-type-post_type menu-item-object-page nomega-menu-item menu-item-461">
+                              <a href="/walmart-product-description-writing-service/" class="mega-menu-title">Product
+                                Description Writing</a>
+                            </li>
+                            <li
+                              class="menu-item menu-item-type-post_type menu-item-object-page nomega-menu-item menu-item-458">
+                              <a href="/walmart-listing-image-design-service/" class="mega-menu-title">Listing Image
+                                Design</a>
+                            </li>
+                            <li
+                              class="menu-item menu-item-type-post_type menu-item-object-page nomega-menu-item menu-item-462">
+                              <a href="/walmart-product-launching-service/" class="mega-menu-title">Product
+                                Launching</a>
+                            </li>
+                            <li
+                              class="menu-item menu-item-type-post_type menu-item-object-page nomega-menu-item menu-item-459">
+                              <a href="/walmart-listing-optimization-service/" class="mega-menu-title">Listing
+                                Optimization</a>
+                            </li>
+	</ul>
+</li>
+                        <li
+                          class="menu-item menu-item-type-post_type menu-item-object-page nomega-menu-item menu-item-466">
+                          <a href="/walmart-wfs-listing-creation-services/" class="mega-menu-title">WFS Listing
+                            Creation</a>
+                        </li>
+                        <li
+                          class="menu-item menu-item-type-post_type menu-item-object-page nomega-menu-item menu-item-454">
+                          <a href="/walmart-shipment-creation-service/" class="mega-menu-title">Shipment Creation</a>
+                        </li>
+                        <li
+                          class="menu-item menu-item-type-post_type menu-item-object-page nomega-menu-item menu-item-464">
+                          <a href="/walmart-seller-feedback-service/" class="mega-menu-title">Seller Feedback</a>
+                        </li>
+                        <li
+                          class="menu-item menu-item-type-post_type menu-item-object-page nomega-menu-item menu-item-465">
+                          <a href="/walmart-suspension-account-reinstated-service/" class="mega-menu-title">Suspension
+                            Account Reinstated</a>
+                        </li>
+</ul>
+</li>
+                    <li
+                      class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children nomega-menu-item menu-item-421">
+                      <a href="/apply-selling-for-ecommerce-services/" class="mega-menu-title">Apply Selling</a>
+<ul class='depth0 standard sub-menu' style="">
+                        <li
+                          class="menu-item menu-item-type-post_type menu-item-object-page nomega-menu-item menu-item-418">
+                          <a href="/llc-company-formation-service/" class="mega-menu-title">LLC Company Formation</a>
+                        </li>
+                        <li
+                          class="menu-item menu-item-type-post_type menu-item-object-page nomega-menu-item menu-item-420">
+                          <a href="/apply-for-sell-on-amazon/" class="mega-menu-title">Apply For Sell On Amazon</a>
+                        </li>
+                        <li
+                          class="menu-item menu-item-type-post_type menu-item-object-page nomega-menu-item menu-item-419">
+                          <a href="/apply-for-sell-on-walmart/" class="mega-menu-title">Apply For Sell On Walmart</a>
+                        </li>
+</ul>
+</li>
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page nomega-menu-item menu-item-383">
+                      <a href="/about-us/" class="mega-menu-title">About Us</a>
+                    </li>
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page nomega-menu-item menu-item-385">
+                      <a href="/contact-us/" class="mega-menu-title">Contact Us</a>
+                    </li>
+                  </ul>
+                  <div class="tx-nav-right-side-items-mobile">
+                <!-- sidemenu -->
+                     
+        <!-- Side Menu section -->
+        <div id="side-menu-wrapper" class="side-menu">
+                      <a id="side-menu-icon-close" class="s-menu-icon-close" href="#" data-toggle="collapse"
+                        data-target="#side-menu-wrapper" aria-expanded="false" aria-controls="side-menu-wrapper"><i
+                          class="bi bi-x-lg"></i></a>
+           
+                        <div class="side_menu_widget" role="complementary">
+                        <aside id="nav_menu-1" class="widget widget_nav_menu">
+                          <h3 class="widget-title">Our Services</h3>
+                          <div class="menu-footer-2-container">
+                            <ul id="menu-footer-2" class="menu">
+                              <li id="menu-item-1423"
+                                class="menu-item menu-item-type-custom menu-item-object-custom nomega-menu-item menu-item-1423">
+                                <a href="/" class="mega-menu-title">Home</a>
+                              </li>
+                              <li id="menu-item-1420"
+                                class="menu-item menu-item-type-post_type menu-item-object-page nomega-menu-item menu-item-1420">
+                                <a href="/amazon-services/" class="mega-menu-title">Amazon Services</a>
+                              </li>
+                              <li id="menu-item-1422"
+                                class="menu-item menu-item-type-post_type menu-item-object-page nomega-menu-item menu-item-1422">
+                                <a href="/walmart-services/" class="mega-menu-title">Walmart Services</a>
+                              </li>
+                              <li id="menu-item-1430"
+                                class="menu-item menu-item-type-post_type menu-item-object-page nomega-menu-item menu-item-1430">
+                                <a href="/apply-selling-for-ecommerce-services/" class="mega-menu-title">Apply Selling
+                                  For Ecommerce</a>
+                              </li>
+                            </ul>
+</div>
+                        </aside>
+                        <aside id="text-1" class="widget widget_text">
+                          <h3 class="widget-title">GET FREE SEO REPORT</h3>
+                          <div class="textwidget">
+                            <p class="wpcf7-contact-form-not-found"><strong>Error:</strong> Contact form not found.</p>
+                          </div>
+                        </aside>
+                      </div><!-- /.side_menu_widget -->
+            
+        </div><!-- /#side-menu-wrapper -->
+
+                <!-- Menu Button -->
+                                <!-- Search icon -->
+                                <!-- Wishlist icon -->
+                                <!-- Cart icon -->
+                                <!-- Hamburger/Sidemenu Icon -->
+                            </div><!-- tx-nav-right-side-items-mobile -->
+        </div><!-- /.tx-mobile-menu -->
+    </div><!--/#responsive-menu-->
+    
+</nav><!-- End of navigation -->            	
+		    <div class="tx-nav-right-side-items-desktop">
+			    <!-- Menu Button -->
+								<!-- Search icon -->
+			    			    <!-- Wishlist icon -->
+			    			    <!-- Cart icon -->
+			    			    <!-- Side menu -->
+			    			</div><!-- tx-nav-right-side-items-desktop -->
+	</div><!-- /.container -->
+</div><!-- /#h-style-3 -->                
+                
+                <!-- Elementor Template Header -->
+                
+                <!-- sub header -->
+
+            </header><!-- /#header -->
+<div class="container space-blank">
+            <!-- <div id="primary" class="col-md-12"> -->
+            <div id="main" class="site-main">
+                                    
+<div id="post-291" class="post-291 page type-page status-publish hentry">
+    <div class="entry-content">
+        		<div data-elementor-type="wp-page" data-elementor-id="291" class="elementor elementor-291">
+                <section id="amz-new-banner" class="amz-new-banner" aria-label="Banner">
+                  <img class="amz-banner-img" src="/wp-content/uploads/banner.png?v=12" alt="AmzGetway" width="6142"
+                    height="1962" decoding="sync" fetchpriority="high" loading="eager" />
+                  <div class="amz-banner-content">
+                    <h1 class="amz-banner-title">
+                      <span class="amz-banner-title-line">Are You ready to Increase</span>
+                      <span class="amz-banner-title-line">Your Sales !</span>
+                    </h1>
+                    <p class="amz-banner-text">A Global Digital Marketing Agency that can Help you Grow Your
+                      Business on Ecommerce Marketplaces like Amazon and Walmart.</p>
+                    <a class="amz-banner-btn" href="/contact-us/">GET A QUOTE</a>
+					</div>
+		</section>
+                <section
+                  class="elementor-section elementor-top-section elementor-element elementor-element-1f6ce22 elementor-section-stretched elementor-section-boxed elementor-section-height-default elementor-section-height-default elementor-invisible"
+                  data-id="1f6ce22" data-element_type="section"
+                  data-settings="{&quot;stretch_section&quot;:&quot;section-stretched&quot;,&quot;animation&quot;:&quot;none&quot;}">
+						<div class="elementor-container elementor-column-gap-wider">
+                    <div
+                      class="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-42c4a02"
+                      data-id="42c4a02" data-element_type="column"
+                      data-settings="{&quot;animation&quot;:&quot;none&quot;}">
+			<div class="elementor-widget-wrap elementor-element-populated">
+                        <div
+                          class="elementor-element elementor-element-4f9d36c elementor-widget elementor-widget-avas-icon-box"
+                          data-id="4f9d36c" data-element_type="widget" data-widget_type="avas-icon-box.default">
+				<div class="elementor-widget-container">
+						
+		<div class="tx-icon-box-wrap style-1 center">
+
+			<div class="tx-icon-box-icon">
+                                <img decoding="async"
+                                  src="https://avas.live/seo/wp-content/uploads/sites/33/2019/11/highly-optimized.png">
+					
+				
+			</div><!-- tx-icon-box-icon -->
+
+			<div class="tx-icon-box-content-wrap">
+
+												<h4 class="tx-icon-box-title">
+                                  Customer Approach </h4>
+								
+                                <div class="tx-icon-box-desc">
+                                  <p>Our customer ecommerce strategies address your unique needs and concerns.
+                                  </p>
+                                </div>
+							</div><!-- tx-icon-box-content-wrap -->
+
+		</div><!-- tx-icon-box-wrap -->
+
+				</div>
+				</div>
+					</div>
+		</div>
+                    <div
+                      class="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-e2f78c6"
+                      data-id="e2f78c6" data-element_type="column"
+                      data-settings="{&quot;animation&quot;:&quot;none&quot;}">
+			<div class="elementor-widget-wrap elementor-element-populated">
+                        <div
+                          class="elementor-element elementor-element-64aebf8 elementor-widget elementor-widget-avas-icon-box"
+                          data-id="64aebf8" data-element_type="widget" data-widget_type="avas-icon-box.default">
+				<div class="elementor-widget-container">
+						
+		<div class="tx-icon-box-wrap style-1 center">
+
+			<div class="tx-icon-box-icon">
+                                <img decoding="async"
+                                  src="https://avas.live/seo/wp-content/uploads/sites/33/2019/11/high-end-secured.png">
+					
+				
+			</div><!-- tx-icon-box-icon -->
+
+			<div class="tx-icon-box-content-wrap">
+
+												<h4 class="tx-icon-box-title">
+                                  Quality Services </h4>
+								
+                                <div class="tx-icon-box-desc">
+                                  <p>We provide dedicated specialists for each project to ensure
+                                    top-quality services.</p>
+                                </div>
+							</div><!-- tx-icon-box-content-wrap -->
+
+		</div><!-- tx-icon-box-wrap -->
+
+				</div>
+				</div>
+					</div>
+		</div>
+                    <div
+                      class="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-5c9d643"
+                      data-id="5c9d643" data-element_type="column"
+                      data-settings="{&quot;animation&quot;:&quot;none&quot;}">
+			<div class="elementor-widget-wrap elementor-element-populated">
+                        <div
+                          class="elementor-element elementor-element-16c0548 elementor-widget elementor-widget-avas-icon-box"
+                          data-id="16c0548" data-element_type="widget" data-widget_type="avas-icon-box.default">
+				<div class="elementor-widget-container">
+						
+		<div class="tx-icon-box-wrap style-1 center">
+
+			<div class="tx-icon-box-icon">
+                                <img decoding="async"
+                                  src="https://avas.live/seo/wp-content/uploads/sites/33/2019/11/dedicated-support.png">
+					
+				
+			</div><!-- tx-icon-box-icon -->
+
+			<div class="tx-icon-box-content-wrap">
+
+												<h4 class="tx-icon-box-title">
+                                  Expert Consultancy </h4>
+								
+                                <div class="tx-icon-box-desc">
+                                  <p>We offer expert ecommerce consulting for next-level business growth.</p>
+                                </div>
+							</div><!-- tx-icon-box-content-wrap -->
+
+		</div><!-- tx-icon-box-wrap -->
+
+				</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+                <section
+                  class="elementor-section elementor-top-section elementor-element elementor-element-f2917a6 elementor-section-stretched elementor-section-boxed elementor-section-height-default elementor-section-height-default"
+                  data-id="f2917a6" data-element_type="section"
+                  data-settings="{&quot;stretch_section&quot;:&quot;section-stretched&quot;,&quot;background_background&quot;:&quot;classic&quot;}">
+							<div class="elementor-background-overlay"></div>
+							<div class="elementor-container elementor-column-gap-default">
+                    <div
+                      class="elementor-column elementor-col-50 elementor-top-column elementor-element elementor-element-0c45a9d elementor-invisible"
+                      data-id="0c45a9d" data-element_type="column"
+                      data-settings="{&quot;animation&quot;:&quot;fadeInLeft&quot;}">
+			<div class="elementor-widget-wrap elementor-element-populated">
+                        <div
+                          class="elementor-element elementor-element-b21d645 tx-hd-align-left elementor-widget elementor-widget-avas-heading"
+                          data-id="b21d645" data-element_type="widget" data-widget_type="avas-heading.default">
+				<div class="elementor-widget-container">
+					        <div class="tx-hd-wrap">
+
+            <div class="tx-hd-wm"></div>
+
+            
+            <div class="tx-hd-sub"></div>
+                        <h2 class="tx-hd-title">
+                <span class="tx-hd-first-part">Our Clients, Our Priority</span>
+                <span class="tx-hd-last-part"></span>
+            </h2>    
+            
+                              <div class="tx-hd-desc">
+                                <p>We deeply value our clients and strive to deliver an unmatched experience to them.
+                                  Our clients are our top priority. So, we use a customer-centric approach and offer
+                                  Amazon and Walmart ecommerce marketplaces related business solutions according to the
+                                  unique needs of our clients. We believe that every business, whether big or small,
+                                  deserves a strategy that is specifically devised based on that business's needs.
+                                  Hence, we make sure to listen to your concerns carefully. Find out exactly what you
+                                  want and resolve your problems using data-driven strategies. With integrity and
+                                  transparency as our core values, we never compromise on our duty of providing our
+                                  clients with top-tier services.</p>
+                              </div>
+
+
+                   
+        </div><!-- tx-hd-wrap -->
+
+
+
+
+
+
+
+
+				</div>
+				</div>
+                        <div
+                          data-tx-wrapper-link="{&quot;url&quot;:&quot;\/contact-us\/&quot;,&quot;is_external&quot;:&quot;&quot;,&quot;nofollow&quot;:&quot;&quot;,&quot;custom_attributes&quot;:&quot;&quot;}"
+                          style="cursor: pointer"
+                          class="tx-wrapper-link elementor-element elementor-element-35ae12d elementor-align-left elementor-invisible elementor-widget elementor-widget-button"
+                          data-id="35ae12d" data-element_type="widget"
+                          data-settings="{&quot;_animation&quot;:&quot;zoomIn&quot;}" data-widget_type="button.default">
+				<div class="elementor-widget-container">
+									<div class="elementor-button-wrapper">
+					<a class="elementor-button elementor-button-link elementor-size-sm" href="/contact-us/">
+						<span class="elementor-button-content-wrapper">
+                                  <span class="elementor-button-text">Get A Quote &#10132;</span>
+					</span>
+					</a>
+				</div>
+								</div>
+				</div>
+					</div>
+		</div>
+                    <div
+                      class="elementor-column elementor-col-50 elementor-top-column elementor-element elementor-element-55ae7b0 elementor-invisible"
+                      data-id="55ae7b0" data-element_type="column"
+                      data-settings="{&quot;animation&quot;:&quot;fadeInRight&quot;}">
+			<div class="elementor-widget-wrap elementor-element-populated">
+                        <div class="elementor-element elementor-element-48d7d44 elementor-widget elementor-widget-image"
+                          data-id="48d7d44" data-element_type="widget" data-widget_type="image.default">
+				<div class="elementor-widget-container">
+                            <img loading="lazy" decoding="async" width="608" height="347"
+                              src="/wp-content/uploads/2023/04/image-19.png"
+                              class="attachment-large size-large wp-image-1356" alt=""
+                              srcset="/wp-content/uploads/2023/04/image-19.png 608w, /wp-content/uploads/2023/04/image-19-300x171.png 300w, /wp-content/uploads/2023/04/image-19-360x205.png 360w, /wp-content/uploads/2023/04/image-19-373x213.png 373w, /wp-content/uploads/2023/04/image-19-80x46.png 80w, /wp-content/uploads/2023/04/image-19-460x263.png 460w, /wp-content/uploads/2023/04/image-19-365x208.png 365w"
+                              sizes="(max-width: 608px) 100vw, 608px" />
+                          </div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+                <section
+                  class="elementor-section elementor-top-section elementor-element elementor-element-0037f70 elementor-section-stretched elementor-section-boxed elementor-section-height-default elementor-section-height-default elementor-invisible"
+                  data-id="0037f70" data-element_type="section"
+                  data-settings="{&quot;stretch_section&quot;:&quot;section-stretched&quot;,&quot;background_background&quot;:&quot;classic&quot;,&quot;animation&quot;:&quot;pulse&quot;}">
+							<div class="elementor-background-overlay"></div>
+							<div class="elementor-container elementor-column-gap-default">
+                    <div
+                      class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-a77b5e3"
+                      data-id="a77b5e3" data-element_type="column"
+                      data-settings="{&quot;animation&quot;:&quot;none&quot;}">
+			<div class="elementor-widget-wrap elementor-element-populated">
+                        <div
+                          class="elementor-element elementor-element-22d51f0 tx-hd-align-center elementor-invisible elementor-widget elementor-widget-avas-heading"
+                          data-id="22d51f0" data-element_type="widget"
+                          data-settings="{&quot;_animation&quot;:&quot;fadeInUp&quot;}"
+                          data-widget_type="avas-heading.default">
+				<div class="elementor-widget-container">
+					        <div class="tx-hd-wrap">
+
+            <div class="tx-hd-wm"></div>
+
+            
+            <div class="tx-hd-sub"></div>
+                        <h2 class="tx-hd-title">
+                <span class="tx-hd-first-part">What We Offer?</span>
+                <span class="tx-hd-last-part"></span>
+            </h2>    
+            
+                              <div class="tx-hd-desc">
+                                <p>We offer our clients unparalleled Amazon and Walmart services, assisting them to
+                                  avoid common pitfalls along with monitoring, streamlining, and boosting product sales
+                                  on Amazon and Walmart.</p>
+                              </div>
+
+
+                   
+        </div><!-- tx-hd-wrap -->
+
+
+
+
+
+
+
+
+				</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+                <section
+                  class="elementor-section elementor-top-section elementor-element elementor-element-8f863bc elementor-section-stretched elementor-section-boxed elementor-section-height-default elementor-section-height-default"
+                  data-id="8f863bc" data-element_type="section"
+                  data-settings="{&quot;stretch_section&quot;:&quot;section-stretched&quot;,&quot;background_background&quot;:&quot;slideshow&quot;,&quot;background_slideshow_gallery&quot;:[],&quot;background_slideshow_loop&quot;:&quot;yes&quot;,&quot;background_slideshow_slide_duration&quot;:5000,&quot;background_slideshow_slide_transition&quot;:&quot;fade&quot;,&quot;background_slideshow_transition_duration&quot;:500}">
+							<div class="elementor-background-overlay"></div>
+							<div class="elementor-container elementor-column-gap-default">
+                    <div
+                      class="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-23f14fe elementor-invisible"
+                      data-id="23f14fe" data-element_type="column"
+                      data-settings="{&quot;animation&quot;:&quot;fadeInLeft&quot;}">
+			<div class="elementor-widget-wrap elementor-element-populated">
+                        <div
+                          class="elementor-element elementor-element-f8deff9 tx-hd-align-left elementor-widget elementor-widget-avas-heading"
+                          data-id="f8deff9" data-element_type="widget" data-widget_type="avas-heading.default">
+				<div class="elementor-widget-container">
+					        <div class="tx-hd-wrap">
+
+            <div class="tx-hd-wm"></div>
+
+            
+            <div class="tx-hd-sub"></div>
+                        <h2 class="tx-hd-title">
+                <span class="tx-hd-first-part">Amazon Services</span>
+                <span class="tx-hd-last-part"></span>
+            </h2>    
+            
+                              <div class="tx-hd-desc">
+                                <p>Amazon is the biggest ecommerce marketplace with a market share of 50. Many small and
+                                  medium-sized businesses (SMBs) and successful brands have benefited from the unmatched
+                                  reach and sales potential of Amazon. This marketplace supports thousands of online
+                                  sellers and brand owners to improve their brand awareness and scale their businesses.
+                                  Amazon sells millions of products. But if you want your products to stand out, you
+                                  need to leverage an effective SEO strategy, Amazon PPC, and other related
+                                  strategies.Â </p>
+                                <p>With AMZgetway, you don't have to worry about a thing. We offer the following
+                                  fantastic Amazon services:</p>
+                              </div>
+
+
+                   
+        </div><!-- tx-hd-wrap -->
+
+
+
+
+
+
+
+
+				</div>
+				</div>
+                        <div
+                          class="elementor-element elementor-element-ebf8922 elementor-widget elementor-widget-button"
+                          data-id="ebf8922" data-element_type="widget" data-widget_type="button.default">
+				<div class="elementor-widget-container">
+									<div class="elementor-button-wrapper">
+                              <a class="elementor-button elementor-button-link elementor-size-sm"
+                                href="/amazon-services/">
+						<span class="elementor-button-content-wrapper">
+									<span class="elementor-button-text">Explore More Services</span>
+					</span>
+					</a>
+				</div>
+								</div>
+				</div>
+					</div>
+		</div>
+                    <div
+                      class="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-4aef3a2"
+                      data-id="4aef3a2" data-element_type="column">
+			<div class="elementor-widget-wrap">
+							</div>
+		</div>
+                    <div
+                      class="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-fc13d36 elementor-invisible"
+                      data-id="fc13d36" data-element_type="column"
+                      data-settings="{&quot;animation&quot;:&quot;fadeInRight&quot;}">
+			<div class="elementor-widget-wrap elementor-element-populated">
+                        <section
+                          class="elementor-section elementor-inner-section elementor-element elementor-element-2d7ea1a elementor-section-boxed elementor-section-height-default elementor-section-height-default elementor-invisible"
+                          data-id="2d7ea1a" data-element_type="section"
+                          data-settings="{&quot;animation&quot;:&quot;fadeInRight&quot;}">
+						<div class="elementor-container elementor-column-gap-extended">
+                            <div
+                              class="elementor-column elementor-col-33 elementor-inner-column elementor-element elementor-element-1637890"
+                              data-id="1637890" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+                                <div
+                                  data-tx-wrapper-link="{&quot;url&quot;:&quot;\/amazon-full-store-management\/&quot;,&quot;is_external&quot;:&quot;&quot;,&quot;nofollow&quot;:&quot;&quot;,&quot;custom_attributes&quot;:&quot;&quot;}"
+                                  style="cursor: pointer"
+                                  class="tx-wrapper-link elementor-element elementor-element-a6c4bc7 elementor-widget elementor-widget-avas-icon-box"
+                                  data-id="a6c4bc7" data-element_type="widget" data-widget_type="avas-icon-box.default">
+				<div class="elementor-widget-container">
+						
+		<div class="tx-icon-box-wrap style-2 left">
+
+			<div class="tx-icon-box-icon">
+                                        <img decoding="async"
+                                          src="/wp-content/uploads/2023/04/full-store-management.png">
+					
+				
+			</div><!-- tx-icon-box-icon -->
+
+			<div class="tx-icon-box-content-wrap">
+
+												<a href="/amazon-full-store-management/" target="_self">
+				<h4 class="tx-icon-box-title">
+                                            Full Store Management </h4>
+				</a>
+								
+                                        <div class="tx-icon-box-desc">
+                                          <p>Amazon is leading the ecommerce retail market. Many small and medium-sized
+                                            businesses (SMBs)...</p>
+                                        </div>
+								<div class="tx-icon-box-btn-wrap">
+                                          <a class="tx-icon-box-btn" href="/amazon-full-store-management/"
+                                            target="_self">
+						
+
+						
+
+						Read More
+						
+					</a>
+				</div><!-- tx-icon-box-btn-wrap -->
+							</div><!-- tx-icon-box-content-wrap -->
+
+		</div><!-- tx-icon-box-wrap -->
+
+				</div>
+				</div>
+                                <div
+                                  data-tx-wrapper-link="{&quot;url&quot;:&quot;\/amazon-enhanced-brand-content\/&quot;,&quot;is_external&quot;:&quot;&quot;,&quot;nofollow&quot;:&quot;&quot;,&quot;custom_attributes&quot;:&quot;&quot;}"
+                                  style="cursor: pointer"
+                                  class="tx-wrapper-link elementor-element elementor-element-2a34818 elementor-widget elementor-widget-avas-icon-box"
+                                  data-id="2a34818" data-element_type="widget" data-widget_type="avas-icon-box.default">
+				<div class="elementor-widget-container">
+						
+		<div class="tx-icon-box-wrap style-2 left">
+
+			<div class="tx-icon-box-icon">
+                                        <img decoding="async"
+                                          src="/wp-content/uploads/2023/04/WFS-Listing-Creation.png">
+					
+				
+			</div><!-- tx-icon-box-icon -->
+
+			<div class="tx-icon-box-content-wrap">
+
+												<a href="/amazon-enhanced-brand-content/" target="_self">
+				<h4 class="tx-icon-box-title">
+                                            EBC/A+ Brand Content </h4>
+				</a>
+								
+                                        <div class="tx-icon-box-desc">
+                                          <p>Sellers are willing to do everything they can to make their Amazon product
+                                            listings stand out...</p>
+                                        </div>
+								<div class="tx-icon-box-btn-wrap">
+                                          <a class="tx-icon-box-btn" href="/amazon-enhanced-brand-content/"
+                                            target="_self">
+						
+
+						
+
+						Read More
+						
+					</a>
+				</div><!-- tx-icon-box-btn-wrap -->
+							</div><!-- tx-icon-box-content-wrap -->
+
+		</div><!-- tx-icon-box-wrap -->
+
+				</div>
+				</div>
+					</div>
+		</div>
+                            <div
+                              class="elementor-column elementor-col-33 elementor-inner-column elementor-element elementor-element-82c8a83"
+                              data-id="82c8a83" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+                                <div
+                                  data-tx-wrapper-link="{&quot;url&quot;:&quot;\/amazon-ppc-campaign-management\/&quot;,&quot;is_external&quot;:&quot;&quot;,&quot;nofollow&quot;:&quot;&quot;,&quot;custom_attributes&quot;:&quot;&quot;}"
+                                  style="cursor: pointer"
+                                  class="tx-wrapper-link elementor-element elementor-element-638d849 elementor-widget elementor-widget-avas-icon-box"
+                                  data-id="638d849" data-element_type="widget" data-widget_type="avas-icon-box.default">
+				<div class="elementor-widget-container">
+						
+		<div class="tx-icon-box-wrap style-2 left">
+
+			<div class="tx-icon-box-icon">
+                                        <img decoding="async"
+                                          src="/wp-content/uploads/2023/04/PPC-Campaign-Management-1.png">
+					
+				
+			</div><!-- tx-icon-box-icon -->
+
+			<div class="tx-icon-box-content-wrap">
+
+												<a href="/amazon-ppc-campaign-management/" target="_self">
+				<h4 class="tx-icon-box-title">
+                                            PPC Campaign Management </h4>
+				</a>
+								
+                                        <div class="tx-icon-box-desc">
+                                          <p>Amazon sells millions of products. But an effective SEO strategy alone
+                                            canâ€™t help your products stand...</p>
+                                        </div>
+								<div class="tx-icon-box-btn-wrap">
+                                          <a class="tx-icon-box-btn" href="/amazon-ppc-campaign-management/"
+                                            target="_self">
+						
+
+						
+
+						Read More
+						
+					</a>
+				</div><!-- tx-icon-box-btn-wrap -->
+							</div><!-- tx-icon-box-content-wrap -->
+
+		</div><!-- tx-icon-box-wrap -->
+
+				</div>
+				</div>
+                                <div
+                                  data-tx-wrapper-link="{&quot;url&quot;:&quot;\/amazon-brand-registry\/&quot;,&quot;is_external&quot;:&quot;&quot;,&quot;nofollow&quot;:&quot;&quot;,&quot;custom_attributes&quot;:&quot;&quot;}"
+                                  style="cursor: pointer"
+                                  class="tx-wrapper-link elementor-element elementor-element-f0a3395 elementor-widget elementor-widget-avas-icon-box"
+                                  data-id="f0a3395" data-element_type="widget" data-widget_type="avas-icon-box.default">
+				<div class="elementor-widget-container">
+						
+		<div class="tx-icon-box-wrap style-2 left">
+
+			<div class="tx-icon-box-icon">
+										<img decoding="async" src="/wp-content/uploads/2023/04/Brand-Registry.png">
+					
+				
+			</div><!-- tx-icon-box-icon -->
+
+			<div class="tx-icon-box-content-wrap">
+
+												<a href="/amazon-brand-registry/" target="_self">
+				<h4 class="tx-icon-box-title">
+                                            Brand Registry </h4>
+				</a>
+								
+                                        <div class="tx-icon-box-desc">
+                                          <p>Is your brand protected against listing hijackers and counterfeiters on
+                                            Amazon? Despite being...</p>
+                                        </div>
+								<div class="tx-icon-box-btn-wrap">
+					<a class="tx-icon-box-btn" href="/amazon-brand-registry/" target="_self">
+						
+
+						
+
+						Read More
+						
+					</a>
+				</div><!-- tx-icon-box-btn-wrap -->
+							</div><!-- tx-icon-box-content-wrap -->
+
+		</div><!-- tx-icon-box-wrap -->
+
+				</div>
+				</div>
+					</div>
+		</div>
+                            <div
+                              class="elementor-column elementor-col-33 elementor-inner-column elementor-element elementor-element-56e1d09"
+                              data-id="56e1d09" data-element_type="column">
+			<div class="elementor-widget-wrap elementor-element-populated">
+                                <div
+                                  data-tx-wrapper-link="{&quot;url&quot;:&quot;\/amazon-listing-optimization\/&quot;,&quot;is_external&quot;:&quot;&quot;,&quot;nofollow&quot;:&quot;&quot;,&quot;custom_attributes&quot;:&quot;&quot;}"
+                                  style="cursor: pointer"
+                                  class="tx-wrapper-link elementor-element elementor-element-389a03c elementor-widget elementor-widget-avas-icon-box"
+                                  data-id="389a03c" data-element_type="widget" data-widget_type="avas-icon-box.default">
+				<div class="elementor-widget-container">
+						
+		<div class="tx-icon-box-wrap style-2 left">
+
+			<div class="tx-icon-box-icon">
+                                        <img decoding="async"
+                                          src="/wp-content/uploads/2023/04/Listing-Optimization.png">
+					
+				
+			</div><!-- tx-icon-box-icon -->
+
+			<div class="tx-icon-box-content-wrap">
+
+												<a href="/amazon-listing-optimization/" target="_self">
+				<h4 class="tx-icon-box-title">
+                                            Listing Optimization </h4>
+				</a>
+								
+                                        <div class="tx-icon-box-desc">
+                                          <p>Fully optimized product listing is a major factor that differentiates a
+                                            successful seller from...</p>
+                                        </div>
+								<div class="tx-icon-box-btn-wrap">
+                                          <a class="tx-icon-box-btn" href="/amazon-listing-optimization/"
+                                            target="_self">
+						
+
+						
+
+						Read More
+						
+					</a>
+				</div><!-- tx-icon-box-btn-wrap -->
+							</div><!-- tx-icon-box-content-wrap -->
+
+		</div><!-- tx-icon-box-wrap -->
+
+				</div>
+				</div>
+                                <div
+                                  data-tx-wrapper-link="{&quot;url&quot;:&quot;\/amazon-seller-feedback\/&quot;,&quot;is_external&quot;:&quot;&quot;,&quot;nofollow&quot;:&quot;&quot;,&quot;custom_attributes&quot;:&quot;&quot;}"
+                                  style="cursor: pointer"
+                                  class="tx-wrapper-link elementor-element elementor-element-a54db8b elementor-widget elementor-widget-avas-icon-box"
+                                  data-id="a54db8b" data-element_type="widget" data-widget_type="avas-icon-box.default">
+				<div class="elementor-widget-container">
+						
+		<div class="tx-icon-box-wrap style-2 left">
+
+			<div class="tx-icon-box-icon">
+										<img decoding="async" src="/wp-content/uploads/2023/04/Seller-Feedback.png">
+					
+				
+			</div><!-- tx-icon-box-icon -->
+
+			<div class="tx-icon-box-content-wrap">
+
+												<a href="/amazon-seller-feedback/" target="_self">
+				<h4 class="tx-icon-box-title">
+                                            Seller Feedback </h4>
+				</a>
+								
+                                        <div class="tx-icon-box-desc">
+                                          <p>Suspendisse potenti Phasellus euiser mod libero in neque molestie eterse
+                                            mentum libero libero...</p>
+                                        </div>
+								<div class="tx-icon-box-btn-wrap">
+					<a class="tx-icon-box-btn" href="/amazon-seller-feedback/" target="_self">
+						
+
+						
+
+						Read More
+						
+					</a>
+				</div><!-- tx-icon-box-btn-wrap -->
+							</div><!-- tx-icon-box-content-wrap -->
+
+		</div><!-- tx-icon-box-wrap -->
+
+				</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+					</div>
+		</div>
+					</div>
+		</section>
+                <section
+                  class="elementor-section elementor-top-section elementor-element elementor-element-b661992 elementor-section-stretched elementor-section-boxed elementor-section-height-default elementor-section-height-default"
+                  data-id="b661992" data-element_type="section"
+                  data-settings="{&quot;stretch_section&quot;:&quot;section-stretched&quot;,&quot;background_background&quot;:&quot;classic&quot;,&quot;animation&quot;:&quot;none&quot;}">
+							<div class="elementor-background-overlay"></div>
+							<div class="elementor-container elementor-column-gap-default">
+                    <div
+                      class="elementor-column elementor-col-50 elementor-top-column elementor-element elementor-element-f47bfa8 elementor-invisible"
+                      data-id="f47bfa8" data-element_type="column"
+                      data-settings="{&quot;animation&quot;:&quot;fadeInLeft&quot;,&quot;background_background&quot;:&quot;classic&quot;}">
+			<div class="elementor-widget-wrap elementor-element-populated">
+					<div class="elementor-background-overlay"></div>
+                        <div
+                          class="elementor-element elementor-element-b0c6c5a tx-hd-align-center elementor-widget elementor-widget-avas-heading"
+                          data-id="b0c6c5a" data-element_type="widget" data-widget_type="avas-heading.default">
+				<div class="elementor-widget-container">
+					        <div class="tx-hd-wrap">
+
+            <div class="tx-hd-wm"></div>
+
+            
+            <div class="tx-hd-sub"></div>
+                        <h2 class="tx-hd-title">
+                <span class="tx-hd-first-part">Walmart Services</span>
+                <span class="tx-hd-last-part"></span>
+            </h2>    
+            
+                              <div class="tx-hd-desc">
+                                <p>After the immense success of Walmart's brick-and-mortar store, Walmart launched its
+                                  online marketplace nearly a decade ago. All loyal Walmart customers now have online
+                                  access to the amazing range of products, which they can purchase without even leaving
+                                  their house. If you're a business owner, this is an amazing opportunity that you
+                                  should not miss. The Walmart Marketplace allows both small and big sellers to earn
+                                  money.</p>
+                              </div>
+
+
+                   
+        </div><!-- tx-hd-wrap -->
+
+
+
+
+
+
+
+
+				</div>
+				</div>
+                        <div
+                          class="elementor-element elementor-element-ead6435 elementor-align-center elementor-widget elementor-widget-button"
+                          data-id="ead6435" data-element_type="widget" data-widget_type="button.default">
+				<div class="elementor-widget-container">
+									<div class="elementor-button-wrapper">
+                              <a class="elementor-button elementor-button-link elementor-size-sm"
+                                href="/walmart-services/">
+						<span class="elementor-button-content-wrapper">
+									<span class="elementor-button-text">Explore More Service</span>
+					</span>
+					</a>
+				</div>
+								</div>
+				</div>
+					</div>
+		</div>
+                    <div
+                      class="elementor-column elementor-col-50 elementor-top-column elementor-element elementor-element-0368ecf elementor-invisible"
+                      data-id="0368ecf" data-element_type="column"
+                      data-settings="{&quot;animation&quot;:&quot;fadeInRight&quot;,&quot;background_background&quot;:&quot;classic&quot;}">
+			<div class="elementor-widget-wrap elementor-element-populated">
+					<div class="elementor-background-overlay"></div>
+                        <div
+                          class="elementor-element elementor-element-74dca59 tx-hd-align-center elementor-widget elementor-widget-avas-heading"
+                          data-id="74dca59" data-element_type="widget" data-widget_type="avas-heading.default">
+				<div class="elementor-widget-container">
+					        <div class="tx-hd-wrap">
+
+            <div class="tx-hd-wm"></div>
+
+            
+            <div class="tx-hd-sub"></div>
+                        <h2 class="tx-hd-title">
+                <span class="tx-hd-first-part">Apply Selling</span>
+                <span class="tx-hd-last-part"></span>
+            </h2>    
+            
+                              <div class="tx-hd-desc">
+                                <p>Before creating your ecommerce store, we conduct in-depth research into the market
+                                  and your competitors. As a leading digital marketing agency, we come up with creative
+                                  ideas and solutions that benefit your business. If you're new to ecommerce
+                                  marketplaces, hire our team of professionals to manage your Amazon and Walmart stores.
+                                  We will take care of everything from the brand registry to designing an attractive and
+                                  user-friendly storefront.</p>
+                              </div>
+
+
+                   
+        </div><!-- tx-hd-wrap -->
+
+
+
+
+
+
+
+
+				</div>
+				</div>
+                        <div
+                          class="elementor-element elementor-element-94acb9c elementor-align-center elementor-widget elementor-widget-button"
+                          data-id="94acb9c" data-element_type="widget" data-widget_type="button.default">
+				<div class="elementor-widget-container">
+									<div class="elementor-button-wrapper">
+                              <a class="elementor-button elementor-button-link elementor-size-sm"
+                                href="/apply-selling/">
+						<span class="elementor-button-content-wrapper">
+									<span class="elementor-button-text">Explore More Service</span>
+					</span>
+					</a>
+				</div>
+								</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+                <section
+                  class="elementor-section elementor-top-section elementor-element elementor-element-b9d8a45 elementor-section-stretched elementor-section-boxed elementor-section-height-default elementor-section-height-default"
+                  data-id="b9d8a45" data-element_type="section"
+                  data-settings="{&quot;stretch_section&quot;:&quot;section-stretched&quot;,&quot;background_background&quot;:&quot;classic&quot;}">
+							<div class="elementor-background-overlay"></div>
+							<div class="elementor-container elementor-column-gap-default">
+                    <div
+                      class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-1b6ea85 elementor-invisible"
+                      data-id="1b6ea85" data-element_type="column"
+                      data-settings="{&quot;animation&quot;:&quot;fadeInLeft&quot;}">
+			<div class="elementor-widget-wrap elementor-element-populated">
+                        <div
+                          class="elementor-element elementor-element-b900600 tx-hd-align-center elementor-widget elementor-widget-avas-heading"
+                          data-id="b900600" data-element_type="widget" data-widget_type="avas-heading.default">
+				<div class="elementor-widget-container">
+					        <div class="tx-hd-wrap">
+
+            <div class="tx-hd-wm"></div>
+
+            
+            <div class="tx-hd-sub"></div>
+                        <h2 class="tx-hd-title">
+                <span class="tx-hd-first-part">What Makes Us Unique?</span>
+                <span class="tx-hd-last-part"></span>
+            </h2>    
+            
+                              <div class="tx-hd-desc">
+                                <p>AMZgetway is the most dedicated digital marketing agency that will treat your
+                                  business like it's our own. We are a one-stop digital marketing agency, assisting
+                                  clients in promoting their brands on leading ecommerce marketplaces.</p>
+                              </div>
+
+
+                   
+        </div><!-- tx-hd-wrap -->
+
+
+
+
+
+
+
+
+				</div>
+				</div>
+                        <div
+                          class="elementor-element elementor-element-50973de elementor-align-center elementor-widget elementor-widget-button"
+                          data-id="50973de" data-element_type="widget" data-widget_type="button.default">
+				<div class="elementor-widget-container">
+									<div class="elementor-button-wrapper">
+                              <a class="elementor-button elementor-button-link elementor-size-sm"
+                                href="/what-makes-us-unique/">
+						<span class="elementor-button-content-wrapper">
+									<span class="elementor-button-text">Learn More</span>
+					</span>
+					</a>
+				</div>
+								</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+                <section
+                  class="elementor-section elementor-top-section elementor-element elementor-element-5583ad5 elementor-section-stretched elementor-section-boxed elementor-section-height-default elementor-section-height-default"
+                  data-id="5583ad5" data-element_type="section"
+                  data-settings="{&quot;stretch_section&quot;:&quot;section-stretched&quot;}">
+						<div class="elementor-container elementor-column-gap-default">
+                    <div
+                      class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-d8d0208 elementor-invisible"
+                      data-id="d8d0208" data-element_type="column"
+                      data-settings="{&quot;animation&quot;:&quot;bounceIn&quot;}">
+			<div class="elementor-widget-wrap elementor-element-populated">
+                        <div
+                          class="elementor-element elementor-element-9ee57fc tx-hd-align-center elementor-widget elementor-widget-avas-heading"
+                          data-id="9ee57fc" data-element_type="widget" data-widget_type="avas-heading.default">
+				<div class="elementor-widget-container">
+					        <div class="tx-hd-wrap">
+
+            <div class="tx-hd-wm"></div>
+
+            
+            <div class="tx-hd-sub"></div>
+                        <h2 class="tx-hd-title">
+                <span class="tx-hd-first-part">What Our Client Say</span>
+                <span class="tx-hd-last-part"></span>
+            </h2>    
+            
+            <div class="tx-hd-desc"></div>
+
+
+                   
+        </div><!-- tx-hd-wrap -->
+
+
+
+
+
+
+
+
+				</div>
+				</div>
+                        <div
+                          class="elementor-element elementor-element-e96712b elementor-widget elementor-widget-avas-testimonial"
+                          data-id="e96712b" data-element_type="widget" data-widget_type="avas-testimonial.default">
+				<div class="elementor-widget-container">
+					
+                            <div class="tx-testimonial-wrap   style-3 tx-align-center">
+            
+            
+            
+                              <div class="tx-carousel owl-carousel owl-theme"
+                                data-settings="{&quot;autoplay&quot;:true,&quot;autoplay_timeout&quot;:3000,&quot;smart_speed&quot;:900,&quot;loop&quot;:true,&quot;display_mobile&quot;:1,&quot;display_tablet&quot;:1,&quot;display_laptop&quot;:3,&quot;display_desktop&quot;:3,&quot;gutter&quot;:30}">
+                                  
+                    <div class="tx-testimonial ">
+                                  <div class="tx-testimonial-image"><img decoding="async"
+                                      src="/wp-content/uploads/testimonials/william-bullock.jpg?v=2"
+                                      alt="William Bullock"></div>
+                                                <h5 class="tx-testimonial-name">William Bullock</h5>
+                        <div class="tx-testimonial-company"></div>
+                                  <div class="tx-testimonial-details">
+                                    <p>I have been able to significantly increase my sales since I started using this
+                                      Amazon platform. It's amazing how it has transformed my business.</p>
+                                  </div>
+                                                
+                        
+
+                    </div><!-- tx-testimonial -->
+                                  
+                    <div class="tx-testimonial ">
+                                  <div class="tx-testimonial-image"><img decoding="async"
+                                      src="/wp-content/uploads/testimonials/janice-meeks.jpg?v=3"
+                                      alt="Janice Meeks"></div>
+                                                <h5 class="tx-testimonial-name">Janice Meeks</h5>
+                        <div class="tx-testimonial-company"></div>
+                                  <div class="tx-testimonial-details">
+                                    <p>The customer support team service is fantastic. They are always available to
+                                      assist me with any questions or concerns I have.</p>
+                                  </div>
+                                                
+                        
+
+                    </div><!-- tx-testimonial -->
+                                  
+                    <div class="tx-testimonial ">
+                                  <div class="tx-testimonial-image"><img decoding="async"
+                                      src="/wp-content/uploads/testimonials/gavin-glass.jpg?v=2"
+                                      alt="Gavin Glass"></div>
+                                                <h5 class="tx-testimonial-name">Gavin Glass</h5>
+                        <div class="tx-testimonial-company"></div>
+                                  <div class="tx-testimonial-details">
+                                    <p>I highly recommend this full store management service for anyone who wants to
+                                      scale their Amazon business.</p>
+                                  </div>
+                                                
+                        
+
+                    </div><!-- tx-testimonial -->
+                                  
+                    <div class="tx-testimonial ">
+                                  <div class="tx-testimonial-image"><img decoding="async"
+                                      src="/wp-content/uploads/testimonials/virginia-mendoza.jpg?v=3"
+                                      alt="Virginia Mendoza"></div>
+                                                <h5 class="tx-testimonial-name">Virginia Mendoza</h5>
+                        <div class="tx-testimonial-company"></div>
+                                  <div class="tx-testimonial-details">
+                                    <p>I'm able to track my sales and see which products are performing well, which has
+                                      allowed me to make better business decisions</p>
+                                  </div>
+                                                
+                        
+
+                    </div><!-- tx-testimonial -->
+                                  
+                    <div class="tx-testimonial ">
+                                  <div class="tx-testimonial-image"><img decoding="async"
+                                      src="/wp-content/uploads/testimonials/michael-bergmann.jpg?v=2"
+                                      alt="Michael Bergmann"></div>
+                                                <h5 class="tx-testimonial-name">Michael Bergmann</h5>
+                        <div class="tx-testimonial-company"></div>
+                                  <div class="tx-testimonial-details">
+                                    <p>This full store management service has helped me increase my sales and grow my
+                                      Amazon business.</p>
+                                  </div>
+                                                
+                        
+
+                    </div><!-- tx-testimonial -->
+                                  
+                    <div class="tx-testimonial ">
+                                  <div class="tx-testimonial-image"><img decoding="async"
+                                      src="/wp-content/uploads/testimonials/karla-luna.jpg?v=3"
+                                      alt="Karla Luna"></div>
+                                                <h5 class="tx-testimonial-name">Karla Luna</h5>
+                        <div class="tx-testimonial-company"></div>
+                                  <div class="tx-testimonial-details">
+                                    <p>I have been using Amazon PPC campaigns for my products and it has helped me
+                                      increase my sales and visibility on the platform</p>
+                                  </div>
+                                                
+                        
+
+                    </div><!-- tx-testimonial -->
+                                  
+                    <div class="tx-testimonial ">
+                                  <div class="tx-testimonial-image"><img decoding="async"
+                                      src="/wp-content/uploads/testimonials/donald-ramirez.jpg?v=2" alt="Donald Ramirez"></div>
+                                                <h5 class="tx-testimonial-name">Donald Ramirez</h5>
+                        <div class="tx-testimonial-company"></div>
+                                  <div class="tx-testimonial-details">
+                                    <p>Â I highly recommend this service to anyone who needs help forming an LLC.</p>
+                                  </div>
+                                                
+                        
+
+                    </div><!-- tx-testimonial -->
+                                  
+                    <div class="tx-testimonial ">
+                                  <div class="tx-testimonial-image"><img decoding="async"
+                                      src="/wp-content/uploads/testimonials/charles-hyde.jpg?v=2" alt="Charles Hyde"></div>
+                                                <h5 class="tx-testimonial-name">Charles Hyde</h5>
+                        <div class="tx-testimonial-company"></div>
+                                  <div class="tx-testimonial-details">
+                                    <p>Store creation service I used was very professional and delivered exactly what I
+                                      wanted.</p>
+                                  </div>
+                                                
+                        
+
+                    </div><!-- tx-testimonial -->
+                                  
+                    <div class="tx-testimonial ">
+                                  <div class="tx-testimonial-image"><img decoding="async"
+                                      src="/wp-content/uploads/testimonials/robert-harley.jpg?v=2" alt="Robert Harley"></div>
+                                                <h5 class="tx-testimonial-name">Robert Harley</h5>
+                        <div class="tx-testimonial-company"></div>
+                                  <div class="tx-testimonial-details">
+                                    <p>The customer support of this ecommerce service is top-notch.</p>
+                                  </div>
+                                                
+                        
+
+                    </div><!-- tx-testimonial -->
+                                  
+                    <div class="tx-testimonial ">
+                                  <div class="tx-testimonial-image"><img decoding="async"
+                                      src="/wp-content/uploads/testimonials/john-reid.jpg?v=2" alt="John Reid"></div>
+                                                <h5 class="tx-testimonial-name">John Reid</h5>
+                        <div class="tx-testimonial-company"></div>
+                                  <div class="tx-testimonial-details">
+                                    <p>The results I've seen from this PPC campaign have exceeded my expectations.</p>
+                                  </div>
+                                                
+                        
+
+                    </div><!-- tx-testimonial -->
+                                  
+                    <div class="tx-testimonial ">
+                                  <div class="tx-testimonial-image"><img decoding="async"
+                                      src="/wp-content/uploads/testimonials/todd-claypoole.jpg?v=2" alt="Todd Claypoole"></div>
+                                                <h5 class="tx-testimonial-name">Todd Claypoole</h5>
+                        <div class="tx-testimonial-company"></div>
+                                  <div class="tx-testimonial-details">
+                                    <p>I'm very impressed with the automation provided by this full store management
+                                      service.</p>
+                                  </div>
+                                                
+                        
+
+                    </div><!-- tx-testimonial -->
+                                  
+                    <div class="tx-testimonial ">
+                                  <div class="tx-testimonial-image"><img decoding="async"
+                                      src="/wp-content/uploads/testimonials/marsha-kenna.jpg?v=3" alt="Marsha Kenna"></div>
+                                                <h5 class="tx-testimonial-name">Marsha Kenna</h5>
+                        <div class="tx-testimonial-company"></div>
+                                  <div class="tx-testimonial-details">
+                                    <p>The LLC formation service I used was quick and hassle-free.</p>
+                                  </div>
+                                                
+                        
+
+                    </div><!-- tx-testimonial -->
+                                  
+                    <div class="tx-testimonial ">
+                                  <div class="tx-testimonial-image"><img decoding="async"
+                                      src="/wp-content/uploads/testimonials/angel-benner.jpg?v=3" alt="Angel Benner"></div>
+                                                <h5 class="tx-testimonial-name">Angel Benner</h5>
+                        <div class="tx-testimonial-company"></div>
+                                  <div class="tx-testimonial-details">
+                                    <p>This store creation service delivered exactly what I wanted, on time and on
+                                      budget.</p>
+                                  </div>
+                                                
+                        
+
+                    </div><!-- tx-testimonial -->
+                                  
+                    <div class="tx-testimonial ">
+                                  <div class="tx-testimonial-image"><img decoding="async"
+                                      src="/wp-content/uploads/testimonials/lydia-gallegos.jpg?v=3" alt="Lydia Gallegos"></div>
+                                                <h5 class="tx-testimonial-name">Lydia Gallegos</h5>
+                        <div class="tx-testimonial-company"></div>
+                                  <div class="tx-testimonial-details">
+                                    <p>The Amazon EBC design service I used was very professional and high-quality.</p>
+                                  </div>
+                                                
+                        
+
+                    </div><!-- tx-testimonial -->
+                           </div><!-- testimonial-carousel --><!-- style 3 -->
+            
+            
+            
+            
+        </div><!-- tx-testimonial-wrap -->
+
+
+				</div>
+				</div>
+					</div>
+		</div>
+					</div>
+		</section>
+				</div>
+		            </div><!-- .entry-content -->
+          </div><!-- #post-## -->
+        </div><!-- #main -->
+        <!-- </div> --><!-- #primary -->
+
+</div>
+
+
+<div class="footer">
+    <!-- Elementor Template Footer -->
+        <div id="footer-top" class="footer_bg">
+            <div class="footer-top-overlay"></div>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12 col-sm-12">
+                                            </div>
+                    <div class="col-lg-3 col-sm-6">
+                <aside id="text-2" class="widget widget_text">
+                  <div class="textwidget">
+                    <p><a href="/"><img loading="lazy" decoding="async" class="alignnone wp-image-1405"
+                          src="/wp-content/uploads/2023/04/Footer.png" alt="" width="97" height="48"
+                          srcset="/wp-content/uploads/2023/04/Footer.png 99w, /wp-content/uploads/2023/04/Footer-80x40.png 80w"
+                          sizes="(max-width: 97px) 100vw, 97px" /></a></p>
+                    <p>AMZgetway is a one-stop digital marketing agency, assisting clients to promote their brands on
+                      leading ecommerce marketplaces, such as Amazon and Walmart.</p>
+
+<div class="wpcf7 no-js" id="wpcf7-f229-o1" lang="en-US" dir="ltr" data-wpcf7-id="229">
+                      <div class="screen-reader-response">
+                        <p role="status" aria-live="polite" aria-atomic="true"></p>
+                        <ul></ul>
+                      </div>
+                      <form action="/#wpcf7-f229-o1" method="post" class="wpcf7-form init" aria-label="Contact form"
+                        novalidate="novalidate" data-status="init">
+                        <fieldset class="hidden-fields-container"><input type="hidden" name="_wpcf7"
+                            value="229" /><input type="hidden" name="_wpcf7_version" value="6.1.4" /><input
+                            type="hidden" name="_wpcf7_locale" value="en_US" /><input type="hidden"
+                            name="_wpcf7_unit_tag" value="wpcf7-f229-o1" /><input type="hidden"
+                            name="_wpcf7_container_post" value="0" /><input type="hidden" name="_wpcf7_posted_data_hash"
+                            value="" />
+</fieldset>
+<div style="float:left;width:60%">
+                          <p><span class="wpcf7-form-control-wrap" data-name="your-email"><input size="40"
+                                maxlength="400"
+                                class="wpcf7-form-control wpcf7-email wpcf7-validates-as-required wpcf7-text wpcf7-validates-as-email"
+                                aria-required="true" aria-invalid="false" placeholder="Enter Your Email" value=""
+                                type="email" name="your-email" /></span>
+	</p>
+</div>
+<p><input class="wpcf7-form-control wpcf7-submit has-spinner" type="submit" value="SUBSCRIBE" />
+                        </p>
+                        <p style="display: none !important;" class="akismet-fields-container" data-prefix="_wpcf7_ak_">
+                          <label>&#916;<textarea name="_wpcf7_ak_hp_textarea" cols="45" rows="8"
+                              maxlength="100"></textarea></label><input type="hidden" id="ak_js_1" name="_wpcf7_ak_js"
+                            value="73" />
+                          <script>document.getElementById("ak_js_1").setAttribute("value", (new Date()).getTime());</script>
+                        </p>
+                        <div class="wpcf7-response-output" aria-hidden="true"></div>
+</form>
+</div>
+
+</div>
+                </aside>
+              </div>
+                    <div class="col-lg-3 col-sm-6">
+                <aside id="nav_menu-4" class="widget widget_nav_menu">
+                  <h3 class="widget-title">Services provided</h3>
+                  <div class="menu-footer-2-container">
+                    <ul id="menu-footer-3" class="menu">
+                      <li
+                        class="menu-item menu-item-type-custom menu-item-object-custom nomega-menu-item menu-item-1423">
+                        <a href="/" class="mega-menu-title">Home</a>
+                      </li>
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-page nomega-menu-item menu-item-1420">
+                        <a href="/amazon-services/" class="mega-menu-title">Amazon Services</a>
+                      </li>
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-page nomega-menu-item menu-item-1422">
+                        <a href="/walmart-services/" class="mega-menu-title">Walmart Services</a>
+                      </li>
+                      <li
+                        class="menu-item menu-item-type-post_type menu-item-object-page nomega-menu-item menu-item-1430">
+                        <a href="/apply-selling-for-ecommerce-services/" class="mega-menu-title">Apply Selling For
+                          Ecommerce</a>
+                      </li>
+                    </ul>
+                  </div>
+                </aside>
+              </div>
+                    <div class="col-lg-3 col-sm-6">
+                <aside id="avas_text-3" class="widget tx_widget_text">
+                  <h3 class="widget-title">Skype &#038; WhatsApp</h3>
+                  <div class="textwidget">
+                    <p><i class="fa fa-skype" style="padding-right: 10px;"></i> amazonseo121</p>
+<p><i class="fa fa-skype" style="padding-right: 10px;"></i> bsr_agency</p>
+<p><i class="fa fa-whatsapp" style="padding-right: 10px;"></i> +880 1985453254</p>
+<p><i class="fa fa-whatsapp" style="padding-right: 10px;"></i> +880 1817439469</p>
+</div>
+                </aside>
+              </div>
+                    <div class="col-lg-3 col-sm-6">
+                <aside id="text-3" class="widget widget_text">
+                  <h3 class="widget-title">CONTACT DETAILS</h3>
+                  <div class="textwidget">
+                    <p><i class="fa fa-map-marker" style="padding-right: 10px;"></i> 99 Wall St, NY</p>
+<p><i class="fa fa-phone" style="padding-right: 10px;"></i> +1 332 2339 533</p>
+                    <p><i class="fa fa-envelope" style="padding-right: 10px;"></i><a
+                        href="mailto:amzexperts@amzgetway.com">amzexperts@amzgetway.com</a></p>
+                    <p><i class="fa fa-envelope" style="padding-right: 10px;"></i><a
+                        href="mailto:amzsolution@amzgetway.com">amzsolution@amzgetway.com</a></p>
+</div>
+                </aside>
+              </div>
+                    <div class="col-lg-12 col-sm-12">
+                                            </div>
+                </div>
+            </div>
+        </div>
+    
+    <div id="footer">
+        <div class="container footer-style-1">
+    <div class="row">
+		<div class="col-lg-6 col-sm-12">
+		    <div class="copyright">
+		    		        <p>Copyright &copy; <a href="">AmzGetway</a></p>
+		    		    </div>
+		</div>
+				<div class="col-lg-6 col-sm-12">
+		    <!-- social link start -->
+		    		    	 <!-- social link end -->
+		    <!-- footer menu start -->
+                <div class="menu-footer-menu-container">
+                  <ul id="menu-footer-menu" class="footer-menu">
+                    <li id="menu-item-1429"
+                      class="menu-item menu-item-type-post_type menu-item-object-page nomega-menu-item menu-item-1429">
+                      <a href="/amazon-services/" class="mega-menu-title">Amazon Services</a>
+                    </li>
+                    <li id="menu-item-1424"
+                      class="menu-item menu-item-type-post_type menu-item-object-page nomega-menu-item menu-item-1424">
+                      <a href="/walmart-services/" class="mega-menu-title">Walmart Services</a>
+                    </li>
+                    <li id="menu-item-1425"
+                      class="menu-item menu-item-type-post_type menu-item-object-page nomega-menu-item menu-item-1425">
+                      <a href="/contact-us/" class="mega-menu-title">Contact Us</a>
+                    </li>
+                    <li id="menu-item-1426"
+                      class="menu-item menu-item-type-post_type menu-item-object-page nomega-menu-item menu-item-1426">
+                      <a href="/about-us/" class="mega-menu-title">About Us</a>
+                    </li>
+                  </ul>
+                </div><!-- footer menu end -->
+		</div>
+			</div>
+          </div>
+        </div><!-- /#footer -->
+
+    <div id="back_top" class="back_top"><i class="bi bi-arrow-up"></i></div>
+<!-- back to top -->
+
+           
+
+</div><!-- /.footer -->
+</div> <!-- /.row -->
+</div><!-- /#page -->
+
+		<script>
+			window.RS_MODULES = window.RS_MODULES || {};
+			window.RS_MODULES.modules = window.RS_MODULES.modules || {};
+			window.RS_MODULES.waiting = window.RS_MODULES.waiting || [];
+			window.RS_MODULES.defered = true;
+			window.RS_MODULES.moduleWaiting = window.RS_MODULES.moduleWaiting || {};
+			window.RS_MODULES.type = 'compiled';
+		</script>
+		<script type="speculationrules">
+{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":["/wp-*.php","/wp-admin/*","/wp-content/uploads/*","/wp-content/*","/wp-content/plugins/*","/wp-content/themes/avas/*","/*\\?(.+)"]}},{"not":{"selector_matches":"a[rel~=\"nofollow\"]"}},{"not":{"selector_matches":".no-prefetch, .no-prefetch a"}}]},"eagerness":"conservative"}]}
+</script>
+
+<!--Start of Tawk.to Script (0.9.3)-->
+<script id="tawk-script" type="text/javascript">
+var Tawk_API = Tawk_API || {};
+    var Tawk_LoadStart = new Date();
+    (function () {
+      var s1 = document.createElement('script'), s0 = document.getElementsByTagName('script')[0];
+	s1.async = true;
+	s1.src = 'https://embed.tawk.to/6487533bcc26a871b0221582/1h2pmjvf4';
+	s1.charset = 'UTF-8';
+      s1.setAttribute('crossorigin', '*');
+      s0.parentNode.insertBefore(s1, s0);
+})();
+</script>
+<!--End of Tawk.to Script (0.9.3)-->
+
+    <script>
+    jQuery(document).ready(function ($) {
+        "use strict";
+      $(".menu-item-has-children > a").focus(function () {
+            $(this).siblings(".sub-menu").addClass("tx_focused")
+      }).blur(function () {
+            $(this).siblings(".sub-menu").removeClass("tx_focused")
+        });
+
+      $(".sub-menu a").focus(function () {
+            $(this).parents(".sub-menu").addClass("tx_focused")
+      }).blur(function () {
+            $(this).parents(".sub-menu").removeClass("tx_focused")
+        });
+    });
+    </script>
+    			<script>
+				const lazyloadRunObserver = () => {
+      const lazyloadBackgrounds = document.querySelectorAll(`.e-con.e-parent:not(.e-lazyloaded)`);
+      const lazyloadBackgroundObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+								let lazyloadBackground = entry.target;
+            if (lazyloadBackground) {
+              lazyloadBackground.classList.add('e-lazyloaded');
+            }
+            lazyloadBackgroundObserver.unobserve(entry.target);
+          }
+        });
+      }, { rootMargin: '200px 0px 200px 0px' });
+      lazyloadBackgrounds.forEach((lazyloadBackground) => {
+        lazyloadBackgroundObserver.observe(lazyloadBackground);
+      });
+				};
+				const events = [
+					'DOMContentLoaded',
+					'elementor/lazyload/observe',
+				];
+    events.forEach((event) => {
+      document.addEventListener(event, lazyloadRunObserver);
+    });
+			</script>
+  <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:700%7CRoboto:400%2C500%7COpen+Sans:400&display=swap"
+    rel="stylesheet" property="stylesheet" media="all" type="text/css">
+
+<script>
+    if (typeof revslider_showDoubleJqueryError === "undefined") { function revslider_showDoubleJqueryError(sliderID) { console.log("You have some jquery.js library include that comes after the Slider Revolution files js inclusion."); console.log("To fix this, you can:"); console.log("1. Set 'Module General Options' -> 'Advanced' -> 'jQuery & OutPut Filters' -> 'Put JS to Body' to on"); console.log("2. Find the double jQuery.js inclusion and remove it"); return "Double Included jQuery Library"; } }
+</script>
+  <link rel="preload" as="font" id="rs-icon-set-revicon-woff"
+    href="/wp-content/plugins/revslider/public/assets/fonts/revicons/revicons.woff?5510888" type="font/woff"
+    crossorigin="anonymous" media="all" />
+  <link rel='stylesheet' id='rs-plugin-settings-css'
+    href='/wp-content/plugins/revslider/public/assets/css/rs6.css?ver=6.6.12' type='text/css' media='all' />
+<style id='rs-plugin-settings-inline-css' type='text/css'>
+    .rev_slider {
+      font-family: 'Montserrat', sans-serif
+    }
+
+    .slider-button-glass a {
+      color: #232323 !important
+    }
+
+/*# sourceURL=rs-plugin-settings-inline-css */
+</style>
+  <script type="text/javascript" src="/wp-content/themes/avas/assets/js/owl.carousel.min.js?ver=6.9.8"
+    id="tx-owl-carousel-js"></script>
+<script type="text/javascript" id="ajax-login-script-js-extra">
+/* <![CDATA[ */
+    var ajax_login_object = { "ajaxurl": "/wp-admin/admin-ajax.php", "redirecturl": "", "loadingmessage": "Sending user info, please wait..." };
+//# sourceURL=ajax-login-script-js-extra
+/* ]]> */
+</script>
+  <script type="text/javascript" src="/wp-content/themes/avas/assets/js/login.min.js?ver=6.8.4.7"
+    id="ajax-login-script-js"></script>
+  <script type="text/javascript" src="/wp-content/plugins/elementor/assets/js/webpack.runtime.min.js?ver=3.34.1"
+    id="elementor-webpack-runtime-js"></script>
+  <script type="text/javascript" src="/wp-content/plugins/elementor/assets/js/frontend-modules.min.js?ver=3.34.1"
+    id="elementor-frontend-modules-js"></script>
+<script type="text/javascript" src="/wp-includes/js/jquery/ui/core.min.js?ver=1.13.3" id="jquery-ui-core-js"></script>
+<script type="text/javascript" id="elementor-frontend-js-before">
+/* <![CDATA[ */
+    var elementorFrontendConfig = { "environmentMode": { "edit": false, "wpPreview": false, "isScriptDebug": false }, "i18n": { "shareOnFacebook": "Share on Facebook", "shareOnTwitter": "Share on Twitter", "pinIt": "Pin it", "download": "Download", "downloadImage": "Download image", "fullscreen": "Fullscreen", "zoom": "Zoom", "share": "Share", "playVideo": "Play Video", "previous": "Previous", "next": "Next", "close": "Close", "a11yCarouselPrevSlideMessage": "Previous slide", "a11yCarouselNextSlideMessage": "Next slide", "a11yCarouselFirstSlideMessage": "This is the first slide", "a11yCarouselLastSlideMessage": "This is the last slide", "a11yCarouselPaginationBulletMessage": "Go to slide" }, "is_rtl": false, "breakpoints": { "xs": 0, "sm": 480, "md": 768, "lg": 1025, "xl": 1440, "xxl": 1600 }, "responsive": { "breakpoints": { "mobile": { "label": "Mobile Portrait", "value": 767, "default_value": 767, "direction": "max", "is_enabled": true }, "mobile_extra": { "label": "Mobile Landscape", "value": 880, "default_value": 880, "direction": "max", "is_enabled": false }, "tablet": { "label": "Tablet Portrait", "value": 1024, "default_value": 1024, "direction": "max", "is_enabled": true }, "tablet_extra": { "label": "Tablet Landscape", "value": 1200, "default_value": 1200, "direction": "max", "is_enabled": false }, "laptop": { "label": "Laptop", "value": 1366, "default_value": 1366, "direction": "max", "is_enabled": false }, "widescreen": { "label": "Widescreen", "value": 2400, "default_value": 2400, "direction": "min", "is_enabled": false } }, "hasCustomBreakpoints": false }, "version": "3.34.1", "is_static": false, "experimentalFeatures": { "additional_custom_breakpoints": true, "home_screen": true, "global_classes_should_enforce_capabilities": true, "e_variables": true, "cloud-library": true, "e_opt_in_v4_page": true, "e_interactions": true, "import-export-customization": true }, "urls": { "assets": "\/wp-content\/plugins\/elementor\/assets\/", "ajaxurl": "\/wp-admin\/admin-ajax.php", "uploadUrl": "\/wp-content\/uploads" }, "nonces": { "floatingButtonsClickTracking": "80d4911192" }, "swiperClass": "swiper", "settings": { "page": [], "editorPreferences": [] }, "kit": { "active_breakpoints": ["viewport_mobile", "viewport_tablet"], "global_image_lightbox": "yes", "lightbox_enable_counter": "yes", "lightbox_enable_fullscreen": "yes", "lightbox_enable_zoom": "yes", "lightbox_enable_share": "yes", "lightbox_title_src": "title", "lightbox_description_src": "description" }, "post": { "id": 291, "title": "Home%20-%20Seller%20Central%20Agency%20%7C%20Grow%20Your%20Amazon%20%26%20Walmart%20Sales", "excerpt": "", "featuredImage": false } };
+//# sourceURL=elementor-frontend-js-before
+/* ]]> */
+</script>
+  <script type="text/javascript" src="/wp-content/plugins/elementor/assets/js/frontend.min.js?ver=3.34.1"
+    id="elementor-frontend-js"></script>
+  <script type="text/javascript" src="/wp-content/plugins/elementor/assets/lib/swiper/v8/swiper.min.js?ver=8.4.5"
+    id="swiper-js"></script>
+  <script type="text/javascript" src="/wp-includes/js/dist/hooks.min.js?ver=dd5603f07f9220ed27f1"
+    id="wp-hooks-js"></script>
+  <script type="text/javascript" src="/wp-includes/js/dist/i18n.min.js?ver=c26c3dc7bed366793375"
+    id="wp-i18n-js"></script>
+<script type="text/javascript" id="wp-i18n-js-after">
+/* <![CDATA[ */
+    wp.i18n.setLocaleData({ 'text direction\u0004ltr': ['ltr'] });
+//# sourceURL=wp-i18n-js-after
+/* ]]> */
+</script>
+  <script type="text/javascript" src="/wp-content/plugins/contact-form-7/includes/swv/js/index.js?ver=6.1.4"
+    id="swv-js"></script>
+<script type="text/javascript" id="contact-form-7-js-before">
+/* <![CDATA[ */
+var wpcf7 = {
+    "api": {
+        "root": "\/wp-json\/",
+        "namespace": "contact-form-7\/v1"
+    }
+};
+//# sourceURL=contact-form-7-js-before
+/* ]]> */
+</script>
+  <script type="text/javascript" src="/wp-content/plugins/contact-form-7/includes/js/index.js?ver=6.1.4"
+    id="contact-form-7-js"></script>
+  <script type="text/javascript" src="/wp-content/plugins/revslider/public/assets/js/rbtools.min.js?ver=6.6.12" defer
+    async id="tp-tools-js"></script>
+  <script type="text/javascript" src="/wp-content/plugins/revslider/public/assets/js/rs6.min.js?ver=6.6.12" defer async
+    id="revmin-js"></script>
+  <script type="text/javascript" src="/wp-content/themes/avas/assets/js/jquery.magnific-popup.min.js?ver=6.9.8"
+    id="tx-magnific-popup-js"></script>
+  <script type="text/javascript" src="/wp-content/themes/avas/assets/js/imagesloaded.pkgd.min.js?ver=6.9.8"
+    id="tx-imagesloaded-js"></script>
+  <script type="text/javascript" src="/wp-content/themes/avas/assets/js/isotope.pkgd.min.js?ver=6.9.8"
+    id="tx-isotope-js"></script>
+  <script type="text/javascript" src="/wp-content/themes/avas/assets/js/main.min.js?ver=amz-subslide1"
+    id="tx-main-scripts-js"></script>
+  <script type="text/javascript" src="/wp-content/themes/avas/assets/js/bootstrap.min.js?ver=6.9.8"
+    id="bootstrap-js"></script>
+  <script type="text/javascript"
+    src="/wp-content/plugins/avas-core/assets/js/widgets/wrapper-link/wrapper-link.min.js?ver=6.9.8"
+    id="tx-wrapper-link-js"></script>
+<script id="wp-emoji-settings" type="application/json">
+{"baseUrl":"https://s.w.org/images/core/emoji/17.0.2/72x72/","ext":".png","svgUrl":"https://s.w.org/images/core/emoji/17.0.2/svg/","svgExt":".svg","source":{"concatemoji":"/wp-includes/js/wp-emoji-release.min.js?ver=6.9.8"}}
+</script>
+<script type="module">
+/* <![CDATA[ */
+/*! This file is auto-generated */
+    var e = "script#wp-emoji-settings", t = document.querySelector(e); if (!(t instanceof HTMLScriptElement)) throw new Error("Element missing: " + e); const r = JSON.parse(t.text), s = (window._wpemojiSettings = r, "wpEmojiSettingsSupports"), o = ["flag", "emoji"]; function i(e) { try { var t = { supportTests: e, timestamp: (new Date).valueOf() }; sessionStorage.setItem(s, JSON.stringify(t)) } catch (e) { } } function c(e, t, n) { e.clearRect(0, 0, e.canvas.width, e.canvas.height), e.fillText(t, 0, 0); t = new Uint32Array(e.getImageData(0, 0, e.canvas.width, e.canvas.height).data); e.clearRect(0, 0, e.canvas.width, e.canvas.height), e.fillText(n, 0, 0); const r = new Uint32Array(e.getImageData(0, 0, e.canvas.width, e.canvas.height).data); return t.every((e, t) => e === r[t]) } function p(e, t) { e.clearRect(0, 0, e.canvas.width, e.canvas.height), e.fillText(t, 0, 0); var n = e.getImageData(16, 16, 1, 1); for (let e = 0; e < n.data.length; e++)if (0 !== n.data[e]) return !1; return !0 } function u(e, t, n, r) { switch (t) { case "flag": return n(e, "\ud83c\udff3\ufe0f\u200d\u26a7\ufe0f", "\ud83c\udff3\ufe0f\u200b\u26a7\ufe0f") ? !1 : !n(e, "\ud83c\udde8\ud83c\uddf6", "\ud83c\udde8\u200b\ud83c\uddf6") && !n(e, "\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc65\udb40\udc6e\udb40\udc67\udb40\udc7f", "\ud83c\udff4\u200b\udb40\udc67\u200b\udb40\udc62\u200b\udb40\udc65\u200b\udb40\udc6e\u200b\udb40\udc67\u200b\udb40\udc7f"); case "emoji": return !r(e, "\ud83e\u1fac8") }return !1 } function f(e, t, n, r) { let a; const s = (a = "undefined" != typeof WorkerGlobalScope && self instanceof WorkerGlobalScope ? new OffscreenCanvas(300, 150) : document.createElement("canvas")).getContext("2d", { willReadFrequently: !0 }), o = (s.textBaseline = "top", s.font = "600 32px Arial", {}); return e.forEach(e => { o[e] = t(s, e, n, r) }), o } function a(e) { var t = document.createElement("script"); t.src = e, t.defer = !0, document.head.appendChild(t) } r.supports = { everything: !0, everythingExceptFlag: !0 }, new Promise(t => { let n = function () { try { var e = JSON.parse(sessionStorage.getItem(s)); if ("object" == typeof e && "number" == typeof e.timestamp && (new Date).valueOf() < e.timestamp + 604800 && "object" == typeof e.supportTests) return e.supportTests } catch (e) { } return null }(); if (!n) { if ("undefined" != typeof Worker && "undefined" != typeof OffscreenCanvas && "undefined" != typeof URL && URL.createObjectURL && "undefined" != typeof Blob) try { var e = "postMessage(" + f.toString() + "(" + [JSON.stringify(o), u.toString(), c.toString(), p.toString()].join(",") + "));", r = new Blob([e], { type: "text/javascript" }); const a = new Worker(URL.createObjectURL(r), { name: "wpTestEmojiSupports" }); return void (a.onmessage = e => { i(n = e.data), a.terminate(), t(n) }) } catch (e) { } i(n = f(o, u, c, p)) } t(n) }).then(e => { for (const n in e) r.supports[n] = e[n], r.supports.everything = r.supports.everything && r.supports[n], "flag" !== n && (r.supports.everythingExceptFlag = r.supports.everythingExceptFlag && r.supports[n]); var t; r.supports.everythingExceptFlag = r.supports.everythingExceptFlag && !r.supports.flag, r.supports.everything || ((t = r.source || {}).concatemoji ? a(t.concatemoji) : t.wpemoji && t.twemoji && (a(t.twemoji), a(t.wpemoji))) });
+//# sourceURL=/wp-includes/js/wp-emoji-loader.min.js
+/* ]]> */
+	</script>
+<script id="amz-navbar-lock-js">
+(function () {
+  var timer = null;
+
+  function y() {
+    return window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+  }
+
+  function lockNavbar() {
+    document.documentElement.classList.add("amz-nav-locked", "amz-scrolled");
+    document.body.classList.add("amz-nav-locked", "amz-scrolled");
+    var header = document.querySelector(".tx-header");
+    var main = document.querySelector(".main-header");
+    if (header) header.classList.add("tx-scrolled");
+    if (main) main.classList.add("sticky-header");
+  }
+
+  function setPos(v) {
+    window.scrollTo(0, v);
+    document.documentElement.scrollTop = v;
+    document.body.scrollTop = v;
+  }
+
+  // Start same speed, then go faster and faster toward the top
+  function scrollToTopAccel() {
+    try {
+      if (window.jQuery) {
+        window.jQuery("html, body").stop(true, true);
+        window.jQuery("#back_top").off("click");
+      }
+        } catch (e) { }
+
+    document.documentElement.style.scrollBehavior = "auto";
+    if (document.body) document.body.style.scrollBehavior = "auto";
+
+    if (timer) {
+      clearInterval(timer);
+      timer = null;
+    }
+
+    var cur = y();
+    if (cur <= 0) {
+      lockNavbar();
+      return;
+    }
+
+    var step = 28;      // start speed (steady)
+    var maxStep = 120;  // top speed (fast near the top)
+    var grow = 1.08;    // accelerate each tick
+    var ms = 16;
+
+    // begin immediately
+    cur = Math.max(0, cur - step);
+    setPos(cur);
+    lockNavbar();
+
+    timer = setInterval(function () {
+      cur = y();
+      if (cur <= 0) {
+        clearInterval(timer);
+        timer = null;
+        setPos(0);
+        lockNavbar();
+        return;
+      }
+      step = Math.min(maxStep, step * grow);
+      setPos(Math.max(0, cur - step));
+      lockNavbar();
+    }, ms);
+  }
+
+  function onBackTopClick(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    if (e.stopImmediatePropagation) e.stopImmediatePropagation();
+    scrollToTopAccel();
+    return false;
+  }
+
+  function bindBackTop() {
+    var el = document.getElementById("back_top");
+    if (!el) return;
+    try {
+      if (window.jQuery) window.jQuery("#back_top").off("click");
+        } catch (e) { }
+    var neo = el.cloneNode(true);
+    el.parentNode.replaceChild(neo, el);
+    neo.addEventListener("click", onBackTopClick, true);
+  }
+
+  document.documentElement.style.scrollBehavior = "auto";
+
+  document.addEventListener("click", function (e) {
+    var btn = e.target && e.target.closest ? e.target.closest("#back_top") : null;
+    if (!btn) return;
+    onBackTopClick(e);
+  }, true);
+
+  window.addEventListener("scroll", lockNavbar, { passive: true });
+
+  function boot() {
+    lockNavbar();
+    bindBackTop();
+    setTimeout(bindBackTop, 200);
+  }
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
+  else boot();
+  window.addEventListener("load", function () {
+    lockNavbar();
+    bindBackTop();
+  });
+})();
+</script>
+</body>
+
+</html>

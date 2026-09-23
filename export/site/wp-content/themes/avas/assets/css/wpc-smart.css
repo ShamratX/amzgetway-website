@@ -1,0 +1,205 @@
+/* ---------------------------------------------------------
+  # WPC Smart Quick View for WooCommerce
+  # WPC Smart Wishlist for WooCommerce
+  # WPC Smart Compare for WooCommerce
+------------------------------------------------------------ */
+
+.tx-whishlist-icon {
+    color: #222;
+    padding-left: 15px;
+    position: relative;
+}
+.tx-whishlist-icon i {
+  font-size: 18px;
+  color: #222;
+}
+.tx-whishlist-icon {
+    margin-top: 3px;
+}
+.tx-whishlist-icon .tx-count:after {
+    content: attr(data-count);
+    display: block;
+    background-color: #e94b35;
+    color: #fff;
+    font-size: 10px;
+    font-weight: 400;
+    width: 16px;
+    height: 16px;
+    line-height: 16px;
+    text-align: center;
+    border-radius: 8px;
+    position: absolute;
+    top: -4px;
+    right: -10px;
+}
+li.product .woosc-btn,
+li.product .woosq-btn,
+li.product .woosw-btn {
+  position: absolute;
+  right: 0;
+  transition: all ease 0.3s;
+  opacity: 0;
+}
+li.product .woosq-btn {
+  top: 70px;
+}
+li.product .woosw-btn {
+    top: 110px;
+}
+li.product .woosc-btn {
+    top: 150px;
+}
+li.product .woosc-btn:focus,
+li.product .woosq-btn:focus,
+li.product .woosw-btn:focus,
+.single-product div.product .summary .cart .woosw-btn:focus {
+  outline: 0;
+  border: 0;
+}
+
+li.product:hover .woosc-btn,
+li.product:hover .woosq-btn,
+li.product:hover .woosw-btn {
+    opacity: 1;
+    right: 10px;
+}
+
+.single-product div.product .summary .cart .woosc-btn::before,
+.single-product div.product .summary .cart .woosw-btn::before,
+li.product .woosc-btn:before,
+li.product .woosq-btn:before,
+li.product .woosw-btn:before {
+    font-size: 14px;
+    color: #111;
+    line-height: 45px;
+    text-align: center;
+}
+.single-product div.product .summary .cart .woosc-btn::before,
+.single-product div.product .summary .cart .woosw-btn::before {
+  font-size: 18px;
+}
+.single-product div.product .summary .cart .woosq-btn::before, li.product .woosq-btn::before {
+    content: "\f341";
+}
+.single-product div.product .summary .cart .woosw-btn::before, li.product .woosw-btn::before {
+    content: "\f417";
+}
+.single-product div.product .summary .cart .woosc-btn::before, li.product .woosc-btn::before {
+    content: "\f17e"; /*"\f17e"*/
+}
+
+.single-product div.product .summary .cart .woosc-btn::before,
+.single-product div.product .summary .cart .woosq-btn::before,
+.single-product div.product .summary .cart .woosw-btn::before,
+li.product .woosc-btn::before,
+li.product .woosq-btn::before,
+li.product .woosw-btn::before {
+    font-family: "bootstrap-icons";
+    speak: never;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    display: block !important;
+    margin: 0 !important;
+}
+.single-product div.product .summary .cart .woosw-btn,
+.single-product div.product .summary .cart .woosc-btn {
+  margin-left: 15px;
+  margin-top: 1px;
+}
+.single-product div.product .summary .cart .woosc-btn,
+.single-product div.product .summary .cart .woosw-btn,
+li.product .woosc-btn, li.product .woosq-btn, li.product .woosw-btn {
+    z-index: 7;
+    padding: 0;
+    font-size: 0;
+    background-color: #fff;
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    border: 0;
+}
+.single-product div.product .summary .cart .woosc-btn:hover,
+.single-product div.product .summary .cart .woosw-btn:hover,
+li.product .woosc-btn:hover, li.product .woosq-btn:hover, li.product .woosw-btn:hover {
+  background-color: #222;
+}
+.single-product div.product .summary .cart .woosc-btn:hover:before,
+.single-product div.product .summary .cart .woosw-btn:hover:before,
+li.product .woosc-btn:hover:before, li.product .woosq-btn:hover:before, li.product .woosw-btn:hover:before {
+  color: white;
+}
+.single-product div.product .summary .cart [class*=-adding]::after, li.product [class*=-adding]::after {
+    font-family: "bootstrap-icons";
+    speak: never;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    content: "\f130" !important;
+    -webkit-animation: wpcstore-spin 0.75s linear infinite;
+    animation: wpcstore-spin 0.75s linear infinite;
+    height: 20px;
+    width: 20px;
+    line-height: 20px;
+    font-size: 14px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -10px;
+    margin-top: -10px;
+    display: block;
+}
+.single-product div.product .summary .cart [class*=-adding]:before,
+li.product [class*=-adding]:before{
+  opacity: 0;
+}
+.single-product div.product .summary .cart [class*=-adding] {
+    position: relative;
+}
+.single-product div.product .summary .cart [class*=-added],
+li.product [class*=-added] {
+    background-color: #222222;
+    border-color: #222222;
+}
+
+.single-product div.product .summary .cart [class*=-added]:before,
+li.product [class*=-added]:before {
+    color: #fff;
+}
+
+@-webkit-keyframes wpcstore-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes wpcstore-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+/*quick view popup close icon position*/
+.mfp-close-btn-in.mfp-woosq .mfp-close {
+  top: 5px;
+  right: 5px;
+  background-color: transparent;
+  font-size: 0;
+}
+/*quick view popup thumbnail arrow border removed*/
+#woosq-popup .thumbnails .slick-arrow {
+  border: 0;
+}

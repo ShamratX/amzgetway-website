@@ -1,0 +1,14 @@
+.tx-sticky-sec.elementor-section,
+.tx-sticky-sec {
+    transition: background-color 300ms ease-out, padding 350ms ease-out
+}
+.tx-sticky-sec.elementor-section.tx-sticky-sec-active,
+.tx-sticky-sec.tx-sticky-sec-active {
+    position: sticky;
+    top: 0;
+    z-index: 99;
+}
+.tx-sticky-sec.elementor-section.tx-sticky-sec-active,
+.tx-sticky-sec.tx-sticky-sec-active {
+    position: fixed !important;
+}

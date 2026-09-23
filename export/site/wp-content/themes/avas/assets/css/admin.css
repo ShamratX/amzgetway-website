@@ -1,0 +1,421 @@
+.nav-menus-php .item-edit:before {
+    margin-top: 11px
+}
+.menu-item-settings {
+    height: 500px
+}
+.redux-container-image_select .redux-image-select img {
+    border-color: #fcfcfc;
+    border-width: 2px;
+}
+.redux-update-google-fonts {
+    display: none;
+}
+.admin-color-fresh .redux-container-image_select .redux-image-select-selected img {
+    border-color: #b7b7b7;
+}
+.tx_project_details_table,
+.tx_brochure_details {
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin: 15px 0;
+    box-shadow: 0 0 8px 0 rgba(110, 123, 140, 0.15);
+}
+.tx_project_details_table th {
+    text-align: left;
+    font-weight: 500;
+}
+.tx-services-metaboxes {
+    display: flow-root;
+}
+.tx-services-metaboxes .tx_brochure_details {
+    width: 45%;
+    float: left;
+    margin-right: 20px;
+}
+.tx-services-metaboxes .tx_brochure_details label {
+    line-height: 2;
+    font-weight: 500;
+}
+.tx-service_metaboxes_msg {
+    font-weight: 500;
+}
+.tx_brochure_details.form-shortcode,
+.tx_brochure_details.brochure-file,
+.tx_brochure_details.brochure-desc {
+    margin-right: 0;
+}
+.tx_pb_10 {
+    padding-bottom: 20px;
+    display: block;
+}
+
+.brochure_file {
+    text-decoration: none;
+    cursor: text;
+}
+.brochure_img,.brochure_img:hover,.brochure_img:focus,
+.brochure_file,.brochure_file:hover,.brochure_file:focus {
+    color:#555;
+    box-shadow: none;
+}
+#footer-thankyou {
+    display: none;
+}
+.tx-portfolio-settings div {
+    display: inline-block;
+    margin: 20px 15px 20px 0;
+}
+.tx-portfolio-settings select {
+  width: 200px;
+}
+.tx-portfolio-settings div p {
+    margin: 0 0 5px;
+    font-weight: 600;
+}
+
+/*welcome screen*/
+.tx-wel-wrap {
+    opacity: 0;
+    top: 250px;
+    padding: 35px;
+    position: relative;
+    background: white;
+}
+.tx-wel-wrap h1 {
+    font-size: 50px;
+    font-weight: 700;
+    position: relative;
+}
+.tx-wel-txt {
+    /*width: 60%;*/
+    /*float: left;*/
+}
+.tx-wel-txt p {
+    font-size: 20px; 
+    line-height: 1.75em;
+}
+.tx-sys-info {
+    width: 40%;
+    float: right;
+    padding-top: 30px;
+}
+.tx-sys-info h2 {
+    font-size: 26px;
+}
+.tx-sys-info li {
+    margin-bottom: 15px;
+}
+.tx-demo-instructon {
+    margin-bottom: 50px;
+}
+.tx-php-error-alert {
+    padding: 5px 10px;
+    border-radius: 3px;
+    font-size: 12px;
+    background-color: #ffe8e4;
+    font-style: italic;
+    margin: 10px 0;
+}
+.tx-sys-left {
+    width: 200px;
+    display: inline-block;
+}
+.tx-sys-valid,
+.tx-sys-invalid {
+    margin-right: 10px;
+}
+.tx-sys-valid i,
+.tx-sys-invalid i {
+    padding: 0px 2px 3px 0;
+    color: white;
+    border-radius: 2px;
+}
+.tx-sys-valid i {
+    background-color: #8fcc77;
+}
+.tx-sys-invalid i {
+    background-color: #ff3434;
+}
+.tx-avas-ver {
+    font-size: 14px;
+    top: -10px;
+    position: absolute;
+    padding: 3px 7px;
+    border-radius: 3px;
+    background: #8CC63F;
+    color: white;
+    margin-left: 10px;
+    font-weight: 500;
+}
+
+.menu-top.menu-icon-generic.toplevel_page_Welcome .wp-menu-image:before {
+    content: '';
+    background-image: url(../images/icon.png);
+    background-repeat: no-repeat;
+    margin-top: 8px;
+    opacity: .6;
+}
+
+.menu-top.menu-icon-generic.toplevel_page_Welcome:hover .wp-menu-image:before {
+    opacity: 1;
+}
+.notice-warning {
+    border-left-color: #2f659a;
+}
+
+/*remove learnpress advertisement*/
+#learn-press-newsletter-button,
+.learn-press-advertisement-slider {
+    display:none;
+}
+
+/*redux framework*/
+.updated.redux-banner-container,
+#redux-connect-message {
+    display: none
+}
+.redux-notice-field {
+    background-color: #23282D;
+    color: white;
+}
+.redux-notice-field.redux-warning, .redux-notice-field.redux-success {
+    border-color: #23282D;
+}
+.redux-container .notice-yellow {
+    text-shadow: none;
+    background-color: #2f659a;
+    color: white;
+}
+.redux-container .form-table td {
+    padding: 30px 0 0;
+}
+
+/*redux message we need your help*/
+.redux-message {
+    display: none;
+}
+
+/*remove message Love using Elementor?*/
+.notice.updated.elementor-message,
+.wp-admin .e-notice--dismissible,
+.e-notice--extended,.e-notice.notice {
+    display: none !important;
+}
+
+/*demo import progress bar*/
+.wbc-progress-bar.button-primary {
+    min-height: 16px !important;
+    margin-top: -1px;
+}
+
+/*admin panel posts list thumbnail column width*/
+.wp-list-table .column-tx-admin-thumb,
+.column-tx-admin-thumb img {
+    width: 80px;
+    height: auto;
+}
+.post-type-lp_course .wp-list-table .column-tx-admin-thumb,
+.woocommerce-page .wp-list-table .column-tx-admin-thumb {
+    display: none;
+}
+
+/*Theme name capitalize in Redux header*/
+.redux-container #redux-header .display_header {
+    text-transform: capitalize;
+}
+
+/*redux search options*/
+.redux_field_search {
+  position: absolute;
+  left: 50px;
+  right: 50px !important;
+  top: 7px !important;
+  width: 240px;
+}
+.redux_field_search::placeholder {
+    font-family: 'Fontawesome', 'Segoe UI';
+}
+
+/*Estatik, One click demo import*/
+.es-dashboard .es-themes-slider,
+.es-notice,
+.wp-admin .es-notice__coupon,
+label.plugin-item.plugin-item-all-in-one-seo-pack,
+label.plugin-item.plugin-item-google-analytics-for-wordpress,
+label.plugin-item.plugin-item-wpforms-lite,
+.ocdi-content-notice--warning,
+p.about-description,
+.ocdi__theme-about,
+.ocdi__title-container,
+.js-ocdi-ajax-response-subtitle {
+    display: none !important;
+}
+
+/*Updates*/
+.el-license-container {
+    margin: 0;
+    padding: 35px 35px 10px;
+    background: #fff;
+    border-radius: 4px;
+    position: fixed;
+    top: 30px;
+    width: 100%;
+    z-index: 999;
+}
+.el-license-container .el-license-field {
+    display: block;
+    margin-bottom: 15px
+}
+.el-license-container .notice-error,
+.el-license-container div.error {
+    background: rgba(220, 50, 50, 0.11);
+    margin: 0
+}
+
+.el-license-container .el-license-title {
+    margin-top: 0;
+    font-size: 30px
+}
+
+.el-license-container .el-license-info li {
+    list-style: none;
+    padding: 0
+}
+
+.el-license-container .el-license-info-title {
+    width: 150px;
+    display: inline-block;
+    position: relative;
+    padding-right: 5px;
+    font-weight: 700;
+}
+
+.el-license-container .el-license-info-title:after {
+    content: ":";
+    position: absolute;
+    right: 2px
+}
+
+.el-license-container .el-license-valid,
+.el-license-container .el-license-invalid {
+    padding: 0 5px 2px;
+    color: #fff;
+    background-color: #8fcc77;
+    border-radius: 3px
+}
+
+.el-license-container .el-license-invalid {
+    background-color: #f44336
+}
+
+.el-license-container .el-license-key {
+    font-weight: 700;
+    opacity: .8
+}
+
+.el-license-container .el-green-btn {
+    padding: 0 5px 2px;
+    color: #fff;
+    background-color: #8fcc77;
+    border-radius: 3px;
+    text-decoration: none;
+    -webkit-box-shadow: 0 0 3px -1px rgba(0, 0, 0, 0.38);
+    -moz-box-shadow: 0 0 3px -1px rgba(0, 0, 0, 0.38);
+    box-shadow: 0 0 3px -1px rgba(0, 0, 0, 0.38)
+}
+
+.el-license-container .el-green-btn:hover {
+    color: #fff;
+    background-color: #84bc6c
+}
+
+.el-license-container .el-blue-btn {
+    padding: 0 5px 2px;
+    color: #fff;
+    background-color: #20b1d2;
+    border-radius: 3px;
+    text-decoration: none;
+    -webkit-box-shadow: 0 0 3px -1px rgba(0, 0, 0, 0.38);
+    -moz-box-shadow: 0 0 3px -1px rgba(0, 0, 0, 0.38);
+    box-shadow: 0 0 3px -1px rgba(0, 0, 0, 0.38)
+}
+
+.el-license-container .el-blue-btn:hover {
+    color: #fff;
+    background-color: #219dbf
+}
+
+.el-license-container .el-license-field label {
+    display: block;
+    margin-bottom: 5px
+}
+
+.el-license-container .el-license-active-btn {
+    margin-top: 25px
+}
+/*Love using Elementor?*/
+/*tgmpa*/
+/*give plugin usages tracking*/
+.toplevel_page_Welcome .notice.e-notice.e-notice--dismissible.e-notice--extended,
+.toplevel_page_Welcome #setting-error-tgmpa,
+.toplevel_page_Welcome div.usage-tracking,
+#toplevel_page_avas,
+#toplevel_page_Welcome ul.wp-submenu.wp-submenu-wrap .wp-first-item,
+.ocdi-imported-footer a:first-child,
+.menu-top.toplevel_page_AvasChild {
+    display: none;
+}
+
+@media (min-width: 1120px) {
+    .ocdi__gl-item {
+        -ms-flex: 0 0 calc(25% - 30px);
+        flex: 0 0 calc(25% - 30px) !important;
+    }
+}
+
+/*active modal*/
+.tx_active_modal_register {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.7;
+  text-align: center;
+}
+
+/*one click demo import*/
+.ocdi-install-plugins-content-header .notice-info p{
+    color: #e63537 !important;
+    font-weight: 600 !important;
+    font-size: 14px !important;
+}
+
+/*prime slider*/
+.wp-admin #prime-slider-notice-id-rate-the-prime-slider,
+.wp-admin div.fs-notice.updated, .wp-admin div.fs-notice.success, .wp-admin div.fs-notice.promotion {
+    display: none !important;
+}
+
+/*wp-analytify, advance captcha notice, monsterinsights-review-notice*/
+.toplevel_page_Welcome .wp-analytify-notification,
+.toplevel_page_Welcome .analytify-review-notice,
+.toplevel_page_Welcome #adv-captcha-notice,
+.toplevel_page_Welcome .monsterinsights-review-notice,
+.toplevel_page_Welcome .monsterinsights-notice,
+.toplevel_page_Welcome .rs-update-notice-wrap
+{
+    display: none !important;
+}
+
+/*theme builder menu*/
+#toplevel_page_tx-theme-builder {
+    display: none;
+}
+/*prime slider*/
+.dci-global-notice.dci_prime_slider,
+.rc-global-notice.rc_prime_slider,
+#bdt-dashboard-overview{
+    display: none !important;
+}
+/* ---------------------------------------------------------
+   EOF
+------------------------------------------------------------ */

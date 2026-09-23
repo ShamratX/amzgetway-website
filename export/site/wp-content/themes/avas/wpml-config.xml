@@ -1,0 +1,78 @@
+<wpml-config>
+  <admin-texts>
+      <key name="tx">
+          <key name="menu_btn_txt" />
+          <key name="menu_btn_url" />
+          <key name="tx-res-menu-txt" />
+          <key name="welcome_msg" />
+          <key name="phone-number" />
+          <key name="email-address" />
+          <key name="s_ad_banner_link" />
+          <key name="services_title" />
+          <key name="service-slug" />
+          <key name="service-cat-slug" />
+          <key name="portfolio_title" />
+          <key name="portfolio-slug" />
+          <key name="portfolio-cat-slug" />
+          <key name="team_title" />
+          <key name="team-slug" />
+          <key name="team-cat-slug" />
+          <key name="project_experience_title" />
+          <key name="woo-new-badge-text" />
+          <key name="woo-sale-badge-text" />
+          <key name="woo-featured-badge-text" />
+          <key name="woo-soldout-badge-text" />
+          <key name="woo-readmore-text" />
+          <key name="woo-outofstock-text" />
+          <key name="cookie_notice_text" />
+          <key name="cookie_notice_learnmore_text" />
+          <key name="cookie_notice_learnmore_link" />
+          <key name="cookie_notice_accept" />
+          <key name="read-more-text" />
+          <key name="content-none-text" />
+          <key name="share-on-text-header" />
+          <key name="share-on-text-footer" />
+          <key name="prev-post-text" />
+          <key name="next-post-text" />
+          <key name="related-posts_text" />
+          <key name="404_numb" />
+          <key name="404_heading" />
+          <key name="404_desc" />
+          <key name="404_btn" />
+          <key name="copyright" />
+          <key name="logo_link_url" />
+      </key> 
+  </admin-texts>
+  <custom-fields>
+    <custom-field action="ignore">post_views_count</custom-field>
+    <custom-field action="ignore">_menu_item_submenu_type</custom-field>
+    <custom-field action="ignore">_menu_item_bg_image</custom-field>
+    <custom-field action="ignore">_menu_item_bg_image_attachment</custom-field>
+    <custom-field action="ignore">_menu_item_bg_image_size</custom-field>
+    <custom-field action="ignore">_menu_item_bg_image_position</custom-field>
+    <custom-field action="ignore">_menu_item_bg_image_repeat</custom-field>
+    <custom-field action="ignore">_menu_item_menu_icon</custom-field>
+    <custom-field action="ignore">_menu_item_widget_area</custom-field>
+    <custom-field action="ignore">_menu_item_hide_link</custom-field>
+    <custom-field action="ignore">repeatable_fields</custom-field>
+    <custom-field action="ignore">project_fields</custom-field>
+    <custom-field action="ignore">project_title</custom-field>
+    <custom-field action="ignore">completion</custom-field>
+    <custom-field action="ignore">project_completion_title</custom-field>
+    <custom-field action="ignore">web_url</custom-field>
+    <custom-field action="ignore">brochure_file</custom-field>
+    <custom-field action="ignore">brochure_img</custom-field>
+    <custom-field action="ignore">form_shortcode</custom-field>
+    <custom-field action="ignore">brochure_title</custom-field>
+    <custom-field action="ignore">brochure_desc</custom-field>
+    <custom-field action="ignore">skill_title</custom-field>
+    <custom-field action="ignore">team_fb</custom-field>
+    <custom-field action="ignore">team_tw</custom-field>
+    <custom-field action="ignore">team_gp</custom-field>
+    <custom-field action="ignore">team_ln</custom-field>
+    <custom-field action="ignore">team_in</custom-field>
+    <custom-field action="ignore">hire_me</custom-field>
+    <custom-field action="ignore">hour_rate</custom-field>
+    <custom-field action="ignore">skill_fields</custom-field>
+  </custom-fields>
+</wpml-config>

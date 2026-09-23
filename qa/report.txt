@@ -1,0 +1,12 @@
+﻿QA 2026-09-22T23:07:45.5817657+06:00
+Export: D:\Desktop\Important files\amzgetway\export\site
+OK: no residual wordpress/amzgetway/8080 hosts in top-level HTML scan
+OK: home markers present (D:\Desktop\Important files\amzgetway\export\site\index.html)
+OK: about markers present (D:\Desktop\Important files\amzgetway\export\site\about-us\index.html)
+OK: blog markers present (D:\Desktop\Important files\amzgetway\export\site\blog\index.html)
+OK: logo files found:
+  D:\Desktop\Important files\amzgetway\export\site\wp-content\uploads\2023\04\AMZgetway-Logo-1-100x75.png
+  D:\Desktop\Important files\amzgetway\export\site\wp-content\uploads\2023\04\AMZgetway-Logo-1-1024x506.png
+  D:\Desktop\Important files\amzgetway\export\site\wp-content\uploads\2023\04\AMZgetway-Logo-1-1140x500.png
+Stats: 14930 files, 514.1 MB
+RESULT: PASS

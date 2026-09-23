@@ -1,0 +1,56 @@
+[05-Mar-2026 09:56:05 UTC] PHP Fatal error:  Uncaught Error: Class "WP_Customize_Image_Control" not found in /home/jnixpvqx/amzgetway.com/wp-includes/customize/class-wp-customize-cropped-image-control.php:17
+Stack trace:
+#0 {main}
+  thrown in /home/jnixpvqx/amzgetway.com/wp-includes/customize/class-wp-customize-cropped-image-control.php on line 17
+[06-Mar-2026 11:44:24 UTC] PHP Fatal error:  Uncaught Error: Class "WP_Customize_Image_Control" not found in /home/jnixpvqx/amzgetway.com/wp-includes/customize/class-wp-customize-cropped-image-control.php:17
+Stack trace:
+#0 {main}
+  thrown in /home/jnixpvqx/amzgetway.com/wp-includes/customize/class-wp-customize-cropped-image-control.php on line 17
+[08-Mar-2026 09:20:30 UTC] PHP Fatal error:  Uncaught Error: Class "WP_Customize_Image_Control" not found in /home/jnixpvqx/amzgetway.com/wp-includes/customize/class-wp-customize-cropped-image-control.php:17
+Stack trace:
+#0 {main}
+  thrown in /home/jnixpvqx/amzgetway.com/wp-includes/customize/class-wp-customize-cropped-image-control.php on line 17
+[09-Mar-2026 12:31:36 UTC] PHP Fatal error:  Uncaught Error: Class "WP_Customize_Image_Control" not found in /home/jnixpvqx/amzgetway.com/wp-includes/customize/class-wp-customize-cropped-image-control.php:17
+Stack trace:
+#0 {main}
+  thrown in /home/jnixpvqx/amzgetway.com/wp-includes/customize/class-wp-customize-cropped-image-control.php on line 17
+[11-Mar-2026 06:58:43 UTC] PHP Fatal error:  Uncaught Error: Class "WP_Customize_Image_Control" not found in /home/jnixpvqx/amzgetway.com/wp-includes/customize/class-wp-customize-cropped-image-control.php:17
+Stack trace:
+#0 {main}
+  thrown in /home/jnixpvqx/amzgetway.com/wp-includes/customize/class-wp-customize-cropped-image-control.php on line 17
+[12-Mar-2026 09:02:12 UTC] PHP Fatal error:  Uncaught Error: Class "WP_Customize_Image_Control" not found in /home/jnixpvqx/amzgetway.com/wp-includes/customize/class-wp-customize-cropped-image-control.php:17
+Stack trace:
+#0 {main}
+  thrown in /home/jnixpvqx/amzgetway.com/wp-includes/customize/class-wp-customize-cropped-image-control.php on line 17
+[13-Mar-2026 10:08:24 UTC] PHP Fatal error:  Uncaught Error: Class "WP_Customize_Image_Control" not found in /home/jnixpvqx/amzgetway.com/wp-includes/customize/class-wp-customize-cropped-image-control.php:17
+Stack trace:
+#0 {main}
+  thrown in /home/jnixpvqx/amzgetway.com/wp-includes/customize/class-wp-customize-cropped-image-control.php on line 17
+[14-Mar-2026 05:01:08 UTC] PHP Fatal error:  Uncaught Error: Class "WP_Customize_Image_Control" not found in /home/jnixpvqx/amzgetway.com/wp-includes/customize/class-wp-customize-cropped-image-control.php:17
+Stack trace:
+#0 {main}
+  thrown in /home/jnixpvqx/amzgetway.com/wp-includes/customize/class-wp-customize-cropped-image-control.php on line 17
+[14-Mar-2026 19:09:44 UTC] PHP Fatal error:  Uncaught Error: Class "WP_Customize_Image_Control" not found in /home/jnixpvqx/amzgetway.com/wp-includes/customize/class-wp-customize-cropped-image-control.php:17
+Stack trace:
+#0 {main}
+  thrown in /home/jnixpvqx/amzgetway.com/wp-includes/customize/class-wp-customize-cropped-image-control.php on line 17
+[15-Mar-2026 00:12:27 UTC] PHP Fatal error:  Uncaught Error: Class "WP_Customize_Image_Control" not found in /home/jnixpvqx/amzgetway.com/wp-includes/customize/class-wp-customize-cropped-image-control.php:17
+Stack trace:
+#0 {main}
+  thrown in /home/jnixpvqx/amzgetway.com/wp-includes/customize/class-wp-customize-cropped-image-control.php on line 17
+[16-Mar-2026 05:11:36 UTC] PHP Fatal error:  Uncaught Error: Class "WP_Customize_Image_Control" not found in /home/jnixpvqx/amzgetway.com/wp-includes/customize/class-wp-customize-cropped-image-control.php:17
+Stack trace:
+#0 {main}
+  thrown in /home/jnixpvqx/amzgetway.com/wp-includes/customize/class-wp-customize-cropped-image-control.php on line 17
+[16-Mar-2026 21:24:02 UTC] PHP Fatal error:  Uncaught Error: Class "WP_Customize_Image_Control" not found in /home/jnixpvqx/amzgetway.com/wp-includes/customize/class-wp-customize-cropped-image-control.php:17
+Stack trace:
+#0 {main}
+  thrown in /home/jnixpvqx/amzgetway.com/wp-includes/customize/class-wp-customize-cropped-image-control.php on line 17
+[18-Mar-2026 04:50:19 UTC] PHP Fatal error:  Uncaught Error: Class "WP_Customize_Image_Control" not found in /home/jnixpvqx/amzgetway.com/wp-includes/customize/class-wp-customize-cropped-image-control.php:17
+Stack trace:
+#0 {main}
+  thrown in /home/jnixpvqx/amzgetway.com/wp-includes/customize/class-wp-customize-cropped-image-control.php on line 17
+[21-Mar-2026 16:26:35 UTC] PHP Fatal error:  Uncaught Error: Class "WP_Customize_Image_Control" not found in /home/jnixpvqx/amzgetway.com/wp-includes/customize/class-wp-customize-cropped-image-control.php:17
+Stack trace:
+#0 {main}
+  thrown in /home/jnixpvqx/amzgetway.com/wp-includes/customize/class-wp-customize-cropped-image-control.php on line 17
