@@ -28,6 +28,13 @@ jQuery(document).ready(function($){'use strict';
             // Mobile Menu Dropdown Icon
             var hasChildren = $('.tx-res-menu li.menu-item-has-children');
 
+            function tx_reset_mobile_submenus() {
+                $('.tx-res-menu .mb-dropdown-icon.open').removeClass('open');
+                $('.tx-res-menu li.menu-item-has-children > ul.sub-menu')
+                    .stop(true, true)
+                    .hide();
+            }
+
             hasChildren.each( function() {
                 var $btnToggle = $('<a class="mb-dropdown-icon" href="#"></a>');
                 $( this ).append($btnToggle);
@@ -46,11 +53,16 @@ jQuery(document).ready(function($){'use strict';
             } );
 
             $('.mobile-nav-toggle').on('click', function(e) {
-                $('.tx-mobile-menu').toggleClass('tx-res-menu-toggle');
+                var $menu = $('.tx-mobile-menu');
+                var closing = $menu.hasClass('tx-res-menu-toggle');
+                $menu.toggleClass('tx-res-menu-toggle');
                 $(this).find($(".bi")).toggleClass('bi-list bi-x');
                 $('#top_head').toggleClass('d-none');
                 $('.mobile-nav-toggle').toggleClass('tx-mob-sticky');
                 $('#wpadminbar').toggleClass('position-fixed');
+                if (closing) {
+                    tx_reset_mobile_submenus();
+                }
             });
 
             $('.tx-top-res-menu').on('click', function(){
@@ -67,6 +79,10 @@ jQuery(document).ready(function($){'use strict';
             if( $(e.target).is('a:not(".mb-dropdown-icon")') ) {
                 $(this).toggleClass('tx-res-menu-toggle');
                 $(".mobile-nav-toggle").find($(".bi")).toggleClass('bi-list bi-x');
+                $('.tx-res-menu .mb-dropdown-icon.open').removeClass('open');
+                $('.tx-res-menu li.menu-item-has-children > ul.sub-menu')
+                    .stop(true, true)
+                    .hide();
             }
         });
 
