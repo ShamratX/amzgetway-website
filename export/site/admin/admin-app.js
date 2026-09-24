@@ -189,7 +189,7 @@
       "Business",
       "Service",
       "Message",
-      "Website URL",
+      "URL",
       "Status",
       "Created At",
     ];
@@ -439,7 +439,7 @@
       Admin.esc(lead.service) +
       "</dd><dt>Message</dt><dd>" +
       Admin.esc(lead.message || "—") +
-      "</dd><dt>Website / GBP</dt><dd>" +
+      "</dd><dt>URL</dt><dd>" +
       Admin.esc(lead.website_url || "—") +
       "</dd><dt>Created</dt><dd>" +
       Admin.esc(lead.created_at) +
@@ -1323,22 +1323,23 @@
     }
     if (section === "footer") {
       var f = cmsState.cms.footer;
-      if (f.tagline == null)
-        f.tagline =
-          "Local Google marketing for businesses that already do good work — Google Business Profile, reviews, ads, and websites you own.";
-      if (f.servicesTitle == null) f.servicesTitle = "Services";
-      if (f.contactTitle == null) f.contactTitle = "Contact";
-      if (f.companyTitle == null) f.companyTitle = "Company";
-      if (f.contactEmail1 == null) f.contactEmail1 = "hello@townloc.com";
-      if (f.contactEmail2 == null) f.contactEmail2 = "contact@townloc.com";
-      if (f.contactPhone == null) f.contactPhone = "123456789";
-      if (f.contactWhatsapp == null) f.contactWhatsapp = "1234567890";
-      if (f.guaranteeLabel == null) f.guaranteeLabel = "Client Guarantee";
-      if (f.guaranteeText == null)
-        f.guaranteeText =
-          "100% Full Access & Source-Code Ownership | Free Cloudflare Hosting & SSL Setup | Pay Only for Your Domain";
-      if (f.copyrightText == null) f.copyrightText = "Townloc. All rights reserved.";
-      if (f.ctaText == null) f.ctaText = "Get a Free Assessment";
+      // Empty defaults only — Worker auto-fills from live HTML (no Townloc placeholders).
+      if (f.tagline == null) f.tagline = "";
+      if (f.servicesTitle == null) f.servicesTitle = "";
+      if (f.contactTitle == null) f.contactTitle = "";
+      if (f.companyTitle == null) f.companyTitle = "";
+      if (f.contactEmail1 == null) f.contactEmail1 = "";
+      if (f.contactEmail2 == null) f.contactEmail2 = "";
+      if (f.contactPhone == null) f.contactPhone = "";
+      if (f.contactWhatsapp == null) f.contactWhatsapp = "";
+      if (f.contactWhatsapp2 == null) f.contactWhatsapp2 = "";
+      if (f.contactSkype1 == null) f.contactSkype1 = "";
+      if (f.contactSkype2 == null) f.contactSkype2 = "";
+      if (f.contactAddress == null) f.contactAddress = "";
+      if (f.guaranteeLabel == null) f.guaranteeLabel = "";
+      if (f.guaranteeText == null) f.guaranteeText = "";
+      if (f.copyrightText == null) f.copyrightText = "";
+      if (f.ctaText == null) f.ctaText = "";
     }
     return cmsState.cms[section];
   }
@@ -1356,44 +1357,46 @@
           hint: "Text under the footer logo.",
         },
         { key: "servicesTitle", label: "Services column title", type: "text" },
+        {
+          key: "companyTitle",
+          label: "Skype / WhatsApp column title",
+          type: "text",
+        },
         { key: "contactTitle", label: "Contact column title", type: "text" },
-        { key: "companyTitle", label: "Company column title", type: "text" },
+        { key: "contactAddress", label: "Address", type: "text" },
         {
           key: "contactEmail1",
           label: "Contact email 1",
           type: "text",
-          hint: "Shown first in the footer Contact list (mailto link).",
         },
         {
           key: "contactEmail2",
           label: "Contact email 2",
           type: "text",
-          hint: "Shown second in the footer Contact list (mailto link).",
         },
         {
           key: "contactPhone",
           label: "Phone number",
           type: "text",
-          hint: "Footer phone display text and tel: link.",
         },
         {
           key: "contactWhatsapp",
-          label: "WhatsApp number",
+          label: "WhatsApp number 1",
           type: "text",
-          hint: "Footer WhatsApp display text. Digits are used for wa.me link.",
         },
+        { key: "contactWhatsapp2", label: "WhatsApp number 2", type: "text" },
+        { key: "contactSkype1", label: "Skype ID 1", type: "text" },
+        { key: "contactSkype2", label: "Skype ID 2", type: "text" },
         { key: "guaranteeLabel", label: "Guarantee label", type: "text" },
         {
           key: "guaranteeText",
           label: "Guarantee text",
           type: "textarea",
-          hint: "Use | to separate guarantee points.",
         },
         {
           key: "copyrightText",
           label: "Copyright text",
           type: "text",
-          hint: "Shown after © year in the footer bottom.",
         },
         { key: "ctaText", label: "Footer CTA button", type: "text" },
       ];

@@ -32,6 +32,7 @@ import {
 import {
   extractFooterFromHtml,
   extractLogoFromHtml,
+  extractMenusFromHtml,
   mergeCapturedSiteChrome,
   normalizeSiteAssetUrl,
 } from "./footerCapture.js";
@@ -647,7 +648,34 @@ async function loadMenusWithSeed(env) {
     changed = seeded.changed || true;
   }
 
-  // Industries nav ΓåÆ homepage #industries (same pattern as Work / Trust / FAQ)
+  // Fill empty Primary / Footer menus from live HTML (WP #main-menu / #menu-footer-*)
+  try {
+    const menusArr = Array.isArray(raw.menus) ? raw.menus : [];
+    const primaryId = (raw.locations && raw.locations.primary) || "menu_primary";
+    const footerId = (raw.locations && raw.locations.footer) || "menu_footer";
+    const primaryMenu = menusArr.find((m) => m && m.id === primaryId);
+    const footerMenu = menusArr.find((m) => m && m.id === footerId);
+    const needPrimary = primaryMenu && !(primaryMenu.items && primaryMenu.items.length);
+    const needFooter = footerMenu && !(footerMenu.items && footerMenu.items.length);
+    if (needPrimary || needFooter) {
+      const html = await readPageHtml(env, LAYOUT_SOURCE);
+      if (html) {
+        const captured = extractMenusFromHtml(html);
+        if (needPrimary && captured.primary && captured.primary.length) {
+          primaryMenu.items = captured.primary;
+          changed = true;
+        }
+        if (needFooter && captured.footer && captured.footer.length) {
+          footerMenu.items = captured.footer;
+          changed = true;
+        }
+      }
+    }
+  } catch (err) {
+    console.error("menu auto-capture failed", err);
+  }
+
+  // Industries nav → homepage #industries (same pattern as Work / Trust / FAQ)
   const menus = Array.isArray(raw.menus) ? raw.menus : [];
   menus.forEach(function (menu) {
     (menu.items || []).forEach(function (it) {
@@ -1000,7 +1028,36 @@ function clean(value, max) {
 }
 
 function isValidEmail(value) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) && value.length <= MAX.email;
+  const email = String(value || "").trim().toLowerCase();
+  if (!email || email.length > MAX.email) return false;
+  if (!/^[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$/i.test(email)) return false;
+  if (email.includes("..") || email.includes(".@") || email.includes("@.")) return false;
+
+  const [local, domain] = email.split("@");
+  if (!local || local.length < 2 || !domain || !domain.includes(".")) return false;
+
+  const fakeLocal = new Set([
+    "test", "testing", "fake", "asdf", "asdfg", "qwerty", "abc", "abcd",
+    "admin", "user", "username", "email", "mail", "none", "null", "example",
+    "sample", "demo", "xxx", "aaa", "bbb", "noemail", "notreal",
+  ]);
+  const localBase = local.split("+")[0].replace(/[0-9._\-]/g, "");
+  if (fakeLocal.has(local) || fakeLocal.has(localBase)) return false;
+  if (/^(test|fake|asdf|qwer|abc|xxx|aaa|user|mail|email)\d*$/i.test(local)) return false;
+
+  const fakeDomains = new Set([
+    "test.com", "testing.com", "fake.com", "email.com", "mail.com",
+    "example.com", "example.org", "example.net", "domain.com", "asdf.com",
+    "abc.com", "xxx.com", "mailinator.com", "guerrillamail.com", "tempmail.com",
+    "temp-mail.org", "10minutemail.com", "yopmail.com", "trashmail.com",
+    "throwawaymail.com", "getnada.com",
+  ]);
+  if (fakeDomains.has(domain)) return false;
+
+  const domainLabel = domain.split(".")[0];
+  if (local === domainLabel || localBase === domainLabel) return false;
+
+  return true;
 }
 
 function isValidPhone(value) {
@@ -1140,6 +1197,118 @@ function applyFooterContactList(html, footer) {
   );
 }
 
+function replaceAsideWidgetTitle(html, asideId, title) {
+  const v = String(title || "").trim();
+  if (!v || !asideId) return html;
+  const re = new RegExp(
+    `(<aside\\b[^>]*\\bid=["']${asideId}["'][^>]*>[\\s\\S]*?<h3\\b[^>]*\\bwidget-title\\b[^>]*>)([\\s\\S]*?)(<\\/h3>)`,
+    "i"
+  );
+  return String(html).replace(re, `$1${escapeHtml(v)}$3`);
+}
+
+function replaceIconParagraphs(block, iconClass, values) {
+  const vals = (values || []).map((v) => String(v || "").trim()).filter(Boolean);
+  if (!vals.length) return block;
+  let i = 0;
+  return String(block).replace(/<p\b[^>]*>[\s\S]*?<\/p>/gi, (pFull) => {
+    if (!new RegExp(`\\b${iconClass}\\b`, "i").test(pFull)) return pFull;
+    if (i >= vals.length) return pFull;
+    const val = vals[i++];
+    const icon = pFull.match(/<i\b[^>]*>\s*<\/i>/i);
+    if (icon) {
+      return `<p>${icon[0]} ${escapeHtml(val)}</p>`;
+    }
+    return `<p>${escapeHtml(val)}</p>`;
+  });
+}
+
+function replaceMailtoParagraphs(block, emails) {
+  const vals = (emails || []).map((v) => String(v || "").trim()).filter(Boolean);
+  if (!vals.length) return block;
+  let i = 0;
+  return String(block).replace(/<p\b[^>]*>[\s\S]*?<\/p>/gi, (pFull) => {
+    if (!/fa-envelope|mailto:/i.test(pFull)) return pFull;
+    if (i >= vals.length) return pFull;
+    const email = vals[i++];
+    const icon = pFull.match(/<i\b[^>]*>\s*<\/i>/i);
+    const link = `<a href="mailto:${escapeHtml(email)}">${escapeHtml(email)}</a>`;
+    if (icon) return `<p>${icon[0]}${link}</p>`;
+    return `<p>${link}</p>`;
+  });
+}
+
+/** WordPress / Avas footer widgets (AmzGetway export). */
+function applyWpFooter(html, footer) {
+  let out = String(html);
+
+  const tagline = String(footer.tagline || "").trim();
+  if (tagline) {
+    out = out.replace(
+      /(<aside\b[^>]*\bid=["']text-2["'][^>]*>[\s\S]*?<div\b[^>]*\btextwidget\b[^>]*>)([\s\S]*?)(<\/div>\s*<\/aside>)/i,
+      (full, open, inner, close) => {
+        let done = false;
+        const next = inner.replace(/<p\b[^>]*>([\s\S]*?)<\/p>/gi, (pFull, pInner) => {
+          if (done) return pFull;
+          if (/<img\b/i.test(pInner)) return pFull;
+          if (/wpcf7|type=["']email["']/i.test(pInner)) return pFull;
+          const t = String(pInner).replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+          if (t.length < 20) return pFull;
+          done = true;
+          return `<p>${escapeHtml(tagline)}</p>`;
+        });
+        return `${open}${next}${close}`;
+      }
+    );
+  }
+
+  out = replaceAsideWidgetTitle(out, "nav_menu-4", footer.servicesTitle);
+  out = replaceAsideWidgetTitle(out, "avas_text-3", footer.companyTitle);
+  out = replaceAsideWidgetTitle(out, "text-3", footer.contactTitle);
+
+  // Skype & WhatsApp column
+  out = out.replace(
+    /(<aside\b[^>]*\bid=["']avas_text-3["'][^>]*>[\s\S]*?<div\b[^>]*\btextwidget\b[^>]*>)([\s\S]*?)(<\/div>\s*<\/aside>)/i,
+    (full, open, inner, close) => {
+      let block = inner;
+      block = replaceIconParagraphs(block, "fa-skype", [
+        footer.contactSkype1,
+        footer.contactSkype2,
+      ]);
+      block = replaceIconParagraphs(block, "fa-whatsapp", [
+        footer.contactWhatsapp,
+        footer.contactWhatsapp2,
+      ]);
+      return `${open}${block}${close}`;
+    }
+  );
+
+  // CONTACT DETAILS column
+  out = out.replace(
+    /(<aside\b[^>]*\bid=["']text-3["'][^>]*>[\s\S]*?<div\b[^>]*\btextwidget\b[^>]*>)([\s\S]*?)(<\/div>\s*<\/aside>)/i,
+    (full, open, inner, close) => {
+      let block = inner;
+      block = replaceIconParagraphs(block, "fa-map-marker", [footer.contactAddress]);
+      block = replaceIconParagraphs(block, "fa-phone", [footer.contactPhone]);
+      block = replaceMailtoParagraphs(block, [
+        footer.contactEmail1,
+        footer.contactEmail2,
+      ]);
+      return `${open}${block}${close}`;
+    }
+  );
+
+  const copyrightText = String(footer.copyrightText || "").trim();
+  if (copyrightText) {
+    out = out.replace(
+      /(<div\b[^>]*\bcopyright\b[^>]*>\s*<p\b[^>]*>)([\s\S]*?)(<\/p>)/i,
+      `$1Copyright &copy; <a href="/">${escapeHtml(copyrightText)}</a>$3`
+    );
+  }
+
+  return out;
+}
+
 /** Sitewide footer: tagline, columns, contact, guarantee, copyright, CTA. */
 function applyFooter(html, footer) {
   if (!footer || typeof footer !== "object" || !html) return html;
@@ -1170,12 +1339,13 @@ function applyFooter(html, footer) {
   }
 
   out = applyFooterContactList(out, footer);
+  out = applyWpFooter(out, footer);
 
   const copyrightText = String(footer.copyrightText || "").trim();
   if (copyrightText) {
     out = out.replace(
       /(<div\b[^>]*\bfooter-bottom\b[^>]*>[\s\S]*?<p\b[^>]*>)([\s\S]*?)(<\/p>)/i,
-      `$1┬⌐ <span id="year"></span> ${escapeHtml(copyrightText)}$3`
+      `$1© <span id="year"></span> ${escapeHtml(copyrightText)}$3`
     );
   }
 
@@ -1207,6 +1377,15 @@ function applyBranding(html, branding) {
       }
       return `<img${next}>`;
     });
+    // WP / Avas header + footer logos
+    out = out.replace(
+      /(<a\b[^>]*\btx_logo\b[^>]*>\s*<img\b[^>]*\bsrc=["'])([^"']+)(["'])/gi,
+      `$1${logo}$3`
+    );
+    out = out.replace(
+      /(<aside\b[^>]*\bid=["']text-2["'][^>]*>[\s\S]*?<img\b[^>]*\bsrc=["'])([^"']+)(["'])/i,
+      `$1${logo}$3`
+    );
   }
 
   const fav = normalizeSiteAssetUrl(String(branding.faviconUrl || "").trim());
@@ -1346,7 +1525,7 @@ function buildEmailHtml(data, submittedAt) {
     ["Business", data.businessName || "Not provided"],
     ["Service", data.service],
     ["Message", data.message || "Not provided"],
-    ["Website / GBP URL", data.mapsLink || "Not provided"],
+    ["URL", data.mapsLink || "Not provided"],
     ["Submitted", submittedAt],
   ];
 
@@ -1385,7 +1564,7 @@ function buildEmailText(data, submittedAt) {
     `Business:     ${data.businessName || "Not provided"}`,
     `Service:      ${data.service}`,
     `Message:      ${data.message || "Not provided"}`,
-    `Website/GBP:  ${data.mapsLink || "Not provided"}`,
+    `URL:          ${data.mapsLink || "Not provided"}`,
     `Submitted:    ${submittedAt}`,
     "",
     "ΓÇö AMZgetway Contact API",
@@ -1641,7 +1820,7 @@ function leadsToCsv(rows) {
     "Business",
     "Service",
     "Message",
-    "Website URL",
+    "URL",
     "Status",
     "Created At",
   ];
@@ -3560,7 +3739,8 @@ async function serveAssetWithCms(request, env) {
   let baseHeaders = new Headers({
     "content-type": "text/html; charset=utf-8",
     // Block Chrome "Access other apps and services on this device" (loopback / LNA)
-    "permissions-policy": "local-network-access=(), window-management=()",
+    "permissions-policy":
+      "local-network-access=(), local-network=(), loopback-network=(), window-management=()",
   });
 
   if (looksHtml && env.DB) {
@@ -3679,6 +3859,11 @@ async function serveAssetWithCms(request, env) {
     "public, max-age=0, s-maxage=30, stale-while-revalidate=120"
   );
   baseHeaders.set("content-type", "text/html; charset=utf-8");
+  // Re-apply after ASSETS headers replace baseHeaders (otherwise Chrome LNA prompt returns)
+  baseHeaders.set(
+    "permissions-policy",
+    "local-network-access=(), local-network=(), loopback-network=(), window-management=()"
+  );
   return new Response(html, { status, headers: baseHeaders });
 }
 

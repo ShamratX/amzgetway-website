@@ -16,23 +16,37 @@ Master backend package is **wired into this site**. No CMS/API features were rem
 | `ALLOWED_SERVICES` | Original services **kept** + Amazon/Walmart/Newsletter options |
 | GitHub publish vars | `GITHUB_REPO=ShamratX/amzgetway-website` (needs `GITHUB_TOKEN` secret) |
 
-## Your Cloudflare steps (required before live)
+## Resend (contact email)
+
+`wrangler.toml` already has:
+
+- `RECIPIENT_EMAIL` = `contact@amzgetway.com` (inbox)
+- `SENDER_EMAIL` = `AMZgetway <contact@amzgetway.com>` (must be on a **verified** Resend domain)
+
+### Steps
+
+1. [resend.com](https://resend.com) → Domains → add/verify **amzgetway.com**
+2. API Keys → create key
+3. Run:
 
 ```powershell
-cd backend\worker
-npm install
-npx wrangler login
-npx wrangler d1 create amzgetway-cms-db
-# paste database_id into wrangler.toml
-npx wrangler d1 migrations apply amzgetway-cms-db --remote
-npx wrangler secret put ADMIN_PASSWORD
-npx wrangler secret put ADMIN_SECRET
+cd "D:\Desktop\Important files\amzgetway\backend\worker"
 npx wrangler secret put RESEND_API_KEY
-# optional:
-npx wrangler secret put GITHUB_TOKEN
 npm run deploy
 ```
 
-Then open `https://<worker>.workers.dev/admin/` and test a contact form submit.
+4. Test a contact form on the live site → email should arrive + lead in `/admin`
 
-Full checklist: `backend/docs/00-setup-checklist.md`
+Without the secret, leads still save in D1; email is skipped.
+
+## Cloudflare checklist (already mostly done)
+
+```powershell
+cd backend\worker
+npx wrangler secret put ADMIN_PASSWORD
+npx wrangler secret put ADMIN_SECRET
+npx wrangler secret put RESEND_API_KEY
+npm run deploy
+```
+
+Full package docs: `backend/docs/03-secrets-and-email.md`

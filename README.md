@@ -4,17 +4,65 @@ Static Cloudflare Pages site — mirrored from the local WordPress recovery.
 
 ## Preview (localhost)
 
+**Must run from `export\site`** (project root e chalale directory listing ashbe).
+
+Terminal 1 — server:
+
 ```powershell
-cd export\site
+cd "D:\Desktop\Important files\amzgetway\export\site"
 python -m http.server 8090
 ```
 
-Open **http://127.0.0.1:8090/** (hard refresh: Ctrl+Shift+R).
+Terminal 2 — open browser:
+
+```powershell
+Start-Process "http://127.0.0.1:8090/"
+```
+
+Hard refresh: Ctrl+Shift+R.
 
 | Preview | URL |
 |---------|-----|
-| Static (deploy this) | http://127.0.0.1:8090/ |
+| Local static | http://127.0.0.1:8090/ |
 | Source WP | http://127.0.0.1:8080/ |
+
+## Live site (Cloudflare)
+
+```powershell
+# Open live site in browser
+Start-Process "https://amzgetway.com"
+
+# Admin CMS
+Start-Process "https://amzgetway.com/admin/"
+```
+
+| Live | URL |
+|------|-----|
+| Website | https://amzgetway.com |
+| Admin | https://amzgetway.com/admin/ |
+| Workers.dev (fallback) | Cloudflare → Workers → **amzgetway-cms** → Visit |
+
+## Deploy (Worker + site)
+
+```powershell
+cd backend\worker
+npm run deploy
+Start-Process "https://amzgetway.com"
+```
+
+## Resend (form emails)
+
+1. Verify domain **amzgetway.com** at [resend.com](https://resend.com)
+2. Create API key, then:
+
+```powershell
+cd "D:\Desktop\Important files\amzgetway\backend\worker"
+npx wrangler secret put RESEND_API_KEY
+npm run deploy
+```
+
+Inbox: `contact@amzgetway.com` · From: `AMZgetway <contact@amzgetway.com>`  
+(Details: `docs/BACKEND-CONNECT.md`)
 
 ## Project layout
 
@@ -42,12 +90,8 @@ amzgetway/
 
 Reusable package from [master-backend-for-every-frontend](https://github.com/ShamratX/master-backend-for-every-frontend).
 
-**Connected to this site** (admin, CMS shell, form bridge, wrangler assets).  
-Features kept; Cloudflare D1 + secrets + deploy still needed — see **`docs/BACKEND-CONNECT.md`**.
-
-## Deploy
-
-After visual sign-off on `:8090`, upload **`export/site`** to Cloudflare Pages (Direct Upload).
+**Connected** — admin, CMS shell, form bridge, wrangler assets.  
+Setup notes: **`docs/BACKEND-CONNECT.md`**.
 
 ## Rebuild pipeline (optional)
 
@@ -62,5 +106,5 @@ See `docs/PLAN.md` and `scripts/README.md`.
 
 ## Notes
 
-- Contact forms are visual only on Pages (no PHP). Wire Formspree/Worker later if needed.
+- Contact forms post to Worker `/api/contact` (leads in Admin).
 - Content is from the Softaculous backup used for recovery.

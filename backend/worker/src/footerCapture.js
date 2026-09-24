@@ -1,7 +1,7 @@
 /**
- * Auto-capture structured footer fields from site HTML class conventions.
- * Used when a new site reuses this master CMS — empty footer CMS values
- * are filled from index.html (or LAYOUT_SOURCE) on first Admin CMS load.
+ * Auto-capture structured footer fields from site HTML.
+ * Supports master CMS class conventions AND WordPress/Avas widget footers
+ * (AmzGetway export: .footer / #footer-top / widget-title / Skype·WA·contact).
  */
 
 function stripFooterText(html) {
@@ -11,6 +11,7 @@ function stripFooterText(html) {
     .replace(/<[^>]+>/g, " ")
     .replace(/&nbsp;/gi, " ")
     .replace(/&amp;/gi, "&")
+    .replace(/&#038;/gi, "&")
     .replace(/&quot;/gi, '"')
     .replace(/&#39;/gi, "'")
     .replace(/&lt;/gi, "<")
@@ -33,13 +34,86 @@ function allMatchInners(html, re) {
   return out;
 }
 
-/**
- * Capture logo + footer copy/contact from HTML using shared class names:
- * .footer-tagline, .footer-col-title, .footer-contact, .footer-guarantee-*,
- * .footer-bottom, .footer-cta, .site-logo / .site-logo-footer
- */
-export function extractFooterFromHtml(html) {
+/** Slice the live site footer block (WP `.footer` or semantic `<footer>`). */
+export function footerRegionHtml(html) {
   const raw = String(html || "");
+  const footerTag = raw.match(/<footer\b[^>]*>[\s\S]*?<\/footer>/i);
+  if (footerTag) return footerTag[0];
+
+  // Prefer exact class token "footer" (not menu-footer / footer-top / footer_bg)
+  let open = null;
+  const classDivRe = /<div\b[^>]*\bclass=["']([^"']*)["'][^>]*>/gi;
+  let m;
+  while ((m = classDivRe.exec(raw))) {
+    const tokens = String(m[1] || "")
+      .trim()
+      .split(/\s+/)
+      .filter(Boolean);
+    if (tokens.includes("footer")) {
+      open = m;
+      break;
+    }
+  }
+
+  if (!open) {
+    // Fallback: from #footer-top through #footer sibling
+    const top = raw.match(
+      /<div\b[^>]*\bid=["']footer-top["'][^>]*>/i
+    );
+    const bottom = raw.match(
+      /<div\b[^>]*\bid=["']footer["'][^>]*>/i
+    );
+    if (top && bottom && bottom.index > top.index) {
+      // balance from footer-top, then extend through #footer close
+      const start = top.index;
+      let depth = 0;
+      const re = /<\/?div\b[^>]*>/gi;
+      re.lastIndex = start;
+      let end = -1;
+      let tm;
+      while ((tm = re.exec(raw))) {
+        if (/^<\/div/i.test(tm[0])) depth -= 1;
+        else depth += 1;
+        if (depth === 0) {
+          end = tm.index + tm[0].length;
+          break;
+        }
+      }
+      // continue to include #footer if it sits after footer-top close
+      if (end > 0 && bottom.index >= end) {
+        depth = 0;
+        re.lastIndex = bottom.index;
+        while ((tm = re.exec(raw))) {
+          if (/^<\/div/i.test(tm[0])) depth -= 1;
+          else depth += 1;
+          if (depth === 0) {
+            end = tm.index + tm[0].length;
+            break;
+          }
+        }
+        return raw.slice(start, end);
+      }
+      if (end > 0) return raw.slice(start, end);
+    }
+    return "";
+  }
+
+  const start = open.index;
+  let depth = 0;
+  const re = /<\/?div\b[^>]*>/gi;
+  re.lastIndex = start;
+  let tm;
+  while ((tm = re.exec(raw))) {
+    if (/^<\/div/i.test(tm[0])) depth -= 1;
+    else depth += 1;
+    if (depth === 0) {
+      return raw.slice(start, tm.index + tm[0].length);
+    }
+  }
+  return raw.slice(start);
+}
+
+function extractConventionFooter(raw) {
   const footer = {};
 
   const tagline = firstMatchInner(
@@ -122,6 +196,158 @@ export function extractFooterFromHtml(html) {
   return footer;
 }
 
+function asideById(region, id) {
+  const re = new RegExp(
+    `<aside\\b[^>]*\\bid=["']${id}["'][^>]*>([\\s\\S]*?)<\\/aside>`,
+    "i"
+  );
+  const m = region.match(re);
+  return m ? m[1] : "";
+}
+
+function widgetTitle(asideInner) {
+  return firstMatchInner(asideInner, /<h3\b[^>]*\bwidget-title\b[^>]*>([\s\S]*?)<\/h3>/i);
+}
+
+function textwidgetInner(asideInner) {
+  const m = asideInner.match(
+    /<div\b[^>]*\btextwidget\b[^>]*>([\s\S]*?)<\/div>/i
+  );
+  return m ? m[1] : "";
+}
+
+function parasWithIcon(textwidget, iconClass) {
+  const out = [];
+  const re = /<p\b[^>]*>([\s\S]*?)<\/p>/gi;
+  let m;
+  while ((m = re.exec(textwidget))) {
+    if (new RegExp(`\\b${iconClass}\\b`, "i").test(m[1])) {
+      const t = stripFooterText(m[1]);
+      if (t) out.push(t);
+    }
+  }
+  return out;
+}
+
+function extractWpFooter(raw) {
+  const region = footerRegionHtml(raw);
+  if (!region) return {};
+  const footer = {};
+
+  // Logo column tagline (#text-2): first substantial text <p> without an image
+  const about = asideById(region, "text-2") || asideById(region, "text-3");
+  const aboutTw = textwidgetInner(about);
+  if (aboutTw) {
+    const pRe = /<p\b[^>]*>([\s\S]*?)<\/p>/gi;
+    let pm;
+    while ((pm = pRe.exec(aboutTw))) {
+      if (/<img\b/i.test(pm[1])) continue;
+      if (/wpcf7|type=["']email["']/i.test(pm[1])) continue;
+      const t = stripFooterText(pm[1]);
+      if (t.length >= 20) {
+        footer.tagline = t;
+        break;
+      }
+    }
+  }
+
+  const servicesAside = asideById(region, "nav_menu-4") || asideById(region, "nav_menu-1");
+  const servicesTitle = widgetTitle(servicesAside);
+  if (servicesTitle) footer.servicesTitle = servicesTitle;
+
+  // Skype & WhatsApp column
+  let skypeAside =
+    asideById(region, "avas_text-3") ||
+    "";
+  if (!skypeAside) {
+    const m = region.match(
+      /<aside\b[^>]*>([\s\S]*?(?:fa-skype|fa-whatsapp)[\s\S]*?)<\/aside>/i
+    );
+    skypeAside = m ? m[1] : "";
+  }
+  const skypeTitle = widgetTitle(skypeAside);
+  if (skypeTitle) footer.companyTitle = skypeTitle;
+  const skypeTw = textwidgetInner(skypeAside) || skypeAside;
+  const skypes = parasWithIcon(skypeTw, "fa-skype");
+  if (skypes[0]) footer.contactSkype1 = skypes[0];
+  if (skypes[1]) footer.contactSkype2 = skypes[1];
+  const was = parasWithIcon(skypeTw, "fa-whatsapp");
+  if (was[0]) footer.contactWhatsapp = was[0];
+  if (was[1]) footer.contactWhatsapp2 = was[1];
+
+  // CONTACT DETAILS column
+  let contactAside = asideById(region, "text-3");
+  if (!contactAside || contactAside === about) {
+    const m = region.match(
+      /<aside\b[^>]*>([\s\S]*?(?:fa-envelope|fa-map-marker|fa-phone)[\s\S]*?)<\/aside>/i
+    );
+    if (m && !/fa-skype|fa-whatsapp/i.test(m[1])) contactAside = m[1];
+    else if (m && /CONTACT/i.test(widgetTitle(m[1]) || "")) contactAside = m[1];
+  }
+  // Prefer aside whose title looks like contact
+  const contactTitle = widgetTitle(contactAside);
+  if (contactTitle && /contact/i.test(contactTitle)) {
+    footer.contactTitle = contactTitle;
+  } else if (contactTitle && !footer.contactTitle) {
+    footer.contactTitle = contactTitle;
+  }
+
+  const contactTw = textwidgetInner(contactAside) || contactAside;
+  const addr = parasWithIcon(contactTw, "fa-map-marker");
+  if (addr[0]) footer.contactAddress = addr[0];
+  const phones = parasWithIcon(contactTw, "fa-phone");
+  if (phones[0]) footer.contactPhone = phones[0];
+  const emails = [];
+  const mailRe =
+    /mailto:([^"'>\s]+)|([a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,})/gi;
+  let em;
+  const seen = new Set();
+  while ((em = mailRe.exec(contactTw))) {
+    const v = String(em[1] || em[2] || "")
+      .trim()
+      .replace(/^mailto:/i, "");
+    if (v && !seen.has(v.toLowerCase())) {
+      seen.add(v.toLowerCase());
+      emails.push(v);
+    }
+  }
+  if (emails[0]) footer.contactEmail1 = emails[0];
+  if (emails[1]) footer.contactEmail2 = emails[1];
+
+  // Copyright
+  const copy = region.match(
+    /<div\b[^>]*\bcopyright\b[^>]*>[\s\S]*?<p\b[^>]*>([\s\S]*?)<\/p>/i
+  );
+  if (copy) {
+    let t = stripFooterText(copy[1]);
+    t = t
+      .replace(/^copyright\s*/i, "")
+      .replace(/^©\s*/u, "")
+      .replace(/^&\s*copy;\s*/i, "")
+      .trim();
+    if (t) footer.copyrightText = t;
+  }
+
+  return footer;
+}
+
+/**
+ * Capture logo + footer copy/contact from HTML using shared class names,
+ * with WordPress/Avas footer fallback for AmzGetway-style exports.
+ */
+export function extractFooterFromHtml(html) {
+  const raw = String(html || "");
+  const convention = extractConventionFooter(raw);
+  const wp = extractWpFooter(raw);
+  // Convention wins when both present; WP fills gaps.
+  const footer = { ...wp, ...convention };
+  // Prefer WP titles/contacts when convention left them empty
+  Object.keys(wp).forEach((k) => {
+    if (!String(footer[k] || "").trim() && wp[k]) footer[k] = wp[k];
+  });
+  return footer;
+}
+
 export function extractLogoFromHtml(html) {
   const raw = String(html || "");
   const m =
@@ -130,8 +356,120 @@ export function extractLogoFromHtml(html) {
     ) ||
     raw.match(
       /<img\b[^>]*\bsrc=["']([^"']+)["'][^>]*\bsite-logo(?:-footer|-header)?\b/i
+    ) ||
+    raw.match(
+      /<a\b[^>]*\btx_logo\b(?![^>]*tx_sticky_logo)[^>]*>\s*<img\b[^>]*\bsrc=["']([^"']+)["']/i
+    ) ||
+    raw.match(
+      /<img\b[^>]*\bsrc=["']([^"']*Footer\.png[^"']*)["']/i
+    ) ||
+    raw.match(
+      /<img\b[^>]*\bsrc=["']([^"']*AMZgetway-Logo[^"']*)["']/i
     );
   return m ? normalizeSiteAssetUrl(m[1]) : "";
+}
+
+/**
+ * Parse WP nav ULs into CMS menu item trees.
+ * Returns { primary: items[], footer: items[] }.
+ */
+export function extractMenusFromHtml(html) {
+  const raw = String(html || "");
+  return {
+    primary: parseWpMenuUl(raw, "main-menu"),
+    footer: parseWpMenuUl(raw, "menu-footer-menu").length
+      ? parseWpMenuUl(raw, "menu-footer-menu")
+      : parseWpMenuUl(raw, "menu-footer-3"),
+  };
+}
+
+function parseWpMenuUl(html, ulId) {
+  const open = html.match(
+    new RegExp(`<ul\\b[^>]*\\bid=["']${ulId}["'][^>]*>`, "i")
+  );
+  if (!open) return [];
+  const start = open.index + open[0].length;
+  const inner = sliceBalancedUlInner(html, start);
+  return parseMenuLis(inner, null);
+}
+
+function sliceBalancedUlInner(html, start) {
+  let depth = 1;
+  let i = start;
+  const re = /<\/?ul\b[^>]*>/gi;
+  re.lastIndex = start;
+  let m;
+  while ((m = re.exec(html))) {
+    if (/^<\/ul/i.test(m[0])) {
+      depth -= 1;
+      if (depth === 0) return html.slice(start, m.index);
+    } else {
+      depth += 1;
+    }
+    i = m.index + m[0].length;
+  }
+  return html.slice(start);
+}
+
+function parseMenuLis(inner, parentId) {
+  const items = [];
+  // Top-level <li> only: walk with depth tracking for nested ul
+  let i = 0;
+  const src = String(inner || "");
+  while (i < src.length) {
+    const liOpen = src.slice(i).match(/^\s*<li\b[^>]*>/i);
+    if (!liOpen) {
+      const next = src.slice(i).search(/<li\b/i);
+      if (next < 0) break;
+      i += next;
+      continue;
+    }
+    const openEnd = i + liOpen[0].length;
+    // find matching </li>
+    let depth = 1;
+    let j = openEnd;
+    const tagRe = /<\/?li\b[^>]*>/gi;
+    tagRe.lastIndex = openEnd;
+    let tm;
+    let liEnd = -1;
+    while ((tm = tagRe.exec(src))) {
+      if (/^<\/li/i.test(tm[0])) {
+        depth -= 1;
+        if (depth === 0) {
+          liEnd = tm.index;
+          break;
+        }
+      } else {
+        depth += 1;
+      }
+    }
+    if (liEnd < 0) break;
+    const liInner = src.slice(openEnd, liEnd);
+    const a = liInner.match(/<a\b[^>]*href=["']([^"']*)["'][^>]*>([\s\S]*?)<\/a>/i);
+    if (a) {
+      const id = `m_${items.length}_${Math.random().toString(36).slice(2, 7)}`;
+      const label = stripFooterText(a[2]);
+      let href = String(a[1] || "").trim() || "/";
+      if (/^https?:\/\/(?:www\.)?amzgetway\.com/i.test(href)) {
+        href = href.replace(/^https?:\/\/(?:www\.)?amzgetway\.com/i, "") || "/";
+      }
+      const childUl = liInner.match(/<ul\b[^>]*>([\s\S]*)<\/ul>\s*$/i);
+      const item = {
+        id,
+        label,
+        href,
+        type: "custom",
+        parentId: parentId || null,
+      };
+      items.push(item);
+      if (childUl) {
+        const kids = parseMenuLis(childUl[1], id);
+        items.push(...kids);
+      }
+    }
+    i = liEnd + 5;
+  }
+  return items;
 }
 
 /**
@@ -153,6 +491,26 @@ export function normalizeSiteAssetUrl(url) {
   return path + query;
 }
 
+/** Default placeholder titles from CMS_DEFAULTS — treat as empty for capture fill. */
+const FOOTER_PLACEHOLDER = {
+  servicesTitle: "Services",
+  contactTitle: "Contact",
+  companyTitle: "Company",
+};
+
+function isEmptyFooterVal(key, cur) {
+  const v = String(cur || "").trim();
+  if (!v) return true;
+  if (FOOTER_PLACEHOLDER[key] && v === FOOTER_PLACEHOLDER[key]) return true;
+  // Wipe leftover master-template / Townloc placeholders so WP capture can fill
+  if (/townloc\.com/i.test(v)) return true;
+  if (/^1234567890?$/i.test(v)) return true;
+  if (/Get a Free Assessment/i.test(v)) return true;
+  if (/Client Guarantee/i.test(v) && key === "guaranteeLabel") return true;
+  if (/Local Google marketing/i.test(v)) return true;
+  return false;
+}
+
 /** Fill only empty footer/branding keys from captured HTML values. */
 export function mergeCapturedSiteChrome(doc, capturedFooter, capturedLogo) {
   const out = doc && typeof doc === "object" ? { ...doc } : {};
@@ -163,7 +521,7 @@ export function mergeCapturedSiteChrome(doc, capturedFooter, capturedLogo) {
   Object.keys(capturedFooter || {}).forEach((key) => {
     const next = String(capturedFooter[key] || "").trim();
     const cur = String(footer[key] || "").trim();
-    if (next && !cur) {
+    if (next && isEmptyFooterVal(key, cur)) {
       footer[key] = next;
       changed = true;
     }
@@ -189,6 +547,20 @@ export function mergeCapturedSiteChrome(doc, capturedFooter, capturedLogo) {
     const fixedFav = normalizeSiteAssetUrl(branding.faviconUrl);
     if (fixedFav && fixedFav !== branding.faviconUrl) {
       branding.faviconUrl = fixedFav;
+      changed = true;
+    }
+  }
+  // Prefer real site name from logo alt when still generic
+  if (
+    (!String(branding.name || "").trim() ||
+      branding.name === "My Site" ||
+      /townloc/i.test(branding.name)) &&
+    capturedLogo
+  ) {
+    // leave name unless we have something better — set AmzGetway if logo path matches
+    if (/AMZgetway/i.test(String(capturedLogo))) {
+      branding.name = "AmzGetway";
+      branding.mark = "A";
       changed = true;
     }
   }

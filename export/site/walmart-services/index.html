@@ -2,6 +2,17 @@
 <!DOCTYPE html>
 <html lang="en-US">
     <head>
+<style id="amz-inner-nofouc">
+html{overflow-y:scroll;scrollbar-gutter:stable}
+body:not(.home) .elementor-invisible,body:not(.home) .elementor-element.elementor-invisible,body:not(.home) .elementor-section.elementor-invisible,body:not(.home) .elementor-column.elementor-invisible,body:not(.home) .elementor-widget.elementor-invisible{visibility:visible!important;opacity:1!important;animation:none!important;-webkit-animation:none!important}
+body:not(.home) #header .main-header,body:not(.home) #h-style-3.main-header{position:fixed!important;top:0!important;left:0!important;right:0!important;width:100%!important;z-index:10000!important;transform:none!important;visibility:visible!important;opacity:1!important;background-color:#ffffff!important;box-shadow:0 0 10px 0 rgb(0 0 0 / 15%)!important;height:81px!important;min-height:81px!important}
+body:not(.home) #header .main-header .tx_logo:not(.tx_sticky_logo){display:none!important}
+body:not(.home) #header .main-header .tx_logo.tx_sticky_logo{display:block!important}
+body:not(.home) #page,body:not(.home) #page.tx-wrapper,body:not(.home) .tx-wrapper{padding-top:81px!important}
+@media (max-width:991px){body:not(.home) #header .main-header,body:not(.home) #h-style-3.main-header{height:auto!important;min-height:64px!important}body:not(.home) #page,body:not(.home) #page.tx-wrapper,body:not(.home) .tx-wrapper{padding-top:64px!important}}
+@media (max-width:767px){body:not(.home) #header .main-header,body:not(.home) #h-style-3.main-header{min-height:60px!important}body:not(.home) #page,body:not(.home) #page.tx-wrapper,body:not(.home) .tx-wrapper{padding-top:60px!important}}
+body:not(.home) .elementor-section.elementor-section-stretched,body:not(.home) .elementor-section.elementor-section-full_width,body:not(.home) .forcefullwidth_wrapper_tp_banner,body:not(.home) .elementor-section-stretched > .elementor-container{left:0!important;right:0!important;width:100%!important;max-width:100%!important;margin-left:0!important;margin-right:0!important;transform:none!important;-webkit-transform:none!important}
+</style>
         <meta charset="UTF-8">
         <link rel="profile" href="http://gmpg.org/xfn/11">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1"><meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
@@ -254,7 +265,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
                     $(".main-header").addClass("sticky-header");
                 } else {
                     $(".tx-header").removeClass("tx-scrolled");
-                    $(".main-header").removeClass("sticky-header");
+                    $(".main-header").addClass("sticky-header"); /* amz: keep fixed like home */
                 }
             });
         });
@@ -538,7 +549,7 @@ body.elementor-page #rev_slider_1_1_wrapper{
     setTimeout(pinFullBleed, 0);
     setTimeout(pinFullBleed, 150);
     setTimeout(pinFullBleed, 500);
-    setTimeout(fallbackStuck, 2800);
+    setTimeout(fallbackStuck, document.body && document.body.classList.contains('home') ? 2800 : 0);
   }
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
@@ -639,7 +650,7 @@ img[title="net.png"],
   display: block !important;
 }
 </style>
-<link rel="stylesheet" href="/wp-content/uploads/amz-responsive.css" id="amz-responsive" />
+<link rel="stylesheet" href="/wp-content/uploads/amz-responsive.css?v=16" id="amz-responsive" />
 </head>
     
 <body class="wp-singular page-template-default page page-id-361 wp-embed-responsive wp-theme-avas sidebar-right elementor-default elementor-kit-7 elementor-page elementor-page-361">
@@ -647,8 +658,7 @@ img[title="net.png"],
     <div id="page" class="tx-wrapper container-fluid">
         <div class="row">
             <header id="header" itemscope="itemscope" itemtype="http://schema.org/WPHeader" class="tx-header">
-
-                <!-- search -->
+<!-- search -->
                     <div id="search" class="tx-search-form-wrap">
       <form role="search" id="search-form" class="search-box" action="/" method="get">
           <input type="search" required="" aria-required="true" name="s" placeholder="Type here &amp; press Enter" value="">
@@ -660,11 +670,11 @@ img[title="net.png"],
                 
                 <!-- main header -->
                 
-<div id="h-style-3" class="main-header d-flex align-items-center">
+<div id="h-style-3" class="main-header sticky-header d-flex align-items-center">
 	<div class="tx-header-overlay"></div><!-- overlay color -->
 	<div class="container-fluid d-flex align-items-center justify-content-lg-between">
 	    	<!-- logo -->
-        	<a class="navbar-brand tx_logo" href="" title="Seller Central Agency | Grow Your Amazon &amp; Walmart Sales"><img src="/wp-content/uploads/2023/04/AMZgetway-Logo-1.png" alt="Seller Central Agency | Grow Your Amazon &amp; Walmart Sales"></a><a class="navbar-brand tx_logo tx_sticky_logo" href="" title="Seller Central Agency | Grow Your Amazon &amp; Walmart Sales"><img src="/wp-content/uploads/2023/04/AMZgetway-Logo-1.png" alt="Seller Central Agency | Grow Your Amazon &amp; Walmart Sales"></a>    		<!-- Main Menu -->	
+        	<a class="navbar-brand tx_logo" href="https://amzgetway.com/" title="Seller Central Agency | Grow Your Amazon &amp; Walmart Sales"><img src="/wp-content/uploads/2023/04/AMZgetway-Logo-1.png" alt="Seller Central Agency | Grow Your Amazon &amp; Walmart Sales"></a><a class="navbar-brand tx_logo tx_sticky_logo" href="https://amzgetway.com/" title="Seller Central Agency | Grow Your Amazon &amp; Walmart Sales"><img src="/wp-content/uploads/2023/04/AMZgetway-Logo-1.png" alt="Seller Central Agency | Grow Your Amazon &amp; Walmart Sales"></a>    		<!-- Main Menu -->	
             
 <nav class="navbar order-last order-lg-0">
         <div class="d-none d-sm-none d-md-block">
@@ -874,7 +884,7 @@ img[title="net.png"],
 		</div>
 					</div>
 		</section>
-				<section class="elementor-section elementor-top-section elementor-element elementor-element-15db9f2 elementor-section-stretched elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="15db9f2" data-element_type="section" data-settings="{&quot;stretch_section&quot;:&quot;section-stretched&quot;}">
+				<section class="elementor-section elementor-top-section elementor-element elementor-element-15db9f2 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="15db9f2" data-element_type="section" data-settings="{}">
 							<div class="elementor-background-overlay"></div>
 							<div class="elementor-container elementor-column-gap-default">
 					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-b9f8cdb elementor-invisible" data-id="b9f8cdb" data-element_type="column" data-settings="{&quot;animation&quot;:&quot;fadeInRight&quot;}">
@@ -1489,22 +1499,7 @@ img[title="net.png"],
 {"prefetch":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":["/wp-*.php","/wp-admin/*","/wp-content/uploads/*","/wp-content/*","/wp-content/plugins/*","/wp-content/themes/avas/*","/*\\?(.+)"]}},{"not":{"selector_matches":"a[rel~=\"nofollow\"]"}},{"not":{"selector_matches":".no-prefetch, .no-prefetch a"}}]},"eagerness":"conservative"}]}
 </script>
 
-<!--Start of Tawk.to Script (0.9.3)-->
-<script id="tawk-script" type="text/javascript">
-var Tawk_API = Tawk_API || {};
-var Tawk_LoadStart=new Date();
-(function(){
-	var s1 = document.createElement( 'script' ),s0=document.getElementsByTagName( 'script' )[0];
-	s1.async = true;
-	s1.src = 'https://embed.tawk.to/6487533bcc26a871b0221582/1h2pmjvf4';
-	s1.charset = 'UTF-8';
-	s1.setAttribute( 'crossorigin','*' );
-	s0.parentNode.insertBefore( s1, s0 );
-})();
-</script>
-<!--End of Tawk.to Script (0.9.3)-->
-
-    <script>
+<script>
     jQuery(document).ready(function($) {
         "use strict";
         $(".menu-item-has-children > a").focus(function(){
@@ -1732,6 +1727,7 @@ var e="script#wp-emoji-settings",t=document.querySelector(e);if(!(t instanceof H
 </script>
 <script src="/assets/cms.js" defer></script>
 <script src="/assets/cms-section-nav.js" defer></script>
-<script src="/assets/amz-api-forms.js" defer></script>
+<script src="/assets/amz-api-forms.js?v=5" defer></script>
+<script src="/assets/amz-whatsapp.js?v=3" defer></script>
 </body>
 </html>

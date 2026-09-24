@@ -114,9 +114,48 @@ export function layoutRegionScope(html, region) {
 
   return (
     tryMatch(/<footer\b[^>]*>([\s\S]*?)<\/footer>/i) ||
-    tryMatch(
-      /<div\b[^>]*(?:id|class)=["'][^"']*(?:site-footer|main-footer|footer)[^"']*["'][^>]*>([\s\S]*?)<\/div>/i
-    ) || {
+    (() => {
+      // Exact class token "footer" (avoid menu-footer / footer-top)
+      const classDivRe = /<div\b[^>]*\bclass=["']([^"']*)["'][^>]*>/gi;
+      let m;
+      while ((m = classDivRe.exec(raw))) {
+        const tokens = String(m[1] || "")
+          .trim()
+          .split(/\s+/)
+          .filter(Boolean);
+        if (!tokens.includes("footer")) continue;
+        const start = m.index;
+        let depth = 0;
+        const re = /<\/?div\b[^>]*>/gi;
+        re.lastIndex = start;
+        let tm;
+        while ((tm = re.exec(raw))) {
+          if (/^<\/div/i.test(tm[0])) depth -= 1;
+          else depth += 1;
+          if (depth === 0) {
+            const open = m[0];
+            const close = tm[0];
+            return {
+              region: r,
+              open,
+              body: raw.slice(start + open.length, tm.index),
+              empty: false,
+              rebuild(nextBody) {
+                return (
+                  raw.slice(0, start) +
+                  open +
+                  nextBody +
+                  close +
+                  raw.slice(tm.index + close.length)
+                );
+              },
+            };
+          }
+        }
+        break;
+      }
+      return null;
+    })() || {
       region: r,
       open: "",
       body: "",
@@ -680,6 +719,14 @@ function injectHeaderMenus(html, items) {
     );
   }
 
+  // WordPress / Avas primary nav (#main-menu)
+  if (tops.length) {
+    const wpLis = tops
+      .map((item) => wpMenuItemLi(item, childrenOf(list, item.id)))
+      .join("\n                      ");
+    out = replaceUlInnerById(out, "main-menu", wpLis);
+  }
+
   return out;
 }
 
@@ -695,6 +742,51 @@ function footerItemLi(item, kids) {
     })
     .join("");
   return `<li data-cms-extra-menu="${a.id}"><a href="${a.href}"${a.section}>${a.label}</a><ul>${nested}</ul></li>`;
+}
+
+function replaceUlInnerById(html, ulId, lisHtml) {
+  const openRe = new RegExp(`<ul\\b([^>]*\\bid=["']${ulId}["'][^>]*)>`, "i");
+  const m = String(html).match(openRe);
+  if (!m) return html;
+  const openFull = m[0];
+  const start = m.index + openFull.length;
+  let depth = 1;
+  const re = /<\/?ul\b[^>]*>/gi;
+  re.lastIndex = start;
+  let tm;
+  while ((tm = re.exec(html))) {
+    if (/^<\/ul/i.test(tm[0])) {
+      depth -= 1;
+      if (depth === 0) {
+        return (
+          html.slice(0, start) +
+          `\n${lisHtml}\n                  ` +
+          html.slice(tm.index)
+        );
+      }
+    } else {
+      depth += 1;
+    }
+  }
+  return html;
+}
+
+function wpMenuItemLi(item, kids) {
+  const a = anchorAttrs(item);
+  const hasKids = kids && kids.length;
+  const cls = hasKids
+    ? "menu-item menu-item-has-children nomega-menu-item"
+    : "menu-item nomega-menu-item";
+  if (!hasKids) {
+    return `<li class="${cls}" data-cms-extra-menu="${a.id}"><a href="${a.href}"${a.section} class="mega-menu-title">${a.label}</a></li>`;
+  }
+  const nested = kids
+    .map((k) => {
+      const c = anchorAttrs(k);
+      return `<li class="menu-item nomega-menu-item" data-cms-extra-menu="${c.id}"><a href="${c.href}"${c.section} class="mega-menu-title">${c.label}</a></li>`;
+    })
+    .join("\n");
+  return `<li class="${cls}" data-cms-extra-menu="${a.id}"><a href="${a.href}"${a.section} class="mega-menu-title">${a.label}</a><ul class="sub-menu">${nested}</ul></li>`;
 }
 
 function injectFooterMenus(html, items) {
@@ -741,6 +833,24 @@ function injectFooterMenus(html, items) {
         }
       );
     }
+  }
+
+  // WordPress / Avas footer menus
+  const servicesLis = (servicesTop
+    ? childrenOf(list, servicesTop.id)
+    : tops
+  )
+    .map((item) => wpMenuItemLi(item, childrenOf(list, item.id)))
+    .join("\n                      ");
+  const bottomLis = (companyTops.length ? companyTops : tops)
+    .map((item) => wpMenuItemLi(item, childrenOf(list, item.id)))
+    .join("\n                    ");
+
+  if (servicesLis) {
+    out = replaceUlInnerById(out, "menu-footer-3", servicesLis);
+  }
+  if (bottomLis) {
+    out = replaceUlInnerById(out, "menu-footer-menu", bottomLis);
   }
 
   return out;

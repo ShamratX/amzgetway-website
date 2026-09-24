@@ -35,8 +35,8 @@ not_found_handling = "404-page"
 [vars]
 ALLOWED_ORIGINS = "http://127.0.0.1:8090,http://localhost:8090,http://127.0.0.1:8787,http://localhost:8787,https://amzgetway.com,https://www.amzgetway.com"
 PUBLIC_SITE_URL = "https://amzgetway.com"
-RECIPIENT_EMAIL = "amzexperts@amzgetway.com"
-SENDER_EMAIL = "AMZgetway <amzexperts@amzgetway.com>"
+RECIPIENT_EMAIL = "contact@amzgetway.com"
+SENDER_EMAIL = "AMZgetway <contact@amzgetway.com>"
 
 # Optional — Publish to GitHub / media features (needs GITHUB_TOKEN secret)
 GITHUB_REPO = "ShamratX/amzgetway-website"
