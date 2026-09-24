@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+Disallow: /admin/
+Disallow: /cms/
+Disallow: /wp-admin/
+Disallow: /wp-includes/
+
+Sitemap: https://amzgetway.com/sitemap.xml
