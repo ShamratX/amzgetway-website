@@ -84,6 +84,7 @@
             <div class="card-header">
               <h2>Leads</h2>
               <div>
+                <button type="button" class="btn btn-danger btn-sm" id="bulk-delete-leads" disabled>Delete selected</button>
                 <button type="button" class="btn btn-secondary btn-sm" id="export-leads">Export CSV</button>
                 <button type="button" class="btn btn-secondary btn-sm" id="refresh-leads">Refresh</button>
               </div>
@@ -96,11 +97,15 @@
                 <option value="contacted">Contacted</option>
                 <option value="closed">Closed</option>
               </select>
+              <span id="leads-selected-count" class="hint" style="margin-left:auto"></span>
             </div>
             <div class="table-wrap">
               <table class="data">
                 <thead>
                   <tr>
+                    <th class="lead-check-col">
+                      <input type="checkbox" id="leads-select-all" title="Select all" aria-label="Select all leads" />
+                    </th>
                     <th>Name</th>
                     <th>Email</th>
                     <th>Phone</th>
@@ -517,20 +522,20 @@
       <h3 id="lead-modal-title">Lead details</h3>
       <dl id="lead-modal-body"></dl>
       <div class="form-actions">
-        <label class="field-label" for="lead-modal-status" style="margin:0">Status</label>
+        <label class="field-label" for="lead-modal-status" style="margin:0">Mark status</label>
         <select id="lead-modal-status">
-          <option value="new">new</option>
-          <option value="contacted">contacted</option>
-          <option value="closed">closed</option>
+          <option value="new">New</option>
+          <option value="contacted">Contacted</option>
+          <option value="closed">Closed</option>
         </select>
-        <button type="button" class="btn btn-primary" id="lead-modal-save">Update status</button>
+        <button type="button" class="btn btn-primary" id="lead-modal-save">Save mark</button>
         <button type="button" class="btn btn-secondary" id="lead-modal-close">Close</button>
       </div>
     </div>
   </div>
 
   <script src="admin.js"></script>
-  <script src="admin-app.js?v=16"></script>
+  <script src="admin-app.js?v=19"></script>
 </body>
 
 </html>

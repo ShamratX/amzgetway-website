@@ -1050,9 +1050,18 @@ function isValidEmail(value) {
     "example.com", "example.org", "example.net", "domain.com", "asdf.com",
     "abc.com", "xxx.com", "mailinator.com", "guerrillamail.com", "tempmail.com",
     "temp-mail.org", "10minutemail.com", "yopmail.com", "trashmail.com",
-    "throwawaymail.com", "getnada.com",
+    "throwawaymail.com", "getnada.com", "jmailservice.com", "mailservice.com",
+    "fakemail.com", "temp-mail.io", "dispostable.com", "mailnesia.com",
+    "maildrop.cc", "moakt.com", "emailondeck.com", "fakeinbox.com",
   ]);
   if (fakeDomains.has(domain)) return false;
+  if (
+    /mailservice|tempmail|trashmail|throwaway|guerrillamail|fakeinbox|mailnesia|disposable|temp-mail|fakemail|yopmail|getnada|maildrop|moakt|emailondeck|sharklasers/i.test(
+      domain
+    )
+  ) {
+    return false;
+  }
 
   const domainLabel = domain.split(".")[0];
   if (local === domainLabel || localBase === domainLabel) return false;
@@ -1061,8 +1070,11 @@ function isValidEmail(value) {
 }
 
 function isValidPhone(value) {
-  const digits = value.replace(/\D/g, "");
-  return digits.length >= 10 && digits.length <= 15;
+  const digits = String(value || "").replace(/\D/g, "");
+  if (digits.length < 10 || digits.length > 15) return false;
+  // Reject placeholders like 0000000000 / 1111111111
+  if (/^(\d)\1{9,}$/.test(digits)) return false;
+  return true;
 }
 
 function isValidUrl(value) {
@@ -1456,13 +1468,9 @@ function validatePayload(body) {
     message: clean(body.message, MAX.message),
   };
 
-  if (
-    !data.clientName ||
-    !data.email ||
-    !data.phone ||
-    !data.businessName ||
-    !data.service
-  ) {
+  const isNewsletter = data.service === "Newsletter Subscribe";
+
+  if (!data.clientName || !data.email || !data.businessName || !data.service) {
     return { ok: false, message: "Please complete all required fields." };
   }
 
@@ -1470,11 +1478,17 @@ function validatePayload(body) {
     return { ok: false, message: "Please enter a valid email address." };
   }
 
-  if (!isValidPhone(data.phone)) {
-    return {
-      ok: false,
-      message: "Please enter a phone number with at least 10 digits.",
-    };
+  // Newsletter / forms without phone: empty OK. Fake zeros always rejected.
+  if (data.phone) {
+    if (!isValidPhone(data.phone)) {
+      return {
+        ok: false,
+        message: "Please enter a phone number with at least 10 digits.",
+      };
+    }
+  } else if (!isNewsletter) {
+    // Contact forms may omit phone (e.g. contact-us). Store empty, not zeros.
+    data.phone = "";
   }
 
   if (!ALLOWED_SERVICES.has(data.service)) {
@@ -1884,6 +1898,47 @@ async function handleAdminLeadDelete(env, origin, id) {
     return json({ success: false, message: "Lead not found." }, 404, origin);
   }
   return json({ success: true, message: "Lead deleted." }, 200, origin);
+}
+
+async function handleAdminLeadsBulkDelete(request, env, origin) {
+  let body;
+  try {
+    body = await request.json();
+  } catch (_) {
+    return json({ success: false, message: "Invalid JSON." }, 400, origin);
+  }
+  const raw = Array.isArray(body.ids) ? body.ids : [];
+  const ids = [];
+  const seen = new Set();
+  for (const v of raw) {
+    const n = Number(v);
+    if (!Number.isInteger(n) || n < 1 || seen.has(n)) continue;
+    seen.add(n);
+    ids.push(n);
+    if (ids.length >= 200) break;
+  }
+  if (!ids.length) {
+    return json({ success: false, message: "No leads selected." }, 400, origin);
+  }
+  const placeholders = ids.map(() => "?").join(",");
+  const result = await env.DB.prepare(
+    `DELETE FROM leads WHERE id IN (${placeholders})`
+  )
+    .bind(...ids)
+    .run();
+  const deleted = result.meta && result.meta.changes ? result.meta.changes : 0;
+  return json(
+    {
+      success: true,
+      deleted,
+      message:
+        deleted === 1
+          ? "1 lead deleted."
+          : deleted + " leads deleted.",
+    },
+    200,
+    origin
+  );
 }
 
 async function handleAdminLeadPatch(request, env, origin, id) {
@@ -2947,7 +3002,7 @@ async function handleAdminPagePublish(request, env, origin) {
 
 let cmsSchemaReady = false;
 let cmsDocCache = { at: 0, doc: null };
-const CMS_DOC_CACHE_MS = 10_000;
+const CMS_DOC_CACHE_MS = 30_000;
 
 function invalidateCmsDocCache() {
   cmsDocCache = { at: 0, doc: null };
@@ -3016,7 +3071,8 @@ function fixIndustriesNavToHomeSection(doc) {
   return { doc: merged, changed: true };
 }
 
-async function readCmsDocument(env) {
+async function readCmsDocument(env, options = {}) {
+  const repair = options.repair === true;
   const now = Date.now();
   if (cmsDocCache.doc && now - cmsDocCache.at < CMS_DOC_CACHE_MS) {
     return cmsDocCache.doc;
@@ -3030,40 +3086,45 @@ async function readCmsDocument(env) {
     stored = {};
   }
   let merged = deepMerge(CMS_DEFAULTS, stored);
-  try {
-    if (customPagesNeedRootMigrate(merged)) {
-      merged = await migrateCustomPagesToRoot(env, merged);
+
+  // Heavy one-shot repairs only on admin reads — never on public page TTFB path.
+  if (repair) {
+    try {
+      if (customPagesNeedRootMigrate(merged)) {
+        merged = await migrateCustomPagesToRoot(env, merged);
+      }
+    } catch (err) {
+      console.error("custom page root migrate failed", err);
     }
-  } catch (err) {
-    console.error("custom page root migrate failed", err);
-  }
-  try {
-    const fixed = fixIndustriesNavToHomeSection(merged);
-    if (fixed.changed) {
-      merged = fixed.doc;
-      await writeCmsDocument(env, merged);
+    try {
+      const fixed = fixIndustriesNavToHomeSection(merged);
+      if (fixed.changed) {
+        merged = fixed.doc;
+        await writeCmsDocument(env, merged);
+      }
+    } catch (err) {
+      console.error("industries nav fix failed", err);
     }
-  } catch (err) {
-    console.error("industries nav fix failed", err);
-  }
-  try {
-    const repaired = mergeCapturedSiteChrome(merged, {}, "");
-    if (repaired.changed) {
-      merged = repaired.doc;
-      await writeCmsDocument(env, merged);
+    try {
+      const repaired = mergeCapturedSiteChrome(merged, {}, "");
+      if (repaired.changed) {
+        merged = repaired.doc;
+        await writeCmsDocument(env, merged);
+      }
+    } catch (err) {
+      console.error("branding asset url repair failed", err);
     }
-  } catch (err) {
-    console.error("branding asset url repair failed", err);
-  }
-  try {
-    const deduped = await repairBuiltinPageDuplicates(env, merged);
-    if (deduped.changed) {
-      merged = deduped.doc;
-      await writeCmsDocument(env, merged);
+    try {
+      const deduped = await repairBuiltinPageDuplicates(env, merged);
+      if (deduped.changed) {
+        merged = deduped.doc;
+        await writeCmsDocument(env, merged);
+      }
+    } catch (err) {
+      console.error("builtin page duplicate repair failed", err);
     }
-  } catch (err) {
-    console.error("builtin page duplicate repair failed", err);
   }
+
   cmsDocCache = { at: Date.now(), doc: merged };
   return merged;
 }
@@ -3090,7 +3151,7 @@ async function seedSiteChromeFromHtml(env, doc) {
 }
 
 async function handleAdminCmsGet(env, origin) {
-  let data = await readCmsDocument(env);
+  let data = await readCmsDocument(env, { repair: true });
   const seeded = await seedSiteChromeFromHtml(env, data);
   if (seeded.changed) data = seeded.doc;
   return json(
@@ -3724,8 +3785,97 @@ async function handleAdminMenuUpdate(request, env, origin) {
   return json({ success: true, menus: doc, cms: merged }, 200, origin);
 }
 
-async function serveAssetWithCms(request, env) {
+/** Long cache for immutable-ish static files (deploy changes bust URLs / ETags). */
+function staticAssetCacheControl(pathname) {
+  const p = String(pathname || "").toLowerCase();
+  // Versioned site helpers (?v=) + fonts/images/css/js from the static export
+  if (
+    /^\/assets\//.test(p) ||
+    /^\/wp-content\//.test(p) ||
+    /^\/wp-includes\//.test(p)
+  ) {
+    return "public, max-age=604800, s-maxage=604800, stale-while-revalidate=86400";
+  }
+  return "public, max-age=86400, s-maxage=86400, stale-while-revalidate=604800";
+}
+
+function withStaticCacheHeaders(res, pathname) {
+  const headers = new Headers(res.headers);
+  headers.set("cache-control", staticAssetCacheControl(pathname));
+  return new Response(res.body, { status: res.status, statusText: res.statusText, headers });
+}
+
+/** Faster perceived load — no visual removals; only load-order / unused font cuts. */
+function speedBoostHtml(html) {
+  let out = String(html || "");
+
+  // Drop unused Elementor Google Font dumps (every weight+italic of Roboto/Slab/Open Sans).
+  // Site UI uses Josefin Sans + Rajdhani (already loaded).
+  out = out.replace(
+    /<link[^>]+id=(['"])elementor-gf-(?:roboto|robotoslab|opensans)-css\1[^>]*>\s*/gi,
+    ""
+  );
+
+  // Slim the huge Josefin+Rajdhani "all weights" stylesheet to the weights actually used.
+  out = out.replace(
+    /https:\/\/fonts\.googleapis\.com\/css\?family=Josefin%20Sans:[^"'>\s]+/gi,
+    "https://fonts.googleapis.com/css?family=Josefin+Sans:400,600,700|Rajdhani:400,500,600,700&display=swap"
+  );
+  out = out.replace(
+    /https:\/\/fonts\.googleapis\.com\/css\?family=Josefin\+Sans:[^"'>\s]+/gi,
+    "https://fonts.googleapis.com/css?family=Josefin+Sans:400,600,700|Rajdhani:400,500,600,700&display=swap"
+  );
+
+  // Defer parser-blocking scripts (keep jQuery sync — theme inline code depends on it).
+  out = out.replace(
+    /<script(\s[^>]*?)src=(['"])([^'"]+)\2([^>]*)>/gi,
+    function (full, pre, q, src, post) {
+      const attrs = (String(pre || "") + " " + String(post || "")).toLowerCase();
+      if (/\bdefer\b/.test(attrs) || /\basync\b/.test(attrs)) return full;
+      if (/jquery(?:-migrate)?\.min\.js/i.test(src)) return full;
+      if (/type\s*=\s*['"]application\/ld\+json['"]/i.test(attrs)) return full;
+      const mid = String(post || "");
+      if (/\sdefer\b/i.test(mid) || /\sasync\b/i.test(mid)) return full;
+      return "<script" + pre + "src=" + q + src + q + " defer" + mid + ">";
+    }
+  );
+
+  // Don't force sync image decode (hurts LCP on large hero).
+  out = out.replace(/\sdecoding=(['"])sync\1/gi, ' decoding="async"');
+
+  return out;
+}
+
+async function serveAssetWithCms(request, env, ctx) {
   const url = new URL(request.url);
+  const pathLower = (url.pathname || "").toLowerCase();
+  // Admin / CMS builder: never run public CMS overlays or HTML speed rewrites.
+  if (pathLower === "/admin" || pathLower.indexOf("/admin/") === 0 || pathLower.indexOf("/cms/") === 0) {
+    const res = await env.ASSETS.fetch(request);
+    if (!res.ok) return res;
+    const ct = (res.headers.get("content-type") || "").toLowerCase();
+    const headers = new Headers(res.headers);
+    headers.set(
+      "permissions-policy",
+      "local-network-access=(), local-network=(), loopback-network=(), window-management=()"
+    );
+    if (ct.includes("text/html")) {
+      headers.set("cache-control", "no-store");
+    } else if (
+      /\.(js|css|png|jpe?g|gif|webp|svg|woff2?)$/i.test(url.pathname)
+    ) {
+      headers.set(
+        "cache-control",
+        "public, max-age=300, s-maxage=300, stale-while-revalidate=86400"
+      );
+    }
+    return new Response(res.body, {
+      status: res.status,
+      statusText: res.statusText,
+      headers,
+    });
+  }
+
   const pagePath = htmlPathFromUrl(url.pathname);
   // Extensionless paths are HTML routes (/services/foo), not static assets.
   const looksHtml =
@@ -3733,6 +3883,29 @@ async function serveAssetWithCms(request, env) {
     url.pathname === "/" ||
     url.pathname.endsWith("/") ||
     !/\.[a-z0-9]+$/i.test(url.pathname);
+
+  // Fast path: CSS/JS/images/fonts — no D1/CMS, long browser+edge cache.
+  if (!looksHtml && env.ASSETS) {
+    const res = await env.ASSETS.fetch(request);
+    if (!res.ok) return res;
+    return withStaticCacheHeaders(res, url.pathname);
+  }
+
+  // Edge Cache API: skip D1/CMS rebuild on warm HTML (same PoP).
+  const HTML_CACHE_VER = "speed3";
+  const cache = typeof caches !== "undefined" ? caches.default : null;
+  const htmlCacheKey =
+    cache && request.method === "GET"
+      ? new Request(url.origin + url.pathname + "?amzcv=" + HTML_CACHE_VER, {
+          method: "GET",
+        })
+      : null;
+  if (htmlCacheKey) {
+    try {
+      const hit = await cache.match(htmlCacheKey);
+      if (hit) return hit;
+    } catch (_) {}
+  }
 
   let html = null;
   let status = 200;
@@ -3743,10 +3916,11 @@ async function serveAssetWithCms(request, env) {
       "local-network-access=(), local-network=(), loopback-network=(), window-management=()",
   });
 
+  // One CMS read for redirects + overlays (no repair work on public path).
+  let doc = null;
   if (looksHtml && env.DB) {
-    // CMS-renamed page URLs: old path ΓåÆ new path
     try {
-      const doc = await readCmsDocument(env);
+      doc = await readCmsDocument(env);
       const redirected = resolveRedirectPath(doc, pagePath);
       if (redirected && redirected !== pagePath) {
         const dest = publicHrefForPath(redirected);
@@ -3756,7 +3930,7 @@ async function serveAssetWithCms(request, env) {
       console.error("page redirect check failed", err);
     }
 
-    // Old custom URLs under /services/{slug} ΓåÆ /{slug}
+    // Old custom URLs under /services/{slug} → /{slug}
     const legacySvc =
       url.pathname.match(/^\/services\/([a-z0-9]+(?:-[a-z0-9]+)*)\.html$/i) ||
       url.pathname.match(/^\/services\/([a-z0-9]+(?:-[a-z0-9]+)*)$/i);
@@ -3782,19 +3956,22 @@ async function serveAssetWithCms(request, env) {
       }
     }
 
-    try {
-      const row = await env.DB.prepare(`SELECT html FROM pages WHERE path = ?`)
-        .bind(pagePath)
-        .first();
-      if (row && typeof row.html === "string" && row.html.length) {
-        html = row.html;
+    // Builtin mirrored pages live in ASSETS — skip D1 html lookup (saves ~1 RTT).
+    if (!PAGE_ALLOWLIST_SET.has(pagePath)) {
+      try {
+        const row = await env.DB.prepare(`SELECT html FROM pages WHERE path = ?`)
+          .bind(pagePath)
+          .first();
+        if (row && typeof row.html === "string" && row.html.length) {
+          html = row.html;
+        }
+      } catch (err) {
+        console.error("D1 page read failed", err);
       }
-    } catch (err) {
-      console.error("D1 page read failed", err);
     }
   }
 
-  // Canonical clean URLs: /path.html ΓåÆ /path (same as static HTML assets).
+  // Canonical clean URLs: /path.html → /path (same as static HTML assets).
   if (
     html != null &&
     /\.html$/i.test(url.pathname) &&
@@ -3804,70 +3981,74 @@ async function serveAssetWithCms(request, env) {
     return Response.redirect(clean.toString(), 301);
   }
 
-  const res = await env.ASSETS.fetch(request);
-  const ct = (res.headers.get("content-type") || "").toLowerCase();
-  const isHtml =
-    looksHtml ||
-    ct.includes("text/html");
-
+  // Skip ASSETS round-trip when D1 already has the page HTML (faster TTFB).
   if (html == null) {
-    if (!isHtml || !res.ok) return res;
+    const res = await env.ASSETS.fetch(request);
+    const ct = (res.headers.get("content-type") || "").toLowerCase();
+    const isHtml = looksHtml || ct.includes("text/html");
+    if (!isHtml || !res.ok) {
+      if (!isHtml && res.ok) return withStaticCacheHeaders(res, url.pathname);
+      return res;
+    }
     html = await res.text();
     status = res.status;
     baseHeaders = new Headers(res.headers);
   }
 
   try {
-    const doc = await readCmsDocument(env);
-    const overrides =
-      doc.autoPages && doc.autoPages[pagePath] ? doc.autoPages[pagePath] : null;
-    const hasSections =
-      doc.pageSections &&
-      Array.isArray(doc.pageSections[pagePath]) &&
-      doc.pageSections[pagePath].length > 0;
-    // Section-builder pages are compiled HTML ΓÇö don't re-apply field overrides
-    if (overrides && !hasSections) html = applyEditables(html, overrides);
-    // Sitewide header/footer menus (auto). New pages only appear in Services
-    // when nested under that parent in Menus ΓÇö no auto-inject into nav/cards.
-    html = applyAllLayout(html, doc.layout);
-    html = injectCustomMenus(html, customMenusFromDoc(doc));
+    if (!doc && env.DB) doc = await readCmsDocument(env);
+    if (doc) {
+      const overrides =
+        doc.autoPages && doc.autoPages[pagePath] ? doc.autoPages[pagePath] : null;
+      const hasSections =
+        doc.pageSections &&
+        Array.isArray(doc.pageSections[pagePath]) &&
+        doc.pageSections[pagePath].length > 0;
+      if (overrides && !hasSections) html = applyEditables(html, overrides);
+      html = applyAllLayout(html, doc.layout);
+      html = injectCustomMenus(html, customMenusFromDoc(doc));
 
-    if (doc.pageSeo && doc.pageSeo[pagePath]) {
-      html = applyPageSeo(html, doc.pageSeo[pagePath]);
-    }
+      if (doc.pageSeo && doc.pageSeo[pagePath]) {
+        html = applyPageSeo(html, doc.pageSeo[pagePath]);
+      }
 
-    if (doc.branding) {
-      html = applyBranding(html, doc.branding);
-    }
+      if (doc.branding) {
+        html = applyBranding(html, doc.branding);
+      }
 
-    if (doc.footer) {
-      html = applyFooter(html, doc.footer);
+      if (doc.footer) {
+        html = applyFooter(html, doc.footer);
+      }
     }
   } catch (err) {
     console.error("CMS apply failed", err);
   }
 
-  // Keep public meta URLs extensionless (stored HTML may still say *.html).
   html = String(html).replace(
     /(https:\/\/amzgetway\.com\/[^"'>\s]+?)\.html(?=["'\s>])/gi,
     "$1"
   );
+  html = speedBoostHtml(html);
 
-  // Short edge cache; CMS saves clear worker memory cache. UI unchanged.
+  // Longer edge cache — GTmetrix "page generation" is cold Worker+D1; warm hits edge.
   baseHeaders.set(
     "cache-control",
-    "public, max-age=0, s-maxage=30, stale-while-revalidate=120"
+    "public, max-age=0, s-maxage=600, stale-while-revalidate=86400"
   );
   baseHeaders.set("content-type", "text/html; charset=utf-8");
-  // Re-apply after ASSETS headers replace baseHeaders (otherwise Chrome LNA prompt returns)
   baseHeaders.set(
     "permissions-policy",
     "local-network-access=(), local-network=(), loopback-network=(), window-management=()"
   );
-  return new Response(html, { status, headers: baseHeaders });
+  const out = new Response(html, { status, headers: baseHeaders });
+  if (htmlCacheKey && ctx && typeof ctx.waitUntil === "function") {
+    try {
+      ctx.waitUntil(cache.put(htmlCacheKey, out.clone()));
+    } catch (_) {}
+  }
+  return out;
 }
 
-/* ΓöÇΓöÇ Admin router ΓöÇΓöÇ */
 
 async function handleAdmin(request, env, origin, url) {
   const path = url.pathname.replace(/\/+$/, "") || "/";
@@ -3945,6 +4126,9 @@ async function handleAdmin(request, env, origin, url) {
   if (path === "/api/admin/leads/export" && request.method === "GET") {
     return handleAdminLeadsExport(env, origin);
   }
+  if (path === "/api/admin/leads/bulk-delete" && request.method === "POST") {
+    return handleAdminLeadsBulkDelete(request, env, origin);
+  }
 
   const leadMatch = path.match(/^\/api\/admin\/leads\/(\d+)$/);
   if (leadMatch && request.method === "PATCH") {
@@ -4013,7 +4197,7 @@ async function handleAdmin(request, env, origin, url) {
 /* ΓöÇΓöÇ Router ΓöÇΓöÇ */
 
 export default {
-  async fetch(request, env) {
+  async fetch(request, env, ctx) {
     const url = new URL(request.url);
 
     // Apex canonical: www ΓåÆ non-www
@@ -4096,7 +4280,7 @@ export default {
 
       // Non-/api requests are served by Workers static assets (see wrangler.toml).
       if (env.ASSETS) {
-        return serveAssetWithCms(request, env);
+        return serveAssetWithCms(request, env, ctx);
       }
 
       return json({ success: false, message: "Not found." }, 404, origin);

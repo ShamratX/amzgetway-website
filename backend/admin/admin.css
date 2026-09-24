@@ -1301,6 +1301,71 @@ table.data tr:hover td { background: #fafafa; }
 .badge-published { background: #ecfdf5; color: #047857; }
 .badge-draft { background: #f3f4f6; color: #4b5563; }
 
+.lead-row-new td:first-child {
+  box-shadow: inset 3px 0 0 #2563eb;
+}
+.lead-row-contacted td:first-child {
+  box-shadow: inset 3px 0 0 #ea580c;
+}
+.lead-row-closed td:first-child {
+  box-shadow: inset 3px 0 0 #9ca3af;
+}
+.lead-row-closed {
+  opacity: 0.78;
+}
+.lead-status-select.lead-status-new {
+  border-color: #93c5fd;
+  background: #eff6ff;
+  color: #1d4ed8;
+  font-weight: 600;
+}
+.lead-status-select.lead-status-contacted {
+  border-color: #fdba74;
+  background: #fff7ed;
+  color: #c2410c;
+  font-weight: 600;
+}
+.lead-status-select.lead-status-closed {
+  border-color: #d1d5db;
+  background: #f3f4f6;
+  color: #4b5563;
+  font-weight: 600;
+}
+.lead-actions {
+  white-space: nowrap;
+}
+.lead-check-col {
+  width: 2.25rem;
+  text-align: center;
+  vertical-align: middle;
+}
+.lead-check-col input[type="checkbox"] {
+  width: 1.05rem;
+  height: 1.05rem;
+  cursor: pointer;
+  accent-color: #F28B15;
+}
+#bulk-delete-leads:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.btn-mark {
+  background: #fff7ed;
+  color: #c2410c;
+  border: 1px solid #fdba74;
+}
+.btn-mark:hover {
+  background: #ffedd5;
+}
+.btn-mark-done {
+  background: #f3f4f6;
+  color: #374151;
+  border: 1px solid #d1d5db;
+}
+.btn-mark-done:hover {
+  background: #e5e7eb;
+}
+
 .empty {
   text-align: center;
   padding: 2rem 1rem;

@@ -101,6 +101,7 @@
 
   function badge(status, kind) {
     var cls = "badge ";
+    var label = status || "";
     if (kind === "lead") {
       cls +=
         status === "new"
@@ -108,10 +109,62 @@
           : status === "contacted"
             ? "badge-contacted"
             : "badge-closed";
+      label =
+        status === "new"
+          ? "New"
+          : status === "contacted"
+            ? "Contacted"
+            : status === "closed"
+              ? "Closed"
+              : status;
     } else {
       cls += status === "published" ? "badge-published" : "badge-draft";
     }
-    return '<span class="' + cls + '">' + Admin.esc(status) + "</span>";
+    return '<span class="' + cls + '">' + Admin.esc(label) + "</span>";
+  }
+
+  var LEAD_STATUSES = [
+    { value: "new", label: "New" },
+    { value: "contacted", label: "Contacted" },
+    { value: "closed", label: "Closed" },
+  ];
+
+  function leadStatusOptionsHtml(current) {
+    return LEAD_STATUSES.map(function (s) {
+      return (
+        '<option value="' +
+        s.value +
+        '"' +
+        (current === s.value ? " selected" : "") +
+        ">" +
+        s.label +
+        "</option>"
+      );
+    }).join("");
+  }
+
+  async function setLeadStatus(id, status, opts) {
+    opts = opts || {};
+    if (!Number.isInteger(id) || id < 1) throw new Error("Invalid lead ID");
+    await Admin.api("PATCH", "/api/admin/leads/" + id, { status: status });
+    var lead = state.leads.find(function (l) {
+      return l.id === id;
+    });
+    if (lead) lead.status = status;
+    if (!opts.silent) {
+      toast(
+        status === "contacted"
+          ? "Marked as Contacted."
+          : status === "closed"
+            ? "Marked as Closed."
+            : status === "new"
+              ? "Marked as New."
+              : "Lead status updated.",
+        true
+      );
+    }
+    renderDash();
+    if (!opts.skipRender) renderLeads();
   }
 
   function showPanel(name) {
@@ -218,7 +271,7 @@
     var url = URL.createObjectURL(blob);
     var a = document.createElement("a");
     a.href = url;
-    a.download = "townloc-leads-" + day + ".csv";
+    a.download = "amzgetway-leads-" + day + ".csv";
     document.body.appendChild(a);
     a.click();
     a.remove();
@@ -336,16 +389,30 @@
     var rows = filteredLeads();
     var tbody = $("leads-body");
     var empty = $("leads-empty");
+    var selectAll = $("leads-select-all");
     tbody.innerHTML = "";
     if (!rows.length) {
       empty.hidden = false;
+      if (selectAll) {
+        selectAll.checked = false;
+        selectAll.indeterminate = false;
+      }
+      updateLeadsSelectionUi();
       return;
     }
     empty.hidden = true;
     rows.forEach(function (lead) {
+      var st = lead.status || "new";
       var tr = document.createElement("tr");
+      tr.className = "lead-row lead-row-" + st;
       tr.innerHTML =
-        "<td>" +
+        '<td class="lead-check-col">' +
+        '<input type="checkbox" class="lead-check" data-lead-id="' +
+        lead.id +
+        '" aria-label="Select lead ' +
+        Admin.esc(lead.name || String(lead.id)) +
+        '" />' +
+        "</td><td>" +
         Admin.esc(lead.name) +
         "</td><td>" +
         (lead.email
@@ -356,32 +423,22 @@
             "</a>"
           : "") +
         "</td><td>" +
-        Admin.esc(lead.phone || "") +
+        Admin.esc(lead.phone || "—") +
         "</td><td>" +
         Admin.esc(lead.business || "") +
         "</td><td>" +
         Admin.esc(lead.service) +
         "</td><td>" +
-        '<select class="cms-select cms-select-sm" data-lead-status="' +
+        '<select class="cms-select cms-select-sm lead-status-select lead-status-' +
+        st +
+        '" data-lead-status="' +
         lead.id +
         '" aria-label="Lead status">' +
-        ["new", "contacted", "closed"]
-          .map(function (s) {
-            return (
-              '<option value="' +
-              s +
-              '"' +
-              (lead.status === s ? " selected" : "") +
-              ">" +
-              s +
-              "</option>"
-            );
-          })
-          .join("") +
+        leadStatusOptionsHtml(st) +
         "</select>" +
         "</td><td>" +
         Admin.esc(lead.created_at) +
-        '</td><td style="white-space:nowrap">' +
+        '</td><td class="lead-actions">' +
         '<button type="button" class="btn btn-secondary btn-sm" data-view-lead="' +
         lead.id +
         '">View</button> ' +
@@ -400,24 +457,82 @@
         deleteLead(Number(btn.getAttribute("data-delete-lead")));
       });
     });
+    tbody.querySelectorAll(".lead-check").forEach(function (cb) {
+      cb.addEventListener("change", updateLeadsSelectionUi);
+    });
     tbody.querySelectorAll("[data-lead-status]").forEach(function (sel) {
       sel.addEventListener("change", async function () {
         var id = Number(sel.getAttribute("data-lead-status"));
+        sel.disabled = true;
         try {
-          await Admin.api("PATCH", "/api/admin/leads/" + id, {
-            status: sel.value,
-          });
-          var lead = state.leads.find(function (l) {
-            return l.id === id;
-          });
-          if (lead) lead.status = sel.value;
-          toast("Lead status updated.", true);
+          await setLeadStatus(id, sel.value, { skipRender: false });
         } catch (ex) {
           toast(ex.message || "Unable to update lead.", false);
           renderLeads();
         }
       });
     });
+    updateLeadsSelectionUi();
+  }
+
+  function selectedLeadIds() {
+    var ids = [];
+    document.querySelectorAll("#leads-body .lead-check:checked").forEach(function (cb) {
+      var id = Number(cb.getAttribute("data-lead-id"));
+      if (Number.isInteger(id) && id > 0) ids.push(id);
+    });
+    return ids;
+  }
+
+  function updateLeadsSelectionUi() {
+    var checks = document.querySelectorAll("#leads-body .lead-check");
+    var selected = selectedLeadIds();
+    var selectAll = $("leads-select-all");
+    var bulkBtn = $("bulk-delete-leads");
+    var countEl = $("leads-selected-count");
+    if (selectAll) {
+      var n = checks.length;
+      var s = selected.length;
+      selectAll.checked = n > 0 && s === n;
+      selectAll.indeterminate = s > 0 && s < n;
+    }
+    if (bulkBtn) bulkBtn.disabled = selected.length === 0;
+    if (countEl) {
+      countEl.textContent =
+        selected.length > 0
+          ? selected.length + " selected"
+          : "";
+    }
+  }
+
+  async function bulkDeleteLeads() {
+    var ids = selectedLeadIds();
+    if (!ids.length) return toast("Select at least one lead.", false);
+    var ok = await confirmDialog(
+      "Delete " +
+        ids.length +
+        " selected lead" +
+        (ids.length === 1 ? "" : "s") +
+        "? This cannot be undone."
+    );
+    if (!ok) return;
+    var bulkBtn = $("bulk-delete-leads");
+    if (bulkBtn) bulkBtn.disabled = true;
+    try {
+      var res = await Admin.api("POST", "/api/admin/leads/bulk-delete", {
+        ids: ids,
+      });
+      toast(
+        (res && res.message) ||
+          ids.length + " lead" + (ids.length === 1 ? "" : "s") + " deleted.",
+        true
+      );
+      closeLeadModal();
+      await loadLeads();
+    } catch (ex) {
+      toast(ex.message || "Unable to delete selected leads.", false);
+      updateLeadsSelectionUi();
+    }
   }
 
   function openLeadModal(id) {
@@ -444,6 +559,7 @@
       "</dd><dt>Created</dt><dd>" +
       Admin.esc(lead.created_at) +
       "</dd>";
+    $("lead-modal-status").innerHTML = leadStatusOptionsHtml(lead.status || "new");
     $("lead-modal-status").value = lead.status || "new";
     $("lead-modal").hidden = false;
     $("lead-modal").classList.add("show");
@@ -3887,21 +4003,35 @@
 
   $("leads-search").addEventListener("input", renderLeads);
   $("leads-filter").addEventListener("change", renderLeads);
+  if ($("leads-select-all")) {
+    $("leads-select-all").addEventListener("change", function () {
+      var on = $("leads-select-all").checked;
+      document.querySelectorAll("#leads-body .lead-check").forEach(function (cb) {
+        cb.checked = on;
+      });
+      updateLeadsSelectionUi();
+    });
+  }
+  if ($("bulk-delete-leads")) {
+    $("bulk-delete-leads").addEventListener("click", function () {
+      bulkDeleteLeads();
+    });
+  }
   $("lead-modal-close").addEventListener("click", closeLeadModal);
   $("lead-modal").addEventListener("click", function (e) {
     if (e.target === $("lead-modal")) closeLeadModal();
   });
   $("lead-modal-save").addEventListener("click", async function () {
     if (!state.activeLeadId) return;
+    var btn = $("lead-modal-save");
+    btn.disabled = true;
     try {
-      await Admin.api("PATCH", "/api/admin/leads/" + state.activeLeadId, {
-        status: $("lead-modal-status").value,
-      });
-      toast("Lead updated successfully.", true);
+      await setLeadStatus(state.activeLeadId, $("lead-modal-status").value);
       closeLeadModal();
-      await loadLeads();
     } catch (ex) {
       toast(ex.message || "Unable to update lead.", false);
+    } finally {
+      btn.disabled = false;
     }
   });
 

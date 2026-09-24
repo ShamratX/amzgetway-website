@@ -1,0 +1,9 @@
+# Cloudflare Workers static asset headers (asset-first paths)
+/wp-content/*
+  Cache-Control: public, max-age=604800, s-maxage=604800, stale-while-revalidate=86400
+
+/wp-includes/*
+  Cache-Control: public, max-age=604800, s-maxage=604800, stale-while-revalidate=86400
+
+/assets/*
+  Cache-Control: public, max-age=604800, s-maxage=604800, stale-while-revalidate=86400

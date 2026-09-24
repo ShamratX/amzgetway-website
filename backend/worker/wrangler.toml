@@ -29,7 +29,13 @@ routes = []
 # Website root (HTML + /admin + /assets + /cms) relative to this worker folder
 directory = "../../export/site"
 binding = "ASSETS"
-run_worker_first = true
+# Worker first for HTML/CMS; static WP assets skip Worker (faster).
+run_worker_first = [
+  "/*",
+  "!/wp-content/*",
+  "!/wp-includes/*",
+  "!/assets/*",
+]
 not_found_handling = "404-page"
 
 [vars]

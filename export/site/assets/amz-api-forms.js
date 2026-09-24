@@ -57,6 +57,16 @@
     "guerrillamailblock.com": 1,
     "throwawaymail.com": 1,
     "getnada.com": 1,
+    "jmailservice.com": 1,
+    "mailservice.com": 1,
+    "fakemail.com": 1,
+    "temp-mail.io": 1,
+    "dispostable.com": 1,
+    "mailnesia.com": 1,
+    "maildrop.cc": 1,
+    "moakt.com": 1,
+    "emailondeck.com": 1,
+    "fakeinbox.com": 1,
   };
 
   function ensureStyles() {
@@ -199,8 +209,16 @@
     if (/^(.)\1{3,}$/.test(local)) return false;
 
     if (FAKE_DOMAINS[domain]) return false;
+    // Disposable / fake-looking domain patterns (e.g. jmailservice.com)
+    if (
+      /mailservice|tempmail|trashmail|throwaway|guerrillamail|fakeinbox|mailnesia|disposable|temp-mail|fakemail|yopmail|getnada|maildrop|moakt|emailondeck|sharklasers/i.test(
+        domain
+      )
+    ) {
+      return false;
+    }
     var domRoot = domain.replace(/\.(com|net|org|info|xyz|co|io)$/i, "");
-    if (/^(test|fake|asdf|example|temp|mail|email|xxx|abc)$/i.test(domRoot)) return false;
+    if (/^(test|fake|asdf|example|temp|mail|email|xxx|abc|jmail)$/i.test(domRoot)) return false;
 
     var domainLabel = domain.split(".")[0];
     if (local === domainLabel) return false;
@@ -212,6 +230,24 @@
     return true;
   }
 
+  function phoneDigits(phone) {
+    return String(phone || "").replace(/\D/g, "");
+  }
+
+  function isValidRealPhone(phone) {
+    var digits = phoneDigits(phone);
+    if (digits.length < 10 || digits.length > 15) return false;
+    if (/^(\d)\1{9,}$/.test(digits)) return false; // 0000000000, 1111111111…
+    if (/^0{10,}$/.test(digits)) return false;
+    return true;
+  }
+
+  function formHasPhoneField(form) {
+    return !!form.querySelector(
+      '[name="PhoneNumber"],[name="phone"],[name="Phone"],[name="your-phone"],[name="tel"],[name="telephone"],[type="tel"]'
+    );
+  }
+
   function isSubscribe(form) {
     var submit = form.querySelector('input[type="submit"], button[type="submit"]');
     var label = ((submit && submit.value) || "").toUpperCase();
@@ -221,7 +257,19 @@
   function buildPayload(form) {
     var email = val(form, ["your-email", "Email", "email"]);
     var name = val(form, ["Name", "your-name", "clientName", "name"]);
-    var phone = val(form, ["phone", "Phone", "your-phone", "tel"]);
+    if (!name) {
+      var first = val(form, ["FirstName", "first-name", "first_name"]);
+      var last = val(form, ["LastName", "last-name", "last_name"]);
+      name = [first, last].filter(Boolean).join(" ").trim();
+    }
+    var phone = val(form, [
+      "PhoneNumber",
+      "phone",
+      "Phone",
+      "your-phone",
+      "tel",
+      "telephone",
+    ]);
     var listing = val(form, ["ListingLink", "mapsLink", "listing", "url"]);
     var message = val(form, ["Massage", "message", "Message", "your-message"]);
     var service = val(form, ["service", "Service"]);
@@ -230,26 +278,28 @@
       return {
         clientName: name || (email ? email.split("@")[0] : "Subscriber"),
         email: email,
-        phone: phone || "0000000000",
+        phone: phone || "",
         businessName: "Newsletter",
         service: "Newsletter Subscribe",
         message: message || "Newsletter subscribe from site footer/form.",
         mapsLink: "",
         website2: val(form, ["website2"]),
         _kind: "subscribe",
+        _requirePhone: false,
       };
     }
 
     return {
       clientName: name || (email ? email.split("@")[0] : "Website lead"),
       email: email,
-      phone: phone || "0000000000",
+      phone: phone || "",
       businessName: listing || name || "AmzGetway inquiry",
       service: service || "Amazon / Walmart Services",
       message: message || "",
       mapsLink: listing && /^https?:\/\//i.test(listing) ? listing : "",
       website2: val(form, ["website2"]),
       _kind: "contact",
+      _requirePhone: formHasPhoneField(form),
     };
   }
 
@@ -264,7 +314,9 @@
 
     var payload = buildPayload(form);
     var kind = payload._kind;
+    var requirePhone = !!payload._requirePhone;
     delete payload._kind;
+    delete payload._requirePhone;
 
     if (!isValidRealEmail(payload.email)) {
       showDialog({
@@ -275,6 +327,30 @@
       });
       var emailEl = form.querySelector('[name="your-email"],[name="Email"],[name="email"]');
       if (emailEl) emailEl.focus();
+      return;
+    }
+
+    if (requirePhone && !isValidRealPhone(payload.phone)) {
+      showDialog({
+        kind: "err",
+        title: "Phone required",
+        text: "Please enter a valid phone number (at least 10 digits).",
+        btn: "Try again",
+      });
+      var phoneEl = form.querySelector(
+        '[name="PhoneNumber"],[name="phone"],[name="Phone"],[name="your-phone"],[name="tel"],[type="tel"]'
+      );
+      if (phoneEl) phoneEl.focus();
+      return;
+    }
+
+    if (payload.phone && !isValidRealPhone(payload.phone)) {
+      showDialog({
+        kind: "err",
+        title: "Invalid phone",
+        text: "Please enter a valid phone number.",
+        btn: "Try again",
+      });
       return;
     }
 

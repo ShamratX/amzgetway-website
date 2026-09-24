@@ -102,7 +102,7 @@ From `scripts/pipeline/` (needs local WP on `:8080`):
 3. `postprocess.ps1`
 4. `qa.ps1` → writes `qa/report.txt`
 
-See `docs/PLAN.md` and `scripts/README.md`.
+See `scripts/README.md`.
 
 ## Notes
 
