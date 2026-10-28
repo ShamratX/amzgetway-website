@@ -722,7 +722,7 @@ function injectHeaderMenus(html, items) {
   // WordPress / Avas primary nav (#main-menu)
   if (tops.length) {
     const wpLis = tops
-      .map((item) => wpMenuItemLi(item, childrenOf(list, item.id)))
+      .map((item) => wpMenuItemLi(item, childrenOf(list, item.id), list))
       .join("\n                      ");
     out = replaceUlInnerById(out, "main-menu", wpLis);
   }
@@ -771,7 +771,7 @@ function replaceUlInnerById(html, ulId, lisHtml) {
   return html;
 }
 
-function wpMenuItemLi(item, kids) {
+function wpMenuItemLi(item, kids, list) {
   const a = anchorAttrs(item);
   const hasKids = kids && kids.length;
   const cls = hasKids
@@ -783,7 +783,18 @@ function wpMenuItemLi(item, kids) {
   const nested = kids
     .map((k) => {
       const c = anchorAttrs(k);
-      return `<li class="menu-item nomega-menu-item" data-cms-extra-menu="${c.id}"><a href="${c.href}"${c.section} class="mega-menu-title">${c.label}</a></li>`;
+      // Second level (e.g. Product Listing > Product Research): same markup the theme CSS expects.
+      const grand = list ? childrenOf(list, k.id) : [];
+      if (!grand.length) {
+        return `<li class="menu-item nomega-menu-item" data-cms-extra-menu="${c.id}"><a href="${c.href}"${c.section} class="mega-menu-title">${c.label}</a></li>`;
+      }
+      const grandLis = grand
+        .map((g) => {
+          const d = anchorAttrs(g);
+          return `<li class="menu-item nomega-menu-item" data-cms-extra-menu="${d.id}"><a href="${d.href}"${d.section} class="mega-menu-title">${d.label}</a></li>`;
+        })
+        .join("\n");
+      return `<li class="menu-item menu-item-has-children nomega-menu-item" data-cms-extra-menu="${c.id}"><a href="${c.href}"${c.section} class="mega-menu-title">${c.label}</a><ul class='depth1 standard sub-menu'>${grandLis}</ul></li>`;
     })
     .join("\n");
   return `<li class="${cls}" data-cms-extra-menu="${a.id}"><a href="${a.href}"${a.section} class="mega-menu-title">${a.label}</a><ul class="sub-menu">${nested}</ul></li>`;
