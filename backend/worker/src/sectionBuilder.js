@@ -470,9 +470,13 @@ export function compileServicePageFromSections(templateHtml, opts) {
     </div>
     ${renderSectionsHtml(sections)}`;
 
-  if (/<main\b[^>]*>[\s\S]*?<\/main>/i.test(html)) {
+  // Anchored to start-of-line so a doc comment that merely *mentions* <main>
+  // (e.g. "Worker replaces <main> when creating new pages.") can never be
+  // mistaken for the real tag — only an actual <main ...> line matches.
+  const MAIN_TAG_RE = /^[ \t]*<main\b[^>]*>[\s\S]*?<\/main>/im;
+  if (MAIN_TAG_RE.test(html)) {
     html = html.replace(
-      /<main\b[^>]*>[\s\S]*?<\/main>/i,
+      MAIN_TAG_RE,
       `<main id="main" class="pt-[4.5rem] lg:pt-0">${mainInner}</main>`
     );
   } else {

@@ -130,6 +130,7 @@ img, video, iframe, svg,
   text-align: center !important;
   padding-right: 0 !important;
   margin: 0 !important;
+  margin-top: 5px !important;
 }
 
 /*

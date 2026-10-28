@@ -652,7 +652,7 @@
     var status = ($("post-status") && $("post-status").value) || "";
     var slug = ($("post-slug") && $("post-slug").value || "").trim();
     if (status === "published" && slug) {
-      link.href = "https://townloc.com/blog/post.html?slug=" + encodeURIComponent(slug);
+      link.href = window.location.origin + "/blog/post.html?slug=" + encodeURIComponent(slug);
       link.hidden = false;
     } else {
       link.hidden = true;
@@ -1180,15 +1180,16 @@
   }
 
   function liveUrlForPath(path) {
-    if (!path) return "https://townloc.com/";
-    if (path === "index.html") return "https://townloc.com/";
+    var origin = window.location.origin + "/";
+    if (!path) return origin;
+    if (path === "index.html") return origin;
     var p = String(path).replace(/^\/+/, "");
     if (/\/index\.html$/i.test(p)) {
       p = p.replace(/\/index\.html$/i, "/");
     } else if (/\.html$/i.test(p)) {
       p = p.replace(/\.html$/i, "");
     }
-    return "https://townloc.com/" + p;
+    return origin + p;
   }
 
   /** Always open the clean public URL (never *.html) so the address bar never flashes. */
@@ -2016,7 +2017,7 @@
     if (!list) return;
     list.innerHTML = "";
     (menuUi.pages || []).forEach(function (path) {
-      var href = liveUrlForPath(path).replace(/^https:\/\/townloc\.com/i, "") || "/";
+      var href = liveUrlForPath(path).replace(window.location.origin, "") || "/";
       var title = menuPageTitle(path);
       var row = document.createElement("div");
       row.className = "wp-check wp-check-row";
@@ -2933,7 +2934,7 @@
       linkBox.appendChild(linkHint);
       var prefix = document.createElement("p");
       prefix.className = "hint";
-      prefix.textContent = "https://townloc.com/";
+      prefix.textContent = window.location.origin + "/";
       linkBox.appendChild(prefix);
       var linkInput = document.createElement("input");
       linkInput.type = "text";
